@@ -1,0 +1,462 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="course_managements.master.cs" Inherits="EduErp.pages.admin.course_managements" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Course Management</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                <link href="../../assets/css/common.css" rel="stylesheet">
+            </head>
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Admin Dashboard</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="students.aspx">
+                                    <i class="fas fa-user-graduate me-2 text-primary"></i>Students
+                                </a>
+                                <a class="nav-link text-dark" href="faculty.aspx">
+                                    <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Faculty
+                                </a>
+                                <a class="nav-link active" href="admin_course_management.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>Course Management
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>Exams & Results
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-credit-card me-2 text-primary"></i>Fees
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notice Board
+                                </a>
+                                <a class="nav-link text-dark" href="reports.aspx">
+                                    <i class="fas fa-chart-bar me-2 text-primary"></i>Reports
+                                </a>
+                                <a class="nav-link text-dark" href="profile.aspx">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 px-4 py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="mb-1">Course Management</h2>
+                                <p class="text-muted">Manage courses, assign faculty and students</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal">
+                                    <i class="fas fa-plus me-1"></i>Add New Course
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Course Management Tabs -->
+                        <ul class="nav nav-tabs mb-4" id="courseTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" type="button" role="tab">
+                                    <i class="fas fa-book me-1"></i>All Courses
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-dark" id="assign-faculty-tab" data-bs-toggle="tab" data-bs-target="#assign-faculty" type="button" role="tab">
+                                    <i class="fas fa-chalkboard-teacher me-1"></i>Assign Faculty
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-dark" id="assign-students-tab" data-bs-toggle="tab" data-bs-target="#assign-students" type="button" role="tab">
+                                    <i class="fas fa-user-graduate me-1"></i>Assign Students
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="courseTabContent">
+                            <!-- All Courses Tab -->
+                            <div class="tab-pane fade show active" id="courses" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">
+                                            <i class="fas fa-book me-2 text-primary"></i>All Courses
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Course Code</th>
+                                                        <th>Course Name</th>
+                                                        <th>Department</th>
+                                                        <th>Credits</th>
+                                                        <th>Faculty</th>
+                                                        <th>Students</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="coursesTable">
+                                                    <!-- Courses will be populated by JavaScript -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Assign Faculty Tab -->
+                            <div class="tab-pane fade" id="assign-faculty" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">
+                                            <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Assign Faculty to Courses
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Course</th>
+                                                        <th>Current Faculty</th>
+                                                        <th>Department</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="facultyAssignmentTable">
+                                                    <!-- Faculty assignment data will be populated by JavaScript -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Assign Students Tab -->
+                            <div class="tab-pane fade" id="assign-students" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">
+                                            <i class="fas fa-user-graduate me-2 text-primary"></i>Assign Students to Courses
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-4">
+                                                <label for="courseSelect" class="form-label">Select Course</label>
+                                                <select class="form-select" id="courseSelect">
+                                                    <option value="">Choose a course...</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="semesterSelect" class="form-label">Semester</label>
+                                                <select class="form-select" id="semesterSelect">
+                                                    <option value="1">1st Semester</option>
+                                                    <option value="2">2nd Semester</option>
+                                                    <option value="3">3rd Semester</option>
+                                                    <option value="4">4th Semester</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label">&nbsp;</label>
+                                                <div>
+                                                    <button class="btn btn-primary" onclick="loadStudentsForAssignment()">
+                                                        <i class="fas fa-search me-1"></i>Load Students
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <input type="checkbox" id="selectAllStudents" onchange="toggleAllStudents()">
+                                                        </th>
+                                                        <th>Roll No</th>
+                                                        <th>Student Name</th>
+                                                        <th>Department</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="studentAssignmentTable">
+                                                    <!-- Student assignment data will be populated by JavaScript -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-success" onclick="assignSelectedStudents()">
+                                                <i class="fas fa-check me-1"></i>Assign Selected Students
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Course Modal -->
+            <div class="modal fade" id="addCourseModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Course</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addCourseForm">
+                                <div class="mb-3">
+                                    <label for="courseCode" class="form-label">Course Code</label>
+                                    <input type="text" class="form-control" id="courseCode" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="courseName" class="form-label">Course Name</label>
+                                    <input type="text" class="form-control" id="courseName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="department" class="form-label">Department</label>
+                                    <select class="form-select" id="department" required>
+                                        <option value="">Select Department</option>
+                                        <option value="computer_science">Computer Science</option>
+                                        <option value="engineering">Engineering</option>
+                                        <option value="mathematics">Mathematics</option>
+                                        <option value="physics">Physics</option>
+                                        <option value="chemistry">Chemistry</option>
+                                        <option value="english">English</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="credits" class="form-label">Credits</label>
+                                    <input type="number" class="form-control" id="credits" min="1" max="6" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" rows="3" required></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="addCourse()">Add Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Sample data
+                let courses = [
+                    { id: 1, code: "MATH101", name: "Mathematics 101", department: "Mathematics", credits: 3, faculty: "Dr. Sarah Johnson", students: 45 },
+                    { id: 2, code: "CS101", name: "Computer Science Fundamentals", department: "Computer Science", credits: 4, faculty: "Prof. Michael Chen", students: 38 },
+                    { id: 3, code: "PHY101", name: "Physics I", department: "Physics", credits: 4, faculty: "Dr. Robert Wilson", students: 32 }
+                ];
+
+                const students = [
+                    { id: 1, rollNo: "CS2024001", name: "John Doe", department: "Computer Science", assigned: false },
+                    { id: 2, rollNo: "CS2024002", name: "Jane Smith", department: "Computer Science", assigned: false },
+                    { id: 3, rollNo: "CS2024003", name: "Mike Johnson", department: "Computer Science", assigned: false }
+                ];
+
+                function populateCourses() {
+                    const table = document.getElementById('coursesTable');
+                    table.innerHTML = courses.map(course => `
+              <tr>
+                  <td><strong>${course.code}</strong></td>
+                  <td>${course.name}</td>
+                  <td>${course.department}</td>
+                  <td>${course.credits}</td>
+                  <td>${course.faculty}</td>
+                  <td>${course.students}</td>
+                  <td>
+                      <button class="btn btn-sm btn-outline-primary me-1" onclick="editCourse(${course.id})">
+                          <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-danger" onclick="deleteCourse(${course.id})">
+                          <i class="fas fa-trash"></i>
+                      </button>
+                  </td>
+              </tr>
+          `).join('');
+                }
+
+                function populateFacultyAssignment() {
+                    const table = document.getElementById('facultyAssignmentTable');
+                    table.innerHTML = courses.map(course => `
+              <tr>
+                  <td><strong>${course.code} - ${course.name}</strong></td>
+                  <td>${course.faculty}</td>
+                  <td>${course.department}</td>
+                  <td>
+                      <button class="btn btn-sm btn-outline-primary" onclick="assignFaculty(${course.id})">
+                          <i class="fas fa-user-plus me-1"></i>Assign Faculty
+                      </button>
+                  </td>
+              </tr>
+          `).join('');
+                }
+
+                function populateStudentAssignment() {
+                    const courseSelect = document.getElementById('courseSelect');
+                    courseSelect.innerHTML = '<option value="">Choose a course...</option>' +
+                        courses.map(course => `<option value="${course.id}">${course.code} - ${course.name}</option>`).join('');
+                }
+
+                function loadStudentsForAssignment() {
+                    const courseId = document.getElementById('courseSelect').value;
+                    if (!courseId) {
+                        alert('Please select a course');
+                        return;
+                    }
+
+                    const table = document.getElementById('studentAssignmentTable');
+                    table.innerHTML = students.map(student => `
+              <tr>
+                  <td>
+                      <input type="checkbox" class="student-checkbox" value="${student.id}">
+                  </td>
+                  <td><strong>${student.rollNo}</strong></td>
+                  <td>${student.name}</td>
+                  <td>${student.department}</td>
+                  <td>
+                      <span class="badge bg-${student.assigned ? 'success' : 'secondary'}">
+                          ${student.assigned ? 'Assigned' : 'Not Assigned'}
+                      </span>
+                  </td>
+              </tr>
+          `).join('');
+                }
+
+                function toggleAllStudents() {
+                    const selectAll = document.getElementById('selectAllStudents');
+                    const checkboxes = document.querySelectorAll('.student-checkbox');
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = selectAll.checked;
+                    });
+                }
+
+                function assignSelectedStudents() {
+                    const selectedStudents = Array.from(document.querySelectorAll('.student-checkbox:checked')).map(cb => cb.value);
+                    if (selectedStudents.length === 0) {
+                        alert('Please select at least one student');
+                        return;
+                    }
+
+                    alert(`Successfully assigned ${selectedStudents.length} students to the course`);
+                }
+
+                function assignFaculty(courseId) {
+                    const course = courses.find(c => c.id === courseId);
+                    if (course) {
+                        const facultyName = prompt(`Enter faculty name for ${course.name}:`);
+                        if (facultyName) {
+                            course.faculty = facultyName;
+                            populateCourses();
+                            populateFacultyAssignment();
+                            alert('Faculty assigned successfully!');
+                        }
+                    }
+                }
+
+                function addCourse() {
+                    const code = document.getElementById('courseCode').value;
+                    const name = document.getElementById('courseName').value;
+                    const department = document.getElementById('department').value;
+                    const credits = document.getElementById('credits').value;
+                    const description = document.getElementById('description').value;
+
+                    if (!code || !name || !department || !credits || !description) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+
+                    const newCourse = {
+                        id: courses.length + 1,
+                        code: code,
+                        name: name,
+                        department: department,
+                        credits: parseInt(credits),
+                        faculty: "Unassigned",
+                        students: 0
+                    };
+
+                    courses.push(newCourse);
+                    populateCourses();
+                    populateFacultyAssignment();
+                    populateStudentAssignment();
+
+                    // Close modal and reset form
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addCourseModal'));
+                    modal.hide();
+                    document.getElementById('addCourseForm').reset();
+
+                    alert('Course added successfully!');
+                }
+
+                function deleteCourse(courseId) {
+                    if (confirm('Are you sure you want to delete this course?')) {
+                        courses = courses.filter(c => c.id !== courseId);
+                        populateCourses();
+                        populateFacultyAssignment();
+                        populateStudentAssignment();
+                        alert('Course deleted successfully!');
+                    }
+                }
+
+                function editCourse(courseId) {
+                    const course = courses.find(c => c.id === courseId);
+                    if (course) {
+                        alert(`Edit functionality for ${course.name} would be implemented here`);
+                    }
+                }
+
+                // Initialize when page loads
+                document.addEventListener('DOMContentLoaded', function () {
+                    populateCourses();
+                    populateFacultyAssignment();
+                    populateStudentAssignment();
+                });
+            </script>
+            <script src="../../assets/js/common.js"></script>
+        </asp:ContentPlaceHolder>
+    </div>
+
+</bod>
+</html>

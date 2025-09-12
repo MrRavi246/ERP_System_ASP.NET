@@ -1,0 +1,199 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="timetable.Master.cs" Inherits="EduErp.pages.student.timrtable" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - My Timetable</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link href="../../assets/css/common.css" rel="stylesheet">
+
+            </asp:ContentPlaceHolder>
+
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar bg-white border-end p-3">
+                    <div class="text-center mb-4">
+                        <h4 class="text-primary fw-bold">College ERP</h4>
+                        <p class="text-muted small">Student Dashboard</p>
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link text-dark" href="dashboard.aspx">
+                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Dashboard
+                        </a>
+                        <a class="nav-link text-dark" href="courses.aspx">
+                            <i class="fas fa-book me-2 text-primary"></i> My Courses
+                        </a>
+                        <a class="nav-link text-dark" href="attendance.aspx">
+                            <i class="fas fa-calendar-check me-2 text-primary"></i> My Attendance
+                        </a>
+                        <a class="nav-link active" href="timetable.aspx">
+                            <i class="fas fa-clock me-2 text-primary"></i> My Timetable
+                        </a>
+                        <a class="nav-link text-dark" href="exams.aspx">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> My Exams
+                        </a>
+                        <a class="nav-link text-dark" href="fees.aspx">
+                            <i class="fas fa-credit-card me-2 text-primary"></i> My Fees
+                        </a>
+                        <a class="nav-link text-dark" href="notices.aspx">
+                            <i class="fas fa-bullhorn me-2 text-primary"></i> Notices
+                        </a>
+                        <a class="nav-link text-dark" href="profile.aspx">
+                            <i class="fas fa-user-cog me-2 text-primary"></i> Edit Profile
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 px-4 py-3">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="mb-1">My Timetable</h2>
+                        <p class="text-muted">View your class schedule</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary" onclick="history.back()">
+                            <i class="fas fa-arrow-left me-1"></i> Back
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timetable -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-calendar me-2 text-primary"></i>Weekly Schedule
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thursday</th>
+                                        <th>Friday</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="timetableBody">
+                                    <!-- Timetable will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            </asp:ContentPlaceHolder>
+
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample timetable data
+        const timetableData = {
+            "09:00-10:00": {
+                "Monday": { course: "Mathematics 101", room: "Room 101", instructor: "Dr. Sarah Johnson" },
+                "Tuesday": { course: "Computer Science", room: "Lab 201", instructor: "Prof. Michael Chen" },
+                "Wednesday": { course: "Physics I", room: "Room 301", instructor: "Dr. Robert Wilson" },
+                "Thursday": { course: "English Composition", room: "Room 401", instructor: "Prof. Emily Davis" },
+                "Friday": { course: "Mathematics 101", room: "Room 101", instructor: "Dr. Sarah Johnson" }
+            },
+            "10:00-11:00": {
+                "Monday": { course: "Computer Science", room: "Lab 201", instructor: "Prof. Michael Chen" },
+                "Tuesday": { course: "Physics I", room: "Room 301", instructor: "Dr. Robert Wilson" },
+                "Wednesday": { course: "English Composition", room: "Room 401", instructor: "Prof. Emily Davis" },
+                "Thursday": { course: "Mathematics 101", room: "Room 101", instructor: "Dr. Sarah Johnson" },
+                "Friday": { course: "Computer Science", room: "Lab 201", instructor: "Prof. Michael Chen" }
+            },
+            "11:00-12:00": {
+                "Monday": { course: "Physics I", room: "Room 301", instructor: "Dr. Robert Wilson" },
+                "Tuesday": { course: "English Composition", room: "Room 401", instructor: "Prof. Emily Davis" },
+                "Wednesday": { course: "Mathematics 101", room: "Room 101", instructor: "Dr. Sarah Johnson" },
+                "Thursday": { course: "Computer Science", room: "Lab 201", instructor: "Prof. Michael Chen" },
+                "Friday": { course: "Physics I", room: "Room 301", instructor: "Dr. Robert Wilson" }
+            },
+            "12:00-13:00": {
+                "Monday": { course: "Lunch Break", room: "", instructor: "" },
+                "Tuesday": { course: "Lunch Break", room: "", instructor: "" },
+                "Wednesday": { course: "Lunch Break", room: "", instructor: "" },
+                "Thursday": { course: "Lunch Break", room: "", instructor: "" },
+                "Friday": { course: "Lunch Break", room: "", instructor: "" }
+            },
+            "13:00-14:00": {
+                "Monday": { course: "English Composition", room: "Room 401", instructor: "Prof. Emily Davis" },
+                "Tuesday": { course: "Mathematics 101", room: "Room 101", instructor: "Dr. Sarah Johnson" },
+                "Wednesday": { course: "Computer Science", room: "Lab 201", instructor: "Prof. Michael Chen" },
+                "Thursday": { course: "Physics I", room: "Room 301", instructor: "Dr. Robert Wilson" },
+                "Friday": { course: "English Composition", room: "Room 401", instructor: "Prof. Emily Davis" }
+            },
+            "14:00-15:00": {
+                "Monday": { course: "Chemistry Lab", room: "Lab 301", instructor: "Dr. James Brown" },
+                "Tuesday": { course: "Statistics", room: "Room 501", instructor: "Prof. Lisa Wang" },
+                "Wednesday": { course: "Chemistry Lab", room: "Lab 301", instructor: "Dr. James Brown" },
+                "Thursday": { course: "Statistics", room: "Room 501", instructor: "Prof. Lisa Wang" },
+                "Friday": { course: "Chemistry Lab", room: "Lab 301", instructor: "Dr. James Brown" }
+            }
+        };
+
+        function populateTimetable() {
+            const tbody = document.getElementById('timetableBody');
+            tbody.innerHTML = '';
+
+            Object.keys(timetableData).forEach(timeSlot => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td class="table-light"><strong>${timeSlot}</strong></td>`;
+                
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+                days.forEach(day => {
+                    const classData = timetableData[timeSlot][day];
+                    const hasClass = classData.course !== 'Lunch Break';
+                    const cellClass = hasClass ? 'timetable-slot has-class' : 'timetable-slot';
+                    
+                    row.innerHTML += `
+                        <td class="${cellClass}">
+                            ${hasClass ? `
+                                <strong>${classData.course}</strong><br>
+                                <small class="text-muted">${classData.room}</small><br>
+                                <small class="text-muted">${classData.instructor}</small>
+                            ` : '<em>Lunch Break</em>'}
+                        </td>
+                    `;
+                });
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            populateTimetable();
+        });
+    </script>
+    <script src="../../assets/js/common.js"></script>
+
+            </asp:ContentPlaceHolder>
+        </div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="profile.master.cs" Inherits="EduErp.pages.admin.profile" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Admin Profile</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                <link href="../../assets/css/common.css" rel="stylesheet">
+            </head>
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Admin Profile</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="students.aspx">
+                                    <i class="fas fa-user-graduate me-2 text-primary"></i>Students
+                                </a>
+                                <a class="nav-link text-dark" href="faculty.aspx">
+                                    <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Faculty
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>Courses
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>Exams & Results
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-credit-card me-2 text-primary"></i>Fees
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notice Board
+                                </a>
+                                <a class="nav-link text-dark" href="reports.aspx">
+                                    <i class="fas fa-chart-bar me-2 text-primary"></i>Reports
+                                </a>
+                                <a class="nav-link active" href="profile.aspx">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 px-4 py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="mb-1">Admin Profile</h2>
+                                <p class="text-muted">Manage your administrative account settings</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-secondary" onclick="history.back()">
+                                    <i class="fas fa-arrow-left me-1"></i>Back
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 mb-4">
+                                <!-- Profile Picture Card -->
+                                <div class="card profile-card">
+                                    <div class="card-body text-center">
+                                        <div class="mb-3">
+                                            <img src="https://via.placeholder.com/150" alt="Admin Profile" class="rounded-circle" width="120" height="120">
+                                        </div>
+                                        <h5 class="card-title">Administrator</h5>
+                                        <p class="text-muted">System Administrator</p>
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changePhotoModal">
+                                            <i class="fas fa-camera me-1"></i>Change Photo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8">
+                                <!-- Profile Form -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">
+                                            <i class="fas fa-user-edit me-2 text-primary"></i>Edit Profile Information
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="adminProfileForm">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" value="John" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" value="Doe" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="email" class="form-label">Email Address</label>
+                                                    <input type="email" class="form-control" id="email" value="admin@college.edu" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="phone" class="form-label">Phone Number</label>
+                                                    <input type="tel" class="form-control" id="phone" value="+1-555-0123">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="department" class="form-label">Department</label>
+                                                    <select class="form-select" id="department">
+                                                        <option value="administration">Administration</option>
+                                                        <option value="academics">Academics</option>
+                                                        <option value="finance">Finance</option>
+                                                        <option value="it">IT Department</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="position" class="form-label">Position</label>
+                                                    <input type="text" class="form-control" id="position" value="System Administrator">
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label">Address</label>
+                                                <textarea class="form-control" id="address" rows="3">123 College Street, City, State 12345</textarea>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="employeeId" class="form-label">Employee ID</label>
+                                                    <input type="text" class="form-control" id="employeeId" value="ADM001" readonly>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="joinDate" class="form-label">Join Date</label>
+                                                    <input type="date" class="form-control" id="joinDate" value="2020-01-15" readonly>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-4">
+
+                                            <h6 class="mb-3">Security Settings</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                                    <input type="password" class="form-control" id="currentPassword">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="newPassword" class="form-label">New Password</label>
+                                                    <input type="password" class="form-control" id="newPassword">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-end gap-2">
+                                                <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save me-1"></i>Save Changes
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Change Photo Modal -->
+            <div class="modal fade" id="changePhotoModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Change Profile Photo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="photoUpload" class="form-label">Select New Photo</label>
+                                <input type="file" class="form-control" id="photoUpload" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Upload Photo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Form submission
+                document.getElementById('adminProfileForm').addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Show success message
+                    alert('Profile updated successfully!');
+                });
+
+                // Photo upload
+                document.getElementById('photoUpload').addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            // Update profile picture
+                            document.querySelector('.rounded-circle').src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
+            <script src="../../assets/js/common.js"></script>
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

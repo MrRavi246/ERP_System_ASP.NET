@@ -1,0 +1,324 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="notices.master.cs" Inherits="EduErp.pages.student.notices" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Notices</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <link href="../../assets/css/common.css" rel="stylesheet">
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Student Dashboard</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>My Courses
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>My Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>My Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>My Exams
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-credit-card me-2 text-primary"></i>My Fees
+                                </a>
+                                <a class="nav-link active" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notices
+                                </a>
+                                <a class="nav-link text-dark" href="profile.aspx">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 main-content">
+                        <!-- Top Navigation -->
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <div>
+                                <h1 class="h2">Notice Board</h1>
+                                <p class="text-muted">Stay updated with important announcements and events</p>
+                            </div>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-download me-1"></i>Export
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-print me-1"></i>Print
+                                    </button>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user me-1"></i>Student
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
+                                        <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filter Buttons -->
+                        <div class="mb-4">
+                            <div class="btn-group" role="group" aria-label="Notice filters">
+                                <input type="radio" class="btn-check" name="noticeFilter" id="all" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="all">All Notices</label>
+
+                                <input type="radio" class="btn-check" name="noticeFilter" id="urgent" autocomplete="off">
+                                <label class="btn btn-outline-danger" for="urgent">Urgent</label>
+
+                                <input type="radio" class="btn-check" name="noticeFilter" id="important" autocomplete="off">
+                                <label class="btn btn-outline-warning" for="important">Important</label>
+
+                                <input type="radio" class="btn-check" name="noticeFilter" id="events" autocomplete="off">
+                                <label class="btn btn-outline-info" for="events">Events</label>
+
+                                <input type="radio" class="btn-check" name="noticeFilter" id="general" autocomplete="off">
+                                <label class="btn btn-outline-success" for="general">General</label>
+                            </div>
+                        </div>
+
+                        <!-- Notices List -->
+                        <div class="row">
+                            <!-- Urgent Notice -->
+                            <div class="col-12 mb-4">
+                                <div class="card notice-card notice-urgent shadow-sm">
+                                    <div class="card-header bg-danger text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title mb-0">
+                                                <i class="fas fa-exclamation-triangle me-2 text-primary"></i>URGENT: Exam Schedule Change
+                                            </h5>
+                                            <span class="badge bg-light text-dark">URGENT</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <strong>Important Notice:</strong> The Mathematics exam scheduled for December 15, 2024, has been rescheduled to December 18, 2024, due to unforeseen circumstances. The time and venue remain the same. Please update your exam calendar accordingly.
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">
+                                                <i class="fas fa-calendar me-1"></i>Posted: December 10, 2024 | 
+                                        <i class="fas fa-user me-1"></i>By: Exam Controller
+                                            </small>
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye me-1"></i>View Details
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Important Notice -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card notice-card notice-important shadow-sm">
+                                    <div class="card-header bg-warning">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">
+                                                <i class="fas fa-info-circle me-2 text-primary"></i>Fee Payment Deadline
+                                            </h6>
+                                            <span class="badge bg-dark">IMPORTANT</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Reminder: The deadline for semester fee payment is December 15, 2024. Late payment will incur additional charges.
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>Posted: December 8, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Notice -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card notice-card notice-event shadow-sm">
+                                    <div class="card-header bg-info text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">
+                                                <i class="fas fa-calendar-alt me-2 text-primary"></i>Annual Cultural Fest 2024
+                                            </h6>
+                                            <span class="badge bg-light text-dark">EVENT</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Join us for the Annual Cultural Fest on December 20-22, 2024. Registration for various events is now open.
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>Posted: December 5, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- General Notice -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card notice-card notice-general shadow-sm">
+                                    <div class="card-header bg-success text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">
+                                                <i class="fas fa-book me-2 text-primary"></i>Library Hours Extension
+                                            </h6>
+                                            <span class="badge bg-light text-dark">GENERAL</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Library hours have been extended during exam period. New timings: 7:00 AM to 11:00 PM from December 10-25, 2024.
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>Posted: December 3, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Notice -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card notice-card notice-event shadow-sm">
+                                    <div class="card-header bg-info text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">
+                                                <i class="fas fa-graduation-cap me-2 text-primary"></i>Guest Lecture Series
+                                            </h6>
+                                            <span class="badge bg-light text-dark">EVENT</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            Guest lecture on "Future of Technology" by industry expert. Date: December 16, 2024, Time: 2:00 PM, Venue: Auditorium.
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>Posted: December 1, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- General Notice -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card notice-card notice-general shadow-sm">
+                                    <div class="card-header bg-success text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">
+                                                <i class="fas fa-wifi me-2 text-primary"></i>WiFi Maintenance
+                                            </h6>
+                                            <span class="badge bg-light text-dark">GENERAL</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            WiFi maintenance scheduled for December 14, 2024, from 2:00 AM to 6:00 AM. Internet services may be intermittent.
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>Posted: November 30, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Important Notice -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card notice-card notice-important shadow-sm">
+                                    <div class="card-header bg-warning">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0">
+                                                <i class="fas fa-id-card me-2 text-primary"></i>ID Card Renewal
+                                            </h6>
+                                            <span class="badge bg-dark">IMPORTANT</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            All students must renew their ID cards before December 31, 2024. Visit the admin office with required documents.
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>Posted: November 28, 2024
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Load More Button -->
+                        <div class="text-center mt-4">
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-plus me-2 text-primary"></i>Load More Notices
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Filter functionality
+                document.querySelectorAll('input[name="noticeFilter"]').forEach(radio => {
+                    radio.addEventListener('change', function () {
+                        const filter = this.id;
+                        const noticeCards = document.querySelectorAll('.notice-card');
+
+                        noticeCards.forEach(card => {
+                            const cardParent = card.closest('.col-12, .col-lg-6');
+                            if (filter === 'all') {
+                                cardParent.style.display = 'block';
+                            } else {
+                                const isMatch = card.classList.contains(`notice-${filter}`);
+                                cardParent.style.display = isMatch ? 'block' : 'none';
+                            }
+                        });
+                    });
+                });
+            </script>
+            <script src="../../assets/js/common.js"></script>
+
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

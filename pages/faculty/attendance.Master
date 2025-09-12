@@ -1,0 +1,328 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="attendance.master.cs" Inherits="EduErp.pages.faculty.attendance" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Faculty Attendance</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link href="../../assets/css/common.css" rel="stylesheet">
+
+            </asp:ContentPlaceHolder>
+
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    <div class="container-fluid">
+        <div class="row">
+            <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle d-md-none" type="button">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0">
+                <div class="sidebar bg-white border-end p-3">
+                    <div class="text-center mb-4">
+                        <h4 class="text-primary fw-bold">College ERP</h4>
+                        <p class="text-muted small">Faculty Dashboard</p>
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link text-dark" href="dashboard.aspx">
+                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Dashboard
+                        </a>
+                        <a class="nav-link text-dark" href="courses.aspx">
+                            <i class="fas fa-book me-2 text-primary"></i> My Courses
+                        </a>
+                        <a class="nav-link active" href="attendance.aspx">
+                            <i class="fas fa-calendar-check me-2 text-primary"></i> Attendance
+                        </a>
+                        <a class="nav-link text-dark" href="timetable.aspx">
+                            <i class="fas fa-clock me-2 text-primary"></i> My Timetable
+                        </a>
+                        <a class="nav-link text-dark" href="exams.aspx">
+                            <i class="fas fa-file-alt me-2 text-primary"></i> Exams
+                        </a>
+                        <a class="nav-link text-dark" href="students.aspx">
+                            <i class="fas fa-users me-2 text-primary"></i> My Students
+                        </a>
+                        <a class="nav-link text-dark" href="notices.aspx">
+                            <i class="fas fa-bullhorn me-2 text-primary"></i> Notices
+                        </a>
+                        <a class="nav-link text-dark" href="profile.aspx">
+                            <i class="fas fa-user-cog me-2 text-primary"></i> Edit Profile
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 px-4 py-3">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="mb-1">Attendance Management</h2>
+                        <p class="text-muted">Mark and manage student attendance</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary" onclick="history.back()">
+                            <i class="fas fa-arrow-left me-1"></i> Back
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Selection -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-book me-2 text-primary"></i>Select Course
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="courseSelect" class="form-label">Course</label>
+                                <select class="form-select" id="courseSelect" onchange="loadStudents()">
+                                    <option value="">Select a course...</option>
+                                    <option value="math101">Mathematics 101</option>
+                                    <option value="cs101">Computer Science Fundamentals</option>
+                                    <option value="phy101">Physics I</option>
+                                    <option value="eng101">English Composition</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dateSelect" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="dateSelect" value="2024-01-15">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">&nbsp;</label>
+                                <div>
+                                    <button class="btn btn-primary" onclick="loadStudents()">
+                                        <i class="fas fa-search me-1"></i>Load Students
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Table -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-users me-2 text-primary"></i>Student Attendance
+                        </h5>
+                        <div>
+                            <button class="btn btn-success me-2" onclick="markAllPresent()">
+                                <i class="fas fa-check me-1"></i>Mark All Present
+                            </button>
+                            <button class="btn btn-primary" onclick="saveAttendance()">
+                                <i class="fas fa-save me-1"></i>Save Attendance
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Roll No</th>
+                                        <th>Student Name</th>
+                                        <th>Status</th>
+                                        <th>Remarks</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendanceTable">
+                                    <!-- Student attendance data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Summary -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-bar me-2 text-primary"></i>Attendance Summary
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-success" id="presentCount">0</h4>
+                                    <p class="text-muted">Present</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-danger" id="absentCount">0</h4>
+                                    <p class="text-muted">Absent</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-warning" id="lateCount">0</h4>
+                                    <p class="text-muted">Late</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-info" id="totalCount">0</h4>
+                                    <p class="text-muted">Total</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            </asp:ContentPlaceHolder>
+
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample student data
+        const students = [
+            { id: 1, rollNo: "CS2024001", name: "John Doe", status: "present", remarks: "" },
+            { id: 2, rollNo: "CS2024002", name: "Jane Smith", status: "present", remarks: "" },
+            { id: 3, rollNo: "CS2024003", name: "Mike Johnson", status: "absent", remarks: "Medical leave" },
+            { id: 4, rollNo: "CS2024004", name: "Sarah Wilson", status: "present", remarks: "" },
+            { id: 5, rollNo: "CS2024005", name: "David Brown", status: "late", remarks: "Traffic delay" },
+            { id: 6, rollNo: "CS2024006", name: "Emily Davis", status: "present", remarks: "" },
+            { id: 7, rollNo: "CS2024007", name: "Robert Miller", status: "present", remarks: "" },
+            { id: 8, rollNo: "CS2024008", name: "Lisa Garcia", status: "absent", remarks: "" }
+        ];
+
+        function loadStudents() {
+            const courseSelect = document.getElementById('courseSelect');
+            const dateSelect = document.getElementById('dateSelect');
+            
+            if (!courseSelect.value || !dateSelect.value) {
+                alert('Please select both course and date');
+                return;
+            }
+
+            populateAttendanceTable();
+            updateSummary();
+        }
+
+        function populateAttendanceTable() {
+            const table = document.getElementById('attendanceTable');
+            table.innerHTML = students.map(student => `
+                <tr>
+                    <td><strong>${student.rollNo}</strong></td>
+                    <td>${student.name}</td>
+                    <td>
+                        <select class="form-select form-select-sm" onchange="updateStudentStatus(${student.id}, this.value)">
+                            <option value="present" ${student.status === 'present' ? 'selected' : ''}>Present</option>
+                            <option value="absent" ${student.status === 'absent' ? 'selected' : ''}>Absent</option>
+                            <option value="late" ${student.status === 'late' ? 'selected' : ''}>Late</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm" 
+                               value="${student.remarks}" 
+                               placeholder="Add remarks..."
+                               onchange="updateStudentRemarks(${student.id}, this.value)">
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewStudentDetails(${student.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateStudentStatus(studentId, status) {
+            const student = students.find(s => s.id === studentId);
+            if (student) {
+                student.status = status;
+                updateSummary();
+            }
+        }
+
+        function updateStudentRemarks(studentId, remarks) {
+            const student = students.find(s => s.id === studentId);
+            if (student) {
+                student.remarks = remarks;
+            }
+        }
+
+        function markAllPresent() {
+            students.forEach(student => {
+                student.status = 'present';
+            });
+            populateAttendanceTable();
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const presentCount = students.filter(s => s.status === 'present').length;
+            const absentCount = students.filter(s => s.status === 'absent').length;
+            const lateCount = students.filter(s => s.status === 'late').length;
+            const totalCount = students.length;
+
+            document.getElementById('presentCount').textContent = presentCount;
+            document.getElementById('absentCount').textContent = absentCount;
+            document.getElementById('lateCount').textContent = lateCount;
+            document.getElementById('totalCount').textContent = totalCount;
+        }
+
+        function saveAttendance() {
+            const courseSelect = document.getElementById('courseSelect');
+            const dateSelect = document.getElementById('dateSelect');
+            
+            if (!courseSelect.value || !dateSelect.value) {
+                alert('Please select both course and date');
+                return;
+            }
+
+            // Simulate saving attendance
+            const attendanceData = {
+                course: courseSelect.value,
+                date: dateSelect.value,
+                students: students
+            };
+
+            console.log('Saving attendance:', attendanceData);
+            alert('Attendance saved successfully!');
+        }
+
+        function viewStudentDetails(studentId) {
+            const student = students.find(s => s.id === studentId);
+            if (student) {
+                alert(`Student Details:\nName: ${student.name}\nRoll No: ${student.rollNo}\nStatus: ${student.status}\nRemarks: ${student.remarks}`);
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dateSelect').value = today;
+        });
+    </script>
+    <script src="../../assets/js/common.js"></script>
+
+            </asp:ContentPlaceHolder>
+        </div>
+
+</body>
+</html>

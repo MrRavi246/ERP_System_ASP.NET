@@ -1,0 +1,262 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="settings.master.cs" Inherits="EduErp.pages.admin.settings" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Admin Settings</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                <link href="../../assets/css/common.css" rel="stylesheet">
+            </head>
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Admin Dashboard</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="students.aspx">
+                                    <i class="fas fa-user-graduate me-2 text-primary"></i>Students
+                                </a>
+                                <a class="nav-link text-dark" href="faculty.aspx">
+                                    <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Faculty
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>Courses
+                                </a>
+                                <a class="nav-link text-dark" href="course_management.aspx">
+                                    <i class="fas fa-cogs me-2 text-primary"></i>Course Management
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-calendar me-2 text-primary"></i>Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-clipboard-list me-2 text-primary"></i>Exams
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-money-bill me-2 text-primary"></i>Fees
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notices
+                                </a>
+                                <a class="nav-link text-dark" href="reports.aspx">
+                                    <i class="fas fa-chart-bar me-2 text-primary"></i>Reports
+                                </a>
+                                <a class="nav-link text-dark" href="profile.aspx">
+                                    <i class="fas fa-user me-2 text-primary"></i>Profile
+                                </a>
+                                <a class="nav-link active" href="settings.aspx">
+                                    <i class="fas fa-cog me-2 text-primary"></i>Settings
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10">
+                        <!-- Header -->
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2"><i class="fas fa-cog me-2 text-primary"></i>System Settings</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user me-1"></i>Admin
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
+                                        <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings Content -->
+                        <div class="row">
+                            <!-- General Settings -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0"><i class="fas fa-cogs me-2 text-primary"></i>General Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="collegeName" class="form-label">College Name</label>
+                                                <input type="text" class="form-control" id="collegeName" value="Springfield University">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="academicYear" class="form-label">Academic Year</label>
+                                                <select class="form-select" id="academicYear">
+                                                    <option selected>2024-2025</option>
+                                                    <option>2025-2026</option>
+                                                    <option>2026-2027</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="currentSemester" class="form-label">Current Semester</label>
+                                                <select class="form-select" id="currentSemester">
+                                                    <option>1st Semester</option>
+                                                    <option selected>2nd Semester</option>
+                                                    <option>3rd Semester</option>
+                                                    <option>Summer Semester</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timeZone" class="form-label">Time Zone</label>
+                                                <select class="form-select" id="timeZone">
+                                                    <option selected>Asia/Kolkata (IST)</option>
+                                                    <option>America/New_York (EST)</option>
+                                                    <option>Europe/London (GMT)</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security Settings -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0"><i class="fas fa-shield-alt me-2 text-primary"></i>Security Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="sessionTimeout" class="form-label">Session Timeout (minutes)</label>
+                                                <input type="number" class="form-control" id="sessionTimeout" value="30">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="passwordPolicy" class="form-label">Password Policy</label>
+                                                <select class="form-select" id="passwordPolicy">
+                                                    <option selected>Strong (8+ chars, mixed case, numbers, symbols)</option>
+                                                    <option>Medium (8+ chars, mixed case)</option>
+                                                    <option>Basic (6+ chars)</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="twoFactorAuth" checked>
+                                                <label class="form-check-label" for="twoFactorAuth">
+                                                    Enable Two-Factor Authentication
+                                                </label>
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="loginNotifications" checked>
+                                                <label class="form-check-label" for="loginNotifications">
+                                                    Send login notifications via email
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Save Security Settings</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email Settings -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i>Email Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="smtpServer" class="form-label">SMTP Server</label>
+                                                <input type="text" class="form-control" id="smtpServer" value="smtp.college.edu">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="smtpPort" class="form-label">SMTP Port</label>
+                                                <input type="number" class="form-control" id="smtpPort" value="587">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="fromEmail" class="form-label">From Email</label>
+                                                <input type="email" class="form-control" id="fromEmail" value="noreply@college.edu">
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="emailNotifications" checked>
+                                                <label class="form-check-label" for="emailNotifications">
+                                                    Enable email notifications
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Save Email Settings</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Backup Settings -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0"><i class="fas fa-database me-2 text-primary"></i>Backup Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="backupFrequency" class="form-label">Backup Frequency</label>
+                                                <select class="form-select" id="backupFrequency">
+                                                    <option selected>Daily</option>
+                                                    <option>Weekly</option>
+                                                    <option>Monthly</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="backupTime" class="form-label">Backup Time</label>
+                                                <input type="time" class="form-control" id="backupTime" value="02:00">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="retentionDays" class="form-label">Retention Period (days)</label>
+                                                <input type="number" class="form-control" id="retentionDays" value="30">
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button type="submit" class="btn btn-primary">Save Backup Settings</button>
+                                                <button type="button" class="btn btn-outline-success">
+                                                    <i class="fas fa-download me-2 text-primary"></i>Create Manual Backup
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../../assets/js/common.js"></script>
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

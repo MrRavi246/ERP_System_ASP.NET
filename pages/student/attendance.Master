@@ -1,0 +1,349 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="attendance.master.cs" Inherits="EduErp.pages.student.attendance" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - My Attendance</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link href="../../assets/css/common.css" rel="stylesheet">
+    </asp:ContentPlaceHolder>
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <script src="https://cdn.tailwindcss.com"></script>
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Student Dashboard</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>My Courses
+                                </a>
+                                <a class="nav-link active" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>My Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>My Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>My Exams
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-credit-card me-2 text-primary"></i>My Fees
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notices
+                                </a>
+                                <a class="nav-link text-dark" href="profile.aspx">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 px-4 py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="mb-1">My Attendance</h2>
+                                <p class="text-muted">Track your attendance across all courses</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-secondary" onclick="history.back()">
+                                    <i class="fas fa-arrow-left me-1"></i>Back
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Overall Attendance Summary -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body text-center">
+                                        <h4 class="mb-0">95%</h4>
+                                        <p class="mb-0">Overall Attendance</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body text-center">
+                                        <h4 class="mb-0">142</h4>
+                                        <p class="mb-0">Classes Attended</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body text-center">
+                                        <h4 class="mb-0">8</h4>
+                                        <p class="mb-0">Classes Missed</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body text-center">
+                                        <h4 class="mb-0">150</h4>
+                                        <p class="mb-0">Total Classes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Course-wise Attendance -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Course-wise Attendance
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Course</th>
+                                                <th>Instructor</th>
+                                                <th>Classes Attended</th>
+                                                <th>Total Classes</th>
+                                                <th>Attendance %</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="attendanceTable">
+                                            <!-- Attendance data will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Attendance Records -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-history me-2 text-primary"></i>Recent Attendance Records
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Course</th>
+                                                <th>Time</th>
+                                                <th>Status</th>
+                                                <th>Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recentAttendanceTable">
+                                            <!-- Recent attendance records will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Sample attendance data
+                const courseAttendance = [
+                    {
+                        course: "Mathematics 101",
+                        instructor: "Dr. Sarah Johnson",
+                        attended: 28,
+                        total: 30,
+                        percentage: 93
+                    },
+                    {
+                        course: "Computer Science Fundamentals",
+                        instructor: "Prof. Michael Chen",
+                        attended: 32,
+                        total: 32,
+                        percentage: 100
+                    },
+                    {
+                        course: "Physics I",
+                        instructor: "Dr. Robert Wilson",
+                        attended: 25,
+                        total: 30,
+                        percentage: 83
+                    },
+                    {
+                        course: "English Composition",
+                        instructor: "Prof. Emily Davis",
+                        attended: 30,
+                        total: 30,
+                        percentage: 100
+                    },
+                    {
+                        course: "Chemistry Lab",
+                        instructor: "Dr. James Brown",
+                        attended: 15,
+                        total: 16,
+                        percentage: 94
+                    },
+                    {
+                        course: "Statistics",
+                        instructor: "Prof. Lisa Wang",
+                        attended: 12,
+                        total: 22,
+                        percentage: 55
+                    }
+                ];
+
+                const recentAttendance = [
+                    {
+                        date: "2024-01-15",
+                        course: "Mathematics 101",
+                        time: "09:00 AM",
+                        status: "Present",
+                        remarks: ""
+                    },
+                    {
+                        date: "2024-01-15",
+                        course: "Computer Science Fundamentals",
+                        time: "11:00 AM",
+                        status: "Present",
+                        remarks: ""
+                    },
+                    {
+                        date: "2024-01-15",
+                        course: "Physics I",
+                        time: "02:00 PM",
+                        status: "Absent",
+                        remarks: "Medical leave"
+                    },
+                    {
+                        date: "2024-01-14",
+                        course: "English Composition",
+                        time: "10:00 AM",
+                        status: "Present",
+                        remarks: ""
+                    },
+                    {
+                        date: "2024-01-14",
+                        course: "Chemistry Lab",
+                        time: "03:00 PM",
+                        status: "Present",
+                        remarks: ""
+                    },
+                    {
+                        date: "2024-01-13",
+                        course: "Statistics",
+                        time: "01:00 PM",
+                        status: "Present",
+                        remarks: ""
+                    }
+                ];
+
+                function populateAttendanceTable() {
+                    const table = document.getElementById('attendanceTable');
+                    table.innerHTML = courseAttendance.map(course => `
+                <tr>
+                    <td><strong>${course.course}</strong></td>
+                    <td>${course.instructor}</td>
+                    <td>${course.attended}</td>
+                    <td>${course.total}</td>
+                    <td>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-${getAttendanceColor(course.percentage)}" style="width: ${course.percentage}%">
+                                ${course.percentage}%
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge bg-${getAttendanceColor(course.percentage)}">
+                            ${getAttendanceStatus(course.percentage)}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+                }
+
+                function populateRecentAttendance() {
+                    const table = document.getElementById('recentAttendanceTable');
+                    table.innerHTML = recentAttendance.map(record => `
+                <tr>
+                    <td>${formatDate(record.date)}</td>
+                    <td>${record.course}</td>
+                    <td>${record.time}</td>
+                    <td>
+                        <span class="badge bg-${record.status === 'Present' ? 'success' : 'danger'}">
+                            ${record.status}
+                        </span>
+                    </td>
+                    <td>${record.remarks || '-'}</td>
+                </tr>
+            `).join('');
+                }
+
+                function getAttendanceColor(percentage) {
+                    if (percentage >= 90) return 'success';
+                    if (percentage >= 75) return 'warning';
+                    return 'danger';
+                }
+
+                function getAttendanceStatus(percentage) {
+                    if (percentage >= 90) return 'Excellent';
+                    if (percentage >= 75) return 'Good';
+                    return 'Poor';
+                }
+
+                function formatDate(dateString) {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('en-US', {
+                        weekday: 'short',
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+
+                // Initialize when page loads
+                document.addEventListener('DOMContentLoaded', function () {
+                    populateAttendanceTable();
+                    populateRecentAttendance();
+                });
+            </script>
+            <script src="../../assets/js/common.js"></script>
+
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

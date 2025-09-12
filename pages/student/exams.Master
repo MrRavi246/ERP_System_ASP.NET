@@ -1,0 +1,286 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="exams.master.cs" Inherits="EduErp.pages.student.exams" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - My Exams</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <link href="../../assets/css/common.css" rel="stylesheet">
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Student Dashboard</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>My Courses
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>My Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>My Timetable
+                                </a>
+                                <a class="nav-link active" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>My Exams
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-credit-card me-2 text-primary"></i>My Fees
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notices
+                                </a>
+                                <a class="nav-link text-dark" href="profile.aspx">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 main-content">
+                        <!-- Top Navigation -->
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <div>
+                                <h1 class="h2">My Exams</h1>
+                                <p class="text-muted">View your exam schedule and results</p>
+                            </div>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-download me-1"></i>Export
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-print me-1"></i>Print
+                                    </button>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user me-1"></i>Student
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
+                                        <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <ul class="nav nav-tabs mb-4" id="examTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab">
+                                    <i class="fas fa-clock me-2 text-primary"></i>Upcoming Exams
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-dark" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed" type="button" role="tab">
+                                    <i class="fas fa-check me-2 text-primary"></i>Completed Exams
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-dark" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button" role="tab">
+                                    <i class="fas fa-trophy me-2 text-primary"></i>Results
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="examTabContent">
+                            <!-- Upcoming Exams -->
+                            <div class="tab-pane fade show active" id="upcoming" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card exam-card shadow-sm">
+                                            <div class="card-header bg-warning text-dark">
+                                                <h5 class="card-title mb-0">
+                                                    <i class="fas fa-calculator me-2 text-primary"></i>Mathematics - Calculus
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> December 15, 2024<br>
+                                                    <strong>Time:</strong> 10:00 AM - 1:00 PM<br>
+                                                    <strong>Room:</strong> Hall A-101<br>
+                                                    <strong>Duration:</strong> 3 hours
+                                                </p>
+                                                <span class="badge badge-upcoming">Upcoming</span>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-file-download me-1"></i>Download Admit Card
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card exam-card shadow-sm">
+                                            <div class="card-header bg-info text-white">
+                                                <h5 class="card-title mb-0">
+                                                    <i class="fas fa-atom me-2 text-primary"></i>Physics - Quantum Mechanics
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> December 18, 2024<br>
+                                                    <strong>Time:</strong> 2:00 PM - 5:00 PM<br>
+                                                    <strong>Room:</strong> Hall B-205<br>
+                                                    <strong>Duration:</strong> 3 hours
+                                                </p>
+                                                <span class="badge badge-upcoming">Upcoming</span>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-file-download me-1"></i>Download Admit Card
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Completed Exams -->
+                            <div class="tab-pane fade" id="completed" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card exam-card shadow-sm">
+                                            <div class="card-header bg-success text-white">
+                                                <h5 class="card-title mb-0">
+                                                    <i class="fas fa-laptop-code me-2 text-primary"></i>Computer Science - Data Structures
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> November 20, 2024<br>
+                                                    <strong>Time:</strong> 9:00 AM - 12:00 PM<br>
+                                                    <strong>Room:</strong> Lab C-301<br>
+                                                    <strong>Status:</strong> Completed
+                                                </p>
+                                                <span class="badge badge-completed">Completed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card exam-card shadow-sm">
+                                            <div class="card-header bg-success text-white">
+                                                <h5 class="card-title mb-0">
+                                                    <i class="fas fa-language me-2 text-primary"></i>English Literature
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <strong>Date:</strong> November 15, 2024<br>
+                                                    <strong>Time:</strong> 2:00 PM - 5:00 PM<br>
+                                                    <strong>Room:</strong> Hall A-102<br>
+                                                    <strong>Status:</strong> Completed
+                                                </p>
+                                                <span class="badge badge-completed">Completed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Results -->
+                            <div class="tab-pane fade" id="results" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">
+                                            <i class="fas fa-trophy me-2 text-primary"></i>Exam Results
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Subject</th>
+                                                        <th>Exam Date</th>
+                                                        <th>Marks Obtained</th>
+                                                        <th>Total Marks</th>
+                                                        <th>Grade</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Computer Science - Data Structures</td>
+                                                        <td>Nov 20, 2024</td>
+                                                        <td>85</td>
+                                                        <td>100</td>
+                                                        <td><span class="badge bg-success">A</span></td>
+                                                        <td><span class="badge bg-success">Pass</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>English Literature</td>
+                                                        <td>Nov 15, 2024</td>
+                                                        <td>78</td>
+                                                        <td>100</td>
+                                                        <td><span class="badge bg-primary">B+</span></td>
+                                                        <td><span class="badge bg-success">Pass</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>History - Modern Era</td>
+                                                        <td>Oct 25, 2024</td>
+                                                        <td>72</td>
+                                                        <td>100</td>
+                                                        <td><span class="badge bg-primary">B</span></td>
+                                                        <td><span class="badge bg-success">Pass</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../../assets/js/common.js"></script>
+
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

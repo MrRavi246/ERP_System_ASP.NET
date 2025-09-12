@@ -1,0 +1,644 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="reports.master.cs" Inherits="EduErp.pages.admin.reports" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Reports</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <link href="../../assets/css/common.css" rel="stylesheet">
+            </head>
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Reports & Analytics</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="students.aspx">
+                                    <i class="fas fa-user-graduate me-2 text-primary"></i>Students
+                                </a>
+                                <a class="nav-link text-dark" href="faculty.aspx">
+                                    <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Faculty
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>Courses
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>Exams & Results
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-money-bill-wave me-2 text-primary"></i>Fees
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notice Board
+                                </a>
+                                <a class="nav-link active bg-primary text-white rounded" href="reports.aspx">
+                                    <i class="fas fa-chart-bar me-2"></i>Reports
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 px-4 py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="mb-1">Reports & Analytics</h2>
+                                <p class="text-muted">Generate comprehensive reports and view analytics</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary me-2" onclick="generateReport()">
+                                    <i class="fas fa-file-alt me-1"></i>Generate Report
+                                </button>
+                                <button class="btn btn-success me-2" onclick="exportData()">
+                                    <i class="fas fa-download me-1"></i>Export Data
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="printReport()">
+                                    <i class="fas fa-print me-1"></i>Print
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Report Type Selection -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Select Report Type</h5>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reportType" id="attendanceReport" value="attendance" checked>
+                                                    <label class="form-check-label" for="attendanceReport">
+                                                        <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance Report
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reportType" id="feesReport" value="fees">
+                                                    <label class="form-check-label" for="feesReport">
+                                                        <i class="fas fa-money-bill-wave me-2 text-primary"></i>Fees Report
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reportType" id="resultsReport" value="results">
+                                                    <label class="form-check-label" for="resultsReport">
+                                                        <i class="fas fa-chart-line me-2 text-primary"></i>Results Report
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="reportType" id="libraryReport" value="library">
+                                                    <label class="form-check-label" for="libraryReport">
+                                                        <i class="fas fa-book-open me-2 text-primary"></i>Library Report
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Report Filters</h5>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="form-label">Department</label>
+                                                <select class="form-select" id="departmentFilter">
+                                                    <option value="">All Departments</option>
+                                                    <option value="Computer Science">Computer Science</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Mechanical">Mechanical</option>
+                                                    <option value="Civil">Civil</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Date Range</label>
+                                                <select class="form-select" id="dateRangeFilter">
+                                                    <option value="last7days">Last 7 Days</option>
+                                                    <option value="last30days">Last 30 Days</option>
+                                                    <option value="last3months">Last 3 Months</option>
+                                                    <option value="last6months">Last 6 Months</option>
+                                                    <option value="thisYear">This Year</option>
+                                                    <option value="custom">Custom Range</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Start Date</label>
+                                                <input type="date" class="form-control" id="startDate">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">End Date</label>
+                                                <input type="date" class="form-control" id="endDate">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-3">
+                                                <label class="form-label">Year</label>
+                                                <select class="form-select" id="yearFilter">
+                                                    <option value="2024">2024</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2022">2022</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Semester</label>
+                                                <select class="form-select" id="semesterFilter">
+                                                    <option value="">All Semesters</option>
+                                                    <option value="1">Semester 1</option>
+                                                    <option value="2">Semester 2</option>
+                                                    <option value="3">Semester 3</option>
+                                                    <option value="4">Semester 4</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Status</label>
+                                                <select class="form-select" id="statusFilter">
+                                                    <option value="">All Status</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                    <option value="Completed">Completed</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Search</label>
+                                                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Section -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Attendance Trends</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="attendanceChart" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Department Distribution</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="departmentChart" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Report Summary Cards -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="totalRecords">1,250</h4>
+                                                <p class="mb-0">Total Records</p>
+                                            </div>
+                                            <i class="fas fa-database fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="avgScore">78.5%</h4>
+                                                <p class="mb-0">Average Score</p>
+                                            </div>
+                                            <i class="fas fa-chart-line fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="attendanceRate">85.2%</h4>
+                                                <p class="mb-0">Attendance Rate</p>
+                                            </div>
+                                            <i class="fas fa-calendar-check fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="paymentRate">92.1%</h4>
+                                                <p class="mb-0">Payment Rate</p>
+                                            </div>
+                                            <i class="fas fa-money-bill-wave fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Report Table -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Report Data</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Department</th>
+                                                        <th>Category</th>
+                                                        <th>Value</th>
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="reportTable">
+                                                    <!-- Report table will be populated here -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Sample data
+                const reportData = [
+                    {
+                        id: "RPT001",
+                        name: "John Doe",
+                        department: "Computer Science",
+                        category: "Attendance",
+                        value: "95%",
+                        date: "2024-01-15",
+                        status: "Active"
+                    },
+                    {
+                        id: "RPT002",
+                        name: "Jane Smith",
+                        department: "Electrical",
+                        category: "Fees",
+                        value: "��25,000",
+                        date: "2024-01-20",
+                        status: "Paid"
+                    },
+                    {
+                        id: "RPT003",
+                        name: "Mike Johnson",
+                        department: "Mechanical",
+                        category: "Results",
+                        value: "85%",
+                        date: "2024-01-18",
+                        status: "Completed"
+                    },
+                    {
+                        id: "RPT004",
+                        name: "Sarah Wilson",
+                        department: "Computer Science",
+                        category: "Library",
+                        value: "3 Books",
+                        date: "2024-01-22",
+                        status: "Active"
+                    },
+                    {
+                        id: "RPT005",
+                        name: "Alex Brown",
+                        department: "Civil",
+                        category: "Attendance",
+                        value: "88%",
+                        date: "2024-01-16",
+                        status: "Active"
+                    },
+                    {
+                        id: "RPT006",
+                        name: "Emily Davis",
+                        department: "Electrical",
+                        category: "Fees",
+                        value: "��30,000",
+                        date: "2024-01-25",
+                        status: "Pending"
+                    }
+                ];
+
+                // Initialize page
+                document.addEventListener('DOMContentLoaded', function () {
+                    displayReportTable();
+                    updateStats();
+                    setupCharts();
+                    setupFilters();
+                });
+
+                function displayReportTable() {
+                    const tbody = document.getElementById('reportTable');
+                    tbody.innerHTML = '';
+
+                    reportData.forEach(record => {
+                        const row = `
+                    <tr>
+                        <td>${record.id}</td>
+                        <td>${record.name}</td>
+                        <td>${record.department}</td>
+                        <td>${record.category}</td>
+                        <td><span class="fw-bold">${record.value}</span></td>
+                        <td>${formatDate(record.date)}</td>
+                        <td><span class="badge bg-${getStatusColor(record.status)}">${record.status}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-1" onclick="viewRecord('${record.id}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary me-1" onclick="exportRecord('${record.id}')">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info" onclick="printRecord('${record.id}')">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                        tbody.innerHTML += row;
+                    });
+                }
+
+                function updateStats() {
+                    const totalRecords = reportData.length;
+                    const avgScore = "78.5%";
+                    const attendanceRate = "85.2%";
+                    const paymentRate = "92.1%";
+
+                    document.getElementById('totalRecords').textContent = totalRecords.toLocaleString();
+                    document.getElementById('avgScore').textContent = avgScore;
+                    document.getElementById('attendanceRate').textContent = attendanceRate;
+                    document.getElementById('paymentRate').textContent = paymentRate;
+                }
+
+                function setupCharts() {
+                    // Attendance Chart
+                    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+                    new Chart(attendanceCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'Attendance Rate',
+                                data: [85, 87, 89, 88, 90, 92],
+                                borderColor: 'rgb(75, 192, 192)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100
+                                }
+                            }
+                        }
+                    });
+
+                    // Department Chart
+                    const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+                    new Chart(departmentCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Computer Science', 'Electrical', 'Mechanical', 'Civil'],
+                            datasets: [{
+                                data: [35, 25, 20, 20],
+                                backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(75, 192, 192)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }
+                    });
+                }
+
+                function setupFilters() {
+                    const departmentFilter = document.getElementById('departmentFilter');
+                    const dateRangeFilter = document.getElementById('dateRangeFilter');
+                    const yearFilter = document.getElementById('yearFilter');
+                    const semesterFilter = document.getElementById('semesterFilter');
+                    const statusFilter = document.getElementById('statusFilter');
+                    const searchInput = document.getElementById('searchInput');
+
+                    [departmentFilter, dateRangeFilter, yearFilter, semesterFilter, statusFilter, searchInput].forEach(filter => {
+                        filter.addEventListener('change', filterReportData);
+                        filter.addEventListener('input', filterReportData);
+                    });
+                }
+
+                function filterReportData() {
+                    const department = document.getElementById('departmentFilter').value;
+                    const status = document.getElementById('statusFilter').value;
+                    const search = document.getElementById('searchInput').value.toLowerCase();
+
+                    const filteredData = reportData.filter(record => {
+                        const matchesDepartment = !department || record.department === department;
+                        const matchesStatus = !status || record.status === status;
+                        const matchesSearch = !search ||
+                            record.name.toLowerCase().includes(search) ||
+                            record.category.toLowerCase().includes(search) ||
+                            record.department.toLowerCase().includes(search);
+
+                        return matchesDepartment && matchesStatus && matchesSearch;
+                    });
+
+                    displayFilteredReportData(filteredData);
+                }
+
+                function displayFilteredReportData(filteredData) {
+                    const tbody = document.getElementById('reportTable');
+                    tbody.innerHTML = '';
+
+                    filteredData.forEach(record => {
+                        const row = `
+                    <tr>
+                        <td>${record.id}</td>
+                        <td>${record.name}</td>
+                        <td>${record.department}</td>
+                        <td>${record.category}</td>
+                        <td><span class="fw-bold">${record.value}</span></td>
+                        <td>${formatDate(record.date)}</td>
+                        <td><span class="badge bg-${getStatusColor(record.status)}">${record.status}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-1" onclick="viewRecord('${record.id}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary me-1" onclick="exportRecord('${record.id}')">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info" onclick="printRecord('${record.id}')">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                        tbody.innerHTML += row;
+                    });
+                }
+
+                function generateReport() {
+                    const reportType = document.querySelector('input[name="reportType"]:checked').value;
+                    const department = document.getElementById('departmentFilter').value;
+                    const dateRange = document.getElementById('dateRangeFilter').value;
+
+                    alert(`Generating ${reportType} report for ${department || 'all departments'} for ${dateRange}...`);
+
+                    // Simulate report generation
+                    setTimeout(() => {
+                        alert('Report generated successfully! You can now view, export, or print the report.');
+                    }, 2000);
+                }
+
+                function exportData() {
+                    const reportType = document.querySelector('input[name="reportType"]:checked').value;
+                    alert(`Exporting ${reportType} data to Excel...`);
+
+                    // Simulate export
+                    setTimeout(() => {
+                        alert('Data exported successfully!');
+                    }, 1500);
+                }
+
+                function printReport() {
+                    const reportType = document.querySelector('input[name="reportType"]:checked').value;
+                    alert(`Printing ${reportType} report...`);
+
+                    // Simulate print
+                    setTimeout(() => {
+                        alert('Report sent to printer!');
+                    }, 1000);
+                }
+
+                function viewRecord(id) {
+                    const record = reportData.find(r => r.id === id);
+                    if (record) {
+                        alert(`Record Details:\nID: ${record.id}\nName: ${record.name}\nDepartment: ${record.department}\nCategory: ${record.category}\nValue: ${record.value}\nDate: ${formatDate(record.date)}\nStatus: ${record.status}`);
+                    }
+                }
+
+                function exportRecord(id) {
+                    const record = reportData.find(r => r.id === id);
+                    if (record) {
+                        alert(`Exporting record ${record.id}...`);
+                        setTimeout(() => {
+                            alert('Record exported successfully!');
+                        }, 1000);
+                    }
+                }
+
+                function printRecord(id) {
+                    const record = reportData.find(r => r.id === id);
+                    if (record) {
+                        alert(`Printing record ${record.id}...`);
+                        setTimeout(() => {
+                            alert('Record sent to printer!');
+                        }, 1000);
+                    }
+                }
+
+                function getStatusColor(status) {
+                    switch (status) {
+                        case 'Active': return 'success';
+                        case 'Paid': return 'success';
+                        case 'Completed': return 'info';
+                        case 'Pending': return 'warning';
+                        case 'Inactive': return 'secondary';
+                        default: return 'secondary';
+                    }
+                }
+
+                function formatDate(dateString) {
+                    if (!dateString) return '-';
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString();
+                }
+            </script>
+            <script src="../../assets/js/common.js"></script>
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

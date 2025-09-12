@@ -1,0 +1,631 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="notices.master.cs" Inherits="EduErp.pages.admin.notices" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - Notice Board</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                <link href="../../assets/css/common.css" rel="stylesheet">
+            </head>
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Notice Board</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="students.aspx">
+                                    <i class="fas fa-user-graduate me-2 text-primary"></i>Students
+                                </a>
+                                <a class="nav-link text-dark" href="faculty.aspx">
+                                    <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Faculty
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>Courses
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>Exams & Results
+                                </a>
+                                <a class="nav-link text-dark" href="fees.aspx">
+                                    <i class="fas fa-credit-card me-2 text-primary"></i>Fees
+                                </a>
+                                <a class="nav-link active" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notice Board
+                                </a>
+                                <a class="nav-link text-dark" href="reports.aspx">
+                                    <i class="fas fa-chart-bar me-2 text-primary"></i>Reports
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 px-4 py-3">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="mb-1">Notice Board</h2>
+                                <p class="text-muted">Manage and view college announcements and notices</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#addNoticeModal">
+                                    <i class="fas fa-plus me-1"></i>Add Notice
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-download me-1"></i>Export
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="totalNotices">24</h4>
+                                                <p class="mb-0">Total Notices</p>
+                                            </div>
+                                            <i class="fas fa-bullhorn fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-danger text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="highPriority">5</h4>
+                                                <p class="mb-0">High Priority</p>
+                                            </div>
+                                            <i class="fas fa-exclamation-triangle fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="activeNotices">18</h4>
+                                                <p class="mb-0">Active Notices</p>
+                                            </div>
+                                            <i class="fas fa-eye fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h4 class="mb-0" id="todayNotices">3</h4>
+                                                <p class="mb-0">Today's Notices</p>
+                                            </div>
+                                            <i class="fas fa-calendar-day fa-2x opacity-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="form-label">Priority</label>
+                                                <select class="form-select" id="priorityFilter">
+                                                    <option value="">All Priorities</option>
+                                                    <option value="High">High</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="Low">Low</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Category</label>
+                                                <select class="form-select" id="categoryFilter">
+                                                    <option value="">All Categories</option>
+                                                    <option value="Academic">Academic</option>
+                                                    <option value="Administrative">Administrative</option>
+                                                    <option value="Event">Event</option>
+                                                    <option value="Emergency">Emergency</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Status</label>
+                                                <select class="form-select" id="statusFilter">
+                                                    <option value="">All Status</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                    <option value="Expired">Expired</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Search</label>
+                                                <input type="text" class="form-control" id="searchInput" placeholder="Search notices...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notices Grid -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h5 class="mb-3">Recent Notices</h5>
+                                <div class="row" id="noticesGrid">
+                                    <!-- Notices grid will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notices Table -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">All Notices</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Notice ID</th>
+                                                        <th>Title</th>
+                                                        <th>Category</th>
+                                                        <th>Priority</th>
+                                                        <th>Posted Date</th>
+                                                        <th>Expiry Date</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="noticesTable">
+                                                    <!-- Notices table will be populated here -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Notice Modal -->
+            <div class="modal fade" id="addNoticeModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Notice</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addNoticeForm">
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <label class="form-label">Notice Title</label>
+                                        <input type="text" class="form-control" id="noticeTitle" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Priority</label>
+                                        <select class="form-select" id="noticePriority" required>
+                                            <option value="">Select Priority</option>
+                                            <option value="High">High</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Low">Low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Category</label>
+                                        <select class="form-select" id="noticeCategory" required>
+                                            <option value="">Select Category</option>
+                                            <option value="Academic">Academic</option>
+                                            <option value="Administrative">Administrative</option>
+                                            <option value="Event">Event</option>
+                                            <option value="Emergency">Emergency</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Posted By</label>
+                                        <input type="text" class="form-control" id="postedBy" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Posted Date</label>
+                                        <input type="date" class="form-control" id="postedDate" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Expiry Date</label>
+                                        <input type="date" class="form-control" id="expiryDate" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Notice Content</label>
+                                    <textarea class="form-control" id="noticeContent" rows="6" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Target Audience</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="targetStudents" checked>
+                                        <label class="form-check-label" for="targetStudents">Students</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="targetFaculty" checked>
+                                        <label class="form-check-label" for="targetFaculty">Faculty</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="targetStaff">
+                                        <label class="form-check-label" for="targetStaff">Staff</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="addNotice()">Add Notice</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Sample data
+                const notices = [
+                    {
+                        id: "NT001",
+                        title: "Mid-Semester Examination Schedule",
+                        category: "Academic",
+                        priority: "High",
+                        content: "The mid-semester examinations will be conducted from 15th to 20th January 2024. All students are required to check their examination schedule on the portal.",
+                        postedBy: "Academic Office",
+                        postedDate: "2024-01-10",
+                        expiryDate: "2024-01-25",
+                        status: "Active",
+                        targetAudience: ["Students", "Faculty"]
+                    },
+                    {
+                        id: "NT002",
+                        title: "Annual Sports Meet 2024",
+                        category: "Event",
+                        priority: "Medium",
+                        content: "The Annual Sports Meet will be held on 25th February 2024. Registration for various events is now open. Last date for registration is 15th February.",
+                        postedBy: "Sports Department",
+                        postedDate: "2024-01-12",
+                        expiryDate: "2024-02-15",
+                        status: "Active",
+                        targetAudience: ["Students", "Faculty", "Staff"]
+                    },
+                    {
+                        id: "NT003",
+                        title: "Library Maintenance Notice",
+                        category: "Administrative",
+                        priority: "Low",
+                        content: "The library will be closed for maintenance on 20th January 2024. All books must be returned by 19th January.",
+                        postedBy: "Library Department",
+                        postedDate: "2024-01-08",
+                        expiryDate: "2024-01-20",
+                        status: "Active",
+                        targetAudience: ["Students", "Faculty"]
+                    },
+                    {
+                        id: "NT004",
+                        title: "Emergency: Campus Closure",
+                        category: "Emergency",
+                        priority: "High",
+                        content: "Due to severe weather conditions, the campus will remain closed on 18th January 2024. All classes and activities are suspended.",
+                        postedBy: "Administration",
+                        postedDate: "2024-01-17",
+                        expiryDate: "2024-01-19",
+                        status: "Active",
+                        targetAudience: ["Students", "Faculty", "Staff"]
+                    },
+                    {
+                        id: "NT005",
+                        title: "Faculty Development Program",
+                        category: "Academic",
+                        priority: "Medium",
+                        content: "A faculty development program on 'Modern Teaching Methods' will be conducted on 30th January 2024. All faculty members are encouraged to attend.",
+                        postedBy: "HR Department",
+                        postedDate: "2024-01-15",
+                        expiryDate: "2024-01-30",
+                        status: "Active",
+                        targetAudience: ["Faculty"]
+                    },
+                    {
+                        id: "NT006",
+                        title: "Fee Payment Deadline",
+                        category: "Administrative",
+                        priority: "High",
+                        content: "The last date for fee payment for the current semester is 31st January 2024. Late payment will attract a penalty.",
+                        postedBy: "Accounts Department",
+                        postedDate: "2024-01-05",
+                        expiryDate: "2024-01-31",
+                        status: "Active",
+                        targetAudience: ["Students"]
+                    }
+                ];
+
+                // Initialize page
+                document.addEventListener('DOMContentLoaded', function () {
+                    displayNoticesGrid();
+                    displayNoticesTable();
+                    updateStats();
+                    setupFilters();
+                });
+
+                function displayNoticesGrid() {
+                    const container = document.getElementById('noticesGrid');
+                    container.innerHTML = '';
+
+                    notices.slice(0, 6).forEach(notice => {
+                        const card = `
+                <div class="col-md-4 mb-3">
+                    <div class="card notice-card h-100 priority-${notice.priority.toLowerCase()} category-${notice.category.toLowerCase()}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="card-title mb-0">${notice.title}</h6>
+                                <span class="badge bg-${getPriorityColor(notice.priority)}">${notice.priority}</span>
+                            </div>
+                            <p class="text-muted small mb-2">${notice.category} • ${notice.postedBy}</p>
+                            <p class="card-text small">${notice.content.substring(0, 100)}${notice.content.length > 100 ? '...' : ''}</p>
+                            <div class="mt-3">
+                                <small class="text-muted">Posted: ${formatDate(notice.postedDate)}</small><br>
+                                <small class="text-muted">Expires: ${formatDate(notice.expiryDate)}</small><br>
+                                <small class="text-muted">Status: ${notice.status}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                        container.innerHTML += card;
+                    });
+                }
+
+                function displayNoticesTable() {
+                    const tbody = document.getElementById('noticesTable');
+                    tbody.innerHTML = '';
+
+                    notices.forEach(notice => {
+                        const row = `
+                <tr>
+                    <td>${notice.id}</td>
+                    <td>${notice.title}</td>
+                    <td>${notice.category}</td>
+                    <td><span class="badge bg-${getPriorityColor(notice.priority)}">${notice.priority}</span></td>
+                    <td>${formatDate(notice.postedDate)}</td>
+                    <td>${formatDate(notice.expiryDate)}</td>
+                    <td><span class="badge bg-${getStatusColor(notice.status)}">${notice.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="viewNotice('${notice.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning me-1" onclick="editNotice('${notice.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteNotice('${notice.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+                        tbody.innerHTML += row;
+                    });
+                }
+
+                function updateStats() {
+                    const totalNotices = notices.length;
+                    const highPriority = notices.filter(notice => notice.priority === 'High').length;
+                    const activeNotices = notices.filter(notice => notice.status === 'Active').length;
+                    const todayNotices = notices.filter(notice => {
+                        const today = new Date().toISOString().split('T')[0];
+                        return notice.postedDate === today;
+                    }).length;
+
+                    document.getElementById('totalNotices').textContent = totalNotices;
+                    document.getElementById('highPriority').textContent = highPriority;
+                    document.getElementById('activeNotices').textContent = activeNotices;
+                    document.getElementById('todayNotices').textContent = todayNotices;
+                }
+
+                function setupFilters() {
+                    const priorityFilter = document.getElementById('priorityFilter');
+                    const categoryFilter = document.getElementById('categoryFilter');
+                    const statusFilter = document.getElementById('statusFilter');
+                    const searchInput = document.getElementById('searchInput');
+
+                    [priorityFilter, categoryFilter, statusFilter, searchInput].forEach(filter => {
+                        filter.addEventListener('change', filterNotices);
+                        filter.addEventListener('input', filterNotices);
+                    });
+                }
+
+                function filterNotices() {
+                    const priority = document.getElementById('priorityFilter').value;
+                    const category = document.getElementById('categoryFilter').value;
+                    const status = document.getElementById('statusFilter').value;
+                    const search = document.getElementById('searchInput').value.toLowerCase();
+
+                    const filteredNotices = notices.filter(notice => {
+                        const matchesPriority = !priority || notice.priority === priority;
+                        const matchesCategory = !category || notice.category === category;
+                        const matchesStatus = !status || notice.status === status;
+                        const matchesSearch = !search ||
+                            notice.title.toLowerCase().includes(search) ||
+                            notice.content.toLowerCase().includes(search) ||
+                            notice.postedBy.toLowerCase().includes(search);
+
+                        return matchesPriority && matchesCategory && matchesStatus && matchesSearch;
+                    });
+
+                    displayFilteredNotices(filteredNotices);
+                }
+
+                function displayFilteredNotices(filteredNotices) {
+                    const tbody = document.getElementById('noticesTable');
+                    tbody.innerHTML = '';
+
+                    filteredNotices.forEach(notice => {
+                        const row = `
+                <tr>
+                    <td>${notice.id}</td>
+                    <td>${notice.title}</td>
+                    <td>${notice.category}</td>
+                    <td><span class="badge bg-${getPriorityColor(notice.priority)}">${notice.priority}</span></td>
+                    <td>${formatDate(notice.postedDate)}</td>
+                    <td>${formatDate(notice.expiryDate)}</td>
+                    <td><span class="badge bg-${getStatusColor(notice.status)}">${notice.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="viewNotice('${notice.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning me-1" onclick="editNotice('${notice.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteNotice('${notice.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+                        tbody.innerHTML += row;
+                    });
+                }
+
+                function addNotice() {
+                    const form = document.getElementById('addNoticeForm');
+
+                    const notice = {
+                        id: `NT${String(notices.length + 1).padStart(3, '0')}`,
+                        title: document.getElementById('noticeTitle').value,
+                        category: document.getElementById('noticeCategory').value,
+                        priority: document.getElementById('noticePriority').value,
+                        content: document.getElementById('noticeContent').value,
+                        postedBy: document.getElementById('postedBy').value,
+                        postedDate: document.getElementById('postedDate').value,
+                        expiryDate: document.getElementById('expiryDate').value,
+                        status: "Active",
+                        targetAudience: []
+                    };
+
+                    // Get target audience
+                    if (document.getElementById('targetStudents').checked) notice.targetAudience.push('Students');
+                    if (document.getElementById('targetFaculty').checked) notice.targetAudience.push('Faculty');
+                    if (document.getElementById('targetStaff').checked) notice.targetAudience.push('Staff');
+
+                    notices.push(notice);
+                    displayNoticesGrid();
+                    displayNoticesTable();
+                    updateStats();
+
+                    // Close modal and reset form
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addNoticeModal'));
+                    modal.hide();
+                    form.reset();
+
+                    alert('Notice added successfully!');
+                }
+
+                function viewNotice(id) {
+                    const notice = notices.find(n => n.id === id);
+                    if (notice) {
+                        alert(`Notice Details:\nTitle: ${notice.title}\nCategory: ${notice.category}\nPriority: ${notice.priority}\nPosted By: ${notice.postedBy}\nPosted Date: ${formatDate(notice.postedDate)}\nExpiry Date: ${formatDate(notice.expiryDate)}\nStatus: ${notice.status}\n\nContent:\n${notice.content}\n\nTarget Audience: ${notice.targetAudience.join(', ')}`);
+                    }
+                }
+
+                function editNotice(id) {
+                    alert('Edit functionality will be implemented here');
+                }
+
+                function deleteNotice(id) {
+                    if (confirm('Are you sure you want to delete this notice?')) {
+                        const index = notices.findIndex(n => n.id === id);
+                        if (index > -1) {
+                            notices.splice(index, 1);
+                            displayNoticesGrid();
+                            displayNoticesTable();
+                            updateStats();
+                            alert('Notice deleted successfully!');
+                        }
+                    }
+                }
+
+                function getPriorityColor(priority) {
+                    switch (priority) {
+                        case 'High': return 'danger';
+                        case 'Medium': return 'warning';
+                        case 'Low': return 'success';
+                        default: return 'secondary';
+                    }
+                }
+
+                function getStatusColor(status) {
+                    switch (status) {
+                        case 'Active': return 'success';
+                        case 'Inactive': return 'secondary';
+                        case 'Expired': return 'danger';
+                        default: return 'secondary';
+                    }
+                }
+
+                function formatDate(dateString) {
+                    if (!dateString) return '-';
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString();
+                }
+            </script>
+            <script src="../../assets/js/common.js"></script>
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

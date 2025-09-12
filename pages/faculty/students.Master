@@ -1,0 +1,509 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="students.master.cs" Inherits="EduErp.pages.faculty.students" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>College ERP System - My Students</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-light">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <link href="../../assets/css/common.css" rel="stylesheet">
+        </asp:ContentPlaceHolder>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Mobile Navigation Toggle -->
+                    <button class="mobile-nav-toggle d-md-none" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Sidebar Overlay -->
+                    <div class="sidebar-overlay"></div>
+                    <!-- Sidebar -->
+                    <div class="col-md-3 col-lg-2 px-0">
+                        <div class="sidebar bg-white border-end p-3">
+                            <div class="text-center mb-4">
+                                <h4 class="text-primary fw-bold">College ERP</h4>
+                                <p class="text-muted small">Faculty Dashboard</p>
+                            </div>
+                            <nav class="nav flex-column">
+                                <a class="nav-link text-dark" href="dashboard.aspx">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                </a>
+                                <a class="nav-link text-dark" href="courses.aspx">
+                                    <i class="fas fa-book me-2 text-primary"></i>My Courses
+                                </a>
+                                <a class="nav-link text-dark" href="attendance.aspx">
+                                    <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                </a>
+                                <a class="nav-link text-dark" href="timetable.aspx">
+                                    <i class="fas fa-clock me-2 text-primary"></i>My Timetable
+                                </a>
+                                <a class="nav-link text-dark" href="exams.aspx">
+                                    <i class="fas fa-file-alt me-2 text-primary"></i>Exams
+                                </a>
+                                <a class="nav-link active" href="students.aspx">
+                                    <i class="fas fa-users me-2 text-primary"></i>My Students
+                                </a>
+                                <a class="nav-link text-dark" href="notices.aspx">
+                                    <i class="fas fa-bullhorn me-2 text-primary"></i>Notices
+                                </a>
+                                <a class="nav-link text-dark" href="profile.aspx">
+                                    <i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="col-md-9 col-lg-10 main-content">
+                        <!-- Top Navigation -->
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <div>
+                                <h1 class="h2">My Students</h1>
+                                <p class="text-muted">Manage and view student information</p>
+                            </div>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-download me-1"></i>Export
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-print me-1"></i>Print
+                                    </button>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user me-1"></i>Faculty
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
+                                        <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statistics Cards -->
+                        <div class="row mb-4">
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Total Students
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">285</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Average Attendance
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">87.5%</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                    Average Grade
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">B+</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-trophy fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Pending Assignments
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">47</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Course Filter -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <h6 class="m-0 font-weight-bold text-primary">
+                                            <i class="fas fa-filter me-2 text-primary"></i>Filter by Course
+                                        </h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select" id="courseFilter">
+                                            <option value="">All Courses</option>
+                                            <option value="math">Advanced Mathematics (65 students)</option>
+                                            <option value="physics">Quantum Physics (42 students)</option>
+                                            <option value="cs">Data Structures (78 students)</option>
+                                            <option value="ml">Machine Learning (35 students)</option>
+                                            <option value="db">Database Systems (65 students)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Students Table -->
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    <i class="fas fa-users me-2 text-primary"></i>Student List
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="studentsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Student ID</th>
+                                                <th>Name</th>
+                                                <th>Course</th>
+                                                <th>Attendance</th>
+                                                <th>Latest Grade</th>
+                                                <th>Contact</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr data-course="math">
+                                                <td>STU2024001</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                            JD
+                                                        </div>
+                                                        <div>
+                                                            <div class="font-weight-bold">John Doe</div>
+                                                            <div class="text-muted small">Semester 5</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Advanced Mathematics</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 92%">92%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">A</span></td>
+                                                <td>john.doe@college.edu</td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="viewStudent('STU2024001')">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-info">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr data-course="physics">
+                                                <td>STU2024002</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                            JS
+                                                        </div>
+                                                        <div>
+                                                            <div class="font-weight-bold">Jane Smith</div>
+                                                            <div class="text-muted small">Semester 7</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Quantum Physics</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 78%">78%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-primary">B+</span></td>
+                                                <td>jane.smith@college.edu</td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="viewStudent('STU2024002')">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-info">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr data-course="cs">
+                                                <td>STU2024003</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                            MB
+                                                        </div>
+                                                        <div>
+                                                            <div class="font-weight-bold">Mike Brown</div>
+                                                            <div class="text-muted small">Semester 3</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Data Structures</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 95%">95%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">A+</span></td>
+                                                <td>mike.brown@college.edu</td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="viewStudent('STU2024003')">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-info">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr data-course="ml">
+                                                <td>STU2024004</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                            SW
+                                                        </div>
+                                                        <div>
+                                                            <div class="font-weight-bold">Sarah Wilson</div>
+                                                            <div class="text-muted small">Semester 9</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Machine Learning</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 65%">65%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-warning">C+</span></td>
+                                                <td>sarah.wilson@college.edu</td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="viewStudent('STU2024004')">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-info">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr data-course="db">
+                                                <td>STU2024005</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                            AD
+                                                        </div>
+                                                        <div>
+                                                            <div class="font-weight-bold">Alex Davis</div>
+                                                            <div class="text-muted small">Semester 5</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Database Systems</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 88%">88%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-primary">B</span></td>
+                                                <td>alex.davis@college.edu</td>
+                                                <td>
+                                                    <div class="btn-group" role="group">
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="viewStudent('STU2024005')">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-info">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Pagination -->
+                                <nav aria-label="Students pagination">
+                                    <ul class="pagination justify-content-center mt-3">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <div class="modal fade" id="studentDetailsModal" tabindex="-1" aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="studentDetailsModalLabel">Student Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="studentDetailsBody">
+                            <!-- Content will be populated by JavaScript -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Course filter functionality
+                document.getElementById('courseFilter').addEventListener('change', function () {
+                    const selectedCourse = this.value;
+                    const rows = document.querySelectorAll('#studentsTable tbody tr');
+
+                    rows.forEach(row => {
+                        if (selectedCourse === '' || row.dataset.course === selectedCourse) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+
+                // View student details function
+                function viewStudent(studentId) {
+                    const studentData = {
+                        'STU2024001': {
+                            name: 'John Doe',
+                            id: 'STU2024001',
+                            email: 'john.doe@college.edu',
+                            phone: '+1 234 567 8900',
+                            course: 'Advanced Mathematics',
+                            semester: '5',
+                            attendance: '92%',
+                            grade: 'A',
+                            assignments: '8/10 submitted',
+                            lastLogin: 'December 10, 2024'
+                        },
+                        'STU2024002': {
+                            name: 'Jane Smith',
+                            id: 'STU2024002',
+                            email: 'jane.smith@college.edu',
+                            phone: '+1 234 567 8901',
+                            course: 'Quantum Physics',
+                            semester: '7',
+                            attendance: '78%',
+                            grade: 'B+',
+                            assignments: '6/8 submitted',
+                            lastLogin: 'December 9, 2024'
+                        }
+                        // Add more student data as needed
+                    };
+
+                    const student = studentData[studentId];
+                    if (student) {
+                        const modalBody = document.getElementById('studentDetailsBody');
+                        modalBody.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Name:</strong> ${student.name}</p>
+                            <p><strong>Student ID:</strong> ${student.id}</p>
+                            <p><strong>Email:</strong> ${student.email}</p>
+                            <p><strong>Phone:</strong> ${student.phone}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Course:</strong> ${student.course}</p>
+                            <p><strong>Semester:</strong> ${student.semester}</p>
+                            <p><strong>Attendance:</strong> ${student.attendance}</p>
+                            <p><strong>Current Grade:</strong> <span class="badge bg-success">${student.grade}</span></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <p><strong>Assignments:</strong> ${student.assignments}</p>
+                            <p><strong>Last Login:</strong> ${student.lastLogin}</p>
+                        </div>
+                    </div>
+                `;
+
+                        const modal = new bootstrap.Modal(document.getElementById('studentDetailsModal'));
+                        modal.show();
+                    }
+                }
+            </script>
+            <script src="../../assets/js/common.js"></script>
+
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

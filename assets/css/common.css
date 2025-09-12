@@ -1,0 +1,614 @@
+/* Common ERP System Styles */
+
+/* Mobile-First Responsive Design */
+* {
+    box-sizing: border-box;
+}
+
+/* Base responsive font sizes */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Mobile Navigation */
+.mobile-nav-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1050;
+    background: #4e73df;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    min-height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e3e6f0;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    z-index: 1040;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.sidebar.show {
+    left: 0;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: static;
+        left: 0;
+        width: auto;
+    }
+    
+    .mobile-nav-toggle {
+        display: none;
+    }
+}
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1030;
+    display: none;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .sidebar-overlay {
+        display: none !important;
+    }
+}
+
+.sidebar .nav-link {
+    color: #5a5c69;
+    border-radius: 8px;
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    padding: 12px 15px;
+}
+
+.sidebar .nav-link:hover {
+    color: #5a5c69;
+    background-color: #f8f9fc;
+    transform: translateX(5px);
+}
+
+.sidebar .nav-link.active {
+    color: white;
+    background-color: #4e73df;
+    transform: translateX(5px);
+}
+
+/* Main content responsive */
+.main-content {
+    padding: 20px 15px;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding: 30px;
+    }
+}
+
+/* Mobile header adjustments */
+.page-header {
+    margin-bottom: 20px;
+    padding-top: 60px;
+}
+
+@media (min-width: 768px) {
+    .page-header {
+        padding-top: 0;
+    }
+}
+
+.page-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .page-header h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile-friendly buttons */
+.btn-mobile {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 576px) {
+    .btn-mobile {
+        width: auto;
+        margin-bottom: 0;
+    }
+}
+
+/* Responsive tables */
+.table-responsive-mobile {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive-mobile table {
+    min-width: 600px;
+}
+
+@media (max-width: 767px) {
+    .table-responsive-mobile .table td,
+    .table-responsive-mobile .table th {
+        padding: 8px 4px;
+        font-size: 0.875rem;
+    }
+    
+    .table-responsive-mobile .btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Card Animations */
+.card-stats,
+.exam-card,
+.fee-card,
+.notice-card,
+.course-card,
+.student-card,
+.payment-card {
+    transition: transform 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.card-stats:hover,
+.exam-card:hover,
+.fee-card:hover,
+.notice-card:hover,
+.course-card:hover,
+.student-card:hover,
+.payment-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Mobile card adjustments */
+@media (max-width: 767px) {
+    .card {
+        margin-bottom: 15px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .card-stats .card-body {
+        padding: 20px 15px;
+    }
+}
+
+/* Badge Styles */
+.badge-upcoming {
+    background-color: #ffc107;
+}
+
+.badge-completed {
+    background-color: #28a745;
+}
+
+/* Mobile Form Styles */
+@media (max-width: 767px) {
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .form-row > div {
+        margin-bottom: 15px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn-group .btn {
+        border-radius: 4px !important;
+        margin-bottom: 5px;
+    }
+}
+
+/* Mobile Stats Cards */
+@media (max-width: 567px) {
+    .stats-card-mobile {
+        margin-bottom: 15px;
+    }
+    
+    .stats-card-mobile h4 {
+        font-size: 1.25rem;
+    }
+    
+    .stats-card-mobile p {
+        font-size: 0.875rem;
+    }
+}
+
+/* Mobile Dashboard Grid */
+@media (max-width: 767px) {
+    .dashboard-grid {
+        display: block;
+    }
+    
+    .dashboard-grid > div {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+}
+
+/* Mobile Filter Controls */
+.mobile-filters {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .desktop-filters {
+        display: none;
+    }
+    
+    .mobile-filters {
+        display: block;
+    }
+    
+    .filter-dropdown {
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile Charts */
+@media (max-width: 767px) {
+    .chart-container {
+        height: 250px !important;
+    }
+    
+    canvas {
+        max-height: 250px !important;
+    }
+}
+
+/* Status Badge Responsive */
+.status-paid {
+    background-color: #28a745;
+}
+
+.status-pending {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.status-overdue {
+    background-color: #dc3545;
+}
+
+.status-partial {
+    background-color: #17a2b8;
+}
+
+/* Mobile Navigation Animations */
+@media (max-width: 767px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Text Sizing */
+.text-responsive {
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .text-responsive {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile-friendly action buttons */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+@media (max-width: 767px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+        margin-bottom: 5px;
+        justify-content: flex-start;
+    }
+    
+    .action-buttons .btn i {
+        margin-right: 8px;
+        width: 16px;
+        text-align: center;
+    }
+}
+
+/* Responsive Spacing */
+.section-spacing {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .section-spacing {
+        margin-bottom: 30px;
+    }
+}
+
+/* Touch-friendly Elements */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        min-height: 44px;
+        padding: 12px 16px;
+    }
+    
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .sidebar .nav-link {
+        min-height: 48px;
+        padding: 15px;
+    }
+}
+
+/* Swipe gestures for mobile */
+.swipe-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.swipe-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Mobile Table Cards */
+@media (max-width: 767px) {
+    .table-card-mobile {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 15px;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .table-card-mobile .card-header {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .table-card-mobile .card-body {
+        padding: 0;
+    }
+    
+    .table-card-mobile .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        padding: 5px 0;
+    }
+    
+    .table-card-mobile .info-label {
+        font-weight: 500;
+        color: #6c757d;
+        font-size: 0.875rem;
+    }
+    
+    .table-card-mobile .info-value {
+        font-weight: 500;
+        color: #495057;
+        font-size: 0.875rem;
+        text-align: right;
+    }
+}
+
+/* Progressive Web App Support */
+@media (display-mode: standalone) {
+    .page-header {
+        padding-top: 20px;
+    }
+    
+    .mobile-nav-toggle {
+        top: 25px;
+    }
+}
+
+/* High DPI Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    .card {
+        border-width: 0.5px;
+    }
+    
+    .btn {
+        border-width: 0.5px;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .card-stats,
+    .card {
+        transition: none;
+    }
+    
+    .sidebar .nav-link:hover {
+        transform: none;
+    }
+}
+
+.badge-missed {
+    background-color: #dc3545;
+}
+
+.badge-paid {
+    background-color: #28a745;
+}
+
+.badge-pending {
+    background-color: #ffc107;
+}
+
+.badge-overdue {
+    background-color: #dc3545;
+}
+
+/* Notice Styles */
+.notice-urgent {
+    border-left: 5px solid #dc3545;
+}
+
+.notice-important {
+    border-left: 5px solid #ffc107;
+}
+
+.notice-general {
+    border-left: 5px solid #28a745;
+}
+
+.notice-event {
+    border-left: 5px solid #007bff;
+}
+
+/* Timetable Styles */
+.timetable-cell {
+    min-height: 80px;
+    border: 1px solid #dee2e6;
+    position: relative;
+}
+
+.class-block {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 2px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.class-block:hover {
+    transform: scale(1.05);
+}
+
+.class-block.math { 
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24); 
+}
+
+.class-block.physics { 
+    background: linear-gradient(135deg, #4834d4, #686de0); 
+}
+
+.class-block.cs { 
+    background: linear-gradient(135deg, #00d2d3, #54a0ff); 
+}
+
+.class-block.ml { 
+    background: linear-gradient(135deg, #5f27cd, #a55eea); 
+}
+
+.class-block.db { 
+    background: linear-gradient(135deg, #00d2d3, #01a3a4); 
+}
+
+.time-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.day-header {
+    background-color: #e9ecef;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Chart Container */
+.chart-container {
+    height: 300px;
+}
+
+/* Border Left Utilities */
+.border-left-primary {
+    border-left: 4px solid #4e73df;
+}
+
+.border-left-success {
+    border-left: 4px solid #1cc88a;
+}
+
+.border-left-info {
+    border-left: 4px solid #36b9cc;
+}
+
+.border-left-warning {
+    border-left: 4px solid #f6c23e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+    
+    .card-stats,
+    .exam-card,
+    .fee-card,
+    .notice-card,
+    .course-card,
+    .student-card {
+        margin-bottom: 1rem;
+    }
+}

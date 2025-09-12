@@ -36,9 +36,11 @@
                     <div class="main-content p-4">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h2 class="text-primary fw-bold">Student Management</h2>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+                           
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                                 <i class="fas fa-plus me-2"></i>Add Student
                             </button>
+
                         </div>
 
                         <!-- Student Search and Filter -->
@@ -49,13 +51,7 @@
                                         <input type="text" class="form-control" placeholder="Search students...">
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="form-select">
-                                            <option>All Departments</option>
-                                            <option>Computer Science</option>
-                                            <option>Mathematics</option>
-                                            <option>Physics</option>
-                                            <option>Chemistry</option>
-                                        </select>
+                                        <asp:DropDownList ID="department2" runat="server"  class="form-select" AutoPostBack="false"></asp:DropDownList>
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-select">
@@ -293,13 +289,7 @@
                                 <label class="form-label">
                                     Department</label>
 
-                                <asp:DropDownList ID="ddDepartment" runat="server" class="form-select">
-                                    <asp:ListItem Value="">Choose...</asp:ListItem>
-                                    <asp:ListItem Value="Computer Science">Computer Science</asp:ListItem>
-                                    <asp:ListItem Value="Mathematics">Mathematics</asp:ListItem>
-                                    <asp:ListItem Value="Physics">Physics</asp:ListItem>
-                                    <asp:ListItem Value="Chemistry">Chemistry</asp:ListItem>
-                                </asp:DropDownList>
+                                <asp:DropDownList ID="department" runat="server"  class="form-select" AutoPostBack="false"></asp:DropDownList>
 
                             </div>
                             <div class="col-md-6">

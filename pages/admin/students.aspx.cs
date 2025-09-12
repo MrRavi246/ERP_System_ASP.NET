@@ -26,6 +26,7 @@ namespace EduErp.pages.admin
             if (!IsPostBack)
             {
                 fillgrid();
+                filldepartment_catagory();
             }
         }
 
@@ -33,6 +34,23 @@ namespace EduErp.pages.admin
         {
             con = new SqlConnection(conString);
             con.Open();
+        }
+
+        void filldepartment_catagory()
+        {
+            getcon();
+            da = new SqlDataAdapter("select name from departments", con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            department.Items.Add("Select Department");
+            department2.Items.Add("Select Department");
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                department.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                department2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
         }
 
         void fillgrid()
@@ -52,7 +70,7 @@ namespace EduErp.pages.admin
             string LastName = txtLastName.Text;
             string Email = txtEmail.Text;
             string Phone = txtPhone.Text;
-            string Department = ddDepartment.SelectedValue;
+            string Department = department.SelectedValue;
             string Year = ddYear.SelectedValue;
 
             getcon();

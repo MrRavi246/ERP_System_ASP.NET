@@ -24,6 +24,24 @@ namespace EduErp.pages.admin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// department2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList department2;
+
+        /// <summary>
+        /// designation2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList designation2;
+
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
@@ -69,22 +87,22 @@ namespace EduErp.pages.admin
         protected global::System.Web.UI.WebControls.TextBox faculty_phone;
 
         /// <summary>
-        /// faculty_Department control.
+        /// department control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList faculty_Department;
+        protected global::System.Web.UI.WebControls.DropDownList department;
 
         /// <summary>
-        /// Designation control.
+        /// designation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Designation;
+        protected global::System.Web.UI.WebControls.DropDownList designation;
 
         /// <summary>
         /// Qualification control.

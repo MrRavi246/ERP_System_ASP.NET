@@ -17,8 +17,8 @@ namespace EduErp.pages.admin
         String s = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
         SqlConnection con;
-        SqlDataAdapter adapter;
-        DataSet dataSet;
+        SqlDataAdapter da;
+        DataSet ds;
         SqlCommand cmd;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +26,8 @@ namespace EduErp.pages.admin
             if (!IsPostBack)
             {
                 fillgrid();
+                filldepartment_catagory();
+                filldesignation_catagory();
             }
         }
 
@@ -34,13 +36,48 @@ namespace EduErp.pages.admin
             con = new SqlConnection(s);
             con.Open();
         }
+
+        void filldepartment_catagory()
+        {
+            getcon();
+            da = new SqlDataAdapter("select name from departments", con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            department.Items.Add("Select Department");
+            department2.Items.Add("Select Department");
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++) {
+                department.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                department2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
+        }
+
+        void filldesignation_catagory() 
+        { 
+            getcon() ;
+            da = new SqlDataAdapter("select name from designation", con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            designation.Items.Add("Select Designation");
+            designation2.Items.Add("Select Designation");
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++) 
+            {
+                designation.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                designation2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
+        }
+
+
         void fillgrid()
         {
             getcon();
-            adapter = new SqlDataAdapter("select * from faculty", con);
-            dataSet = new DataSet();
-            adapter.Fill(dataSet);
-            GridView1.DataSource = dataSet;
+            da = new SqlDataAdapter("select * from faculty", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            GridView1.DataSource = ds;
             GridView1.DataBind();
             con.Close();
         }
@@ -51,7 +88,7 @@ namespace EduErp.pages.admin
             {
                 getcon();
                 cmd = new SqlCommand("INSERT INTO faculty (first_name,last_name, Phone, department_id, Designation, qualification, experience_years, address) "
-                    + "Values('" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + faculty_Department.SelectedValue + "','" + Designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
+                    + "Values('" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedValue + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
                 cmd.ExecuteNonQuery();
             }
         }

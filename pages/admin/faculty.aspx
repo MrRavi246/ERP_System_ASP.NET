@@ -54,9 +54,10 @@
                     <div class="main-content p-4">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h2 class="text-primary fw-bold">Faculty Management</h2>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFacultyModal">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFacultyModal">
                                 <i class="fas fa-plus me-2"></i>Add Faculty
                             </button>
+
                         </div>
 
                         <!-- Faculty Search and Filter -->
@@ -67,22 +68,13 @@
                                         <input type="text" class="form-control" placeholder="Search faculty...">
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="form-select">
-                                            <option>All Departments</option>
-                                            <option>Computer Science</option>
-                                            <option>Mathematics</option>
-                                            <option>Physics</option>
-                                            <option>Chemistry</option>
-                                        </select>
+                                        <asp:DropDownList ID="department2" runat="server" AutoPostBack="false" CssClass="form-select">
+                                        </asp:DropDownList>
                                     </div>
-                                    <div class="col-md-3">
-                                        <select class="form-select">
-                                            <option>All Designations</option>
-                                            <option>Professor</option>
-                                            <option>Associate Professor</option>
-                                            <option>Assistant Professor</option>
-                                            <option>Lecturer</option>
-                                        </select>
+                                    <div class="col-md-3">                                        
+                                        <asp:DropDownList ID="designation2" runat="server" CssClass="form-select" AutoPostBack="false">
+                                        </asp:DropDownList>
+
                                     </div>
                                     <div class="col-md-2">
                                         <button class="btn btn-outline-primary w-100">
@@ -276,10 +268,13 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Delete">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("id") %>''>Delete</asp:LinkButton>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("id") %>'>Delete</asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Edite">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("id") %>'>Edite</asp:LinkButton>
+                                            </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
                                 </asp:GridView>
@@ -325,24 +320,17 @@
                             <div class="col-md-6">
                                 <label class="form-label">
                                     Department</label>
-                                <asp:DropDownList ID="faculty_Department" runat="server" CssClass="form-select">
-                                    <asp:ListItem Text="Choose..." Value="" />
-                                    <asp:ListItem Text="Computer Science" Value="Computer Science" />
-                                    <asp:ListItem Text="Mathematics" Value="Mathematics" />
-                                    <asp:ListItem Text="PHP" Value="PHP" />
-                                    <asp:ListItem Text="ASP.NET" Value="ASP.NET" />
+
+                                <asp:DropDownList ID="department" runat="server" AutoPostBack="false" CssClass="form-select">
                                 </asp:DropDownList>
+
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">
                                     Designation</label>
-                                <asp:DropDownList ID="Designation" runat="server" CssClass="form-select" required="true">
-                                    <asp:ListItem Text="Choose..." Value="" />
-                                    <asp:ListItem Text="Professor" Value="Professor" />
-                                    <asp:ListItem Text="Associate Professor" Value="Associate Professor" />
-                                    <asp:ListItem Text="Assistant Professor" Value="Assistant Professor" />
-                                    <asp:ListItem Text="Lecturer" Value="Lecturer" />
+                                <asp:DropDownList ID="designation" runat="server" CssClass="form-select" AutoPostBack="false">
                                 </asp:DropDownList>
+
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">

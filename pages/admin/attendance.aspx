@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
+
+    <form runat="server">
     <!-- Mobile Navigation Toggle -->
     <button class="mobile-nav-toggle d-md-none" type="button">
         <i class="fas fa-bars"></i>
@@ -46,12 +48,9 @@
                                 <div class="col-md-3">
                                     <label class="form-label">
                                         Select Course</label>
-                                    <select class="form-select">
-                                        <option>Computer Science - CS101</option>
-                                        <option>Mathematics - MT201</option>
-                                        <option>Physics - PH101</option>
-                                        <option>Chemistry - CH101</option>
-                                    </select>
+                
+
+                                    <asp:DropDownList ID="course_attendance"  class="form-select" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">
@@ -224,7 +223,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    
                         <div class="mb-3">
                             <label class="form-label">
                                 Course</label>

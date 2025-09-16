@@ -4,9 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
-    <
-        
-    runat="server">
+    <form runat="server">
         <!-- Mobile Navigation Toggle -->
     <button class="mobile-nav-toggle d-md-none" type="button">
         <i class="fas fa-bars"></i>
@@ -173,10 +171,10 @@
                                     Year</label>
                                 <asp:DropDownList ID="ddYear" runat="server" class="form-select">
                                     <asp:ListItem Value="">Choose...</asp:ListItem>
-                                    <asp:ListItem Value="1st Year">1st Year</asp:ListItem>
-                                    <asp:ListItem Value="2nd Year">2nd Year</asp:ListItem>
-                                    <asp:ListItem Value="3rd Year">3rd Year</asp:ListItem>
-                                    <asp:ListItem Value="4th Year">4th Year</asp:ListItem>
+                                    <asp:ListItem Value="1">1st Year</asp:ListItem>
+                                    <asp:ListItem Value="2">2nd Year</asp:ListItem>
+                                    <asp:ListItem Value="3">3rd Year</asp:ListItem>
+                                    <asp:ListItem Value="4">4th Year</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="col-12">
@@ -191,7 +189,7 @@
                             Cancel
                         </button>
 
-                        <asp:Button ID="btnAddStudent" runat="server" Text="Add Student" class="btn btn-primary" />
+                        <asp:Button ID="btnAddStudent" runat="server" OnClick="btnAddStudent_Click"  Text="Add Student" class="btn btn-primary" />
 
                     </div>
 
@@ -201,5 +199,4 @@
         </div>
     </form>
 </asp:Content>
-
 

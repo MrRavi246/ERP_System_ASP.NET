@@ -20,6 +20,13 @@ namespace EduErp.pages.admin
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        string ConString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        SqlConnection Con;
+        SqlDataAdapter Da;
+        DataSet Ds;
+        SqlCommand Cmd;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             getcon();
@@ -32,36 +39,36 @@ namespace EduErp.pages.admin
 
         void getcon()
         {
-            con = new SqlConnection(conString);
-            con.Open();
+            Con = new SqlConnection(ConString);
+            Con.Open();
         }
 
         void filldepartment_catagory()
         {
             getcon();
-            da = new SqlDataAdapter("select name from departments", con);
-            ds = new DataSet();
-            da.Fill(ds);
+            Da = new SqlDataAdapter("select name from departments", Con);
+            Ds = new DataSet();
+            Da.Fill(Ds);
 
             department.Items.Add("Select Department");
             department2.Items.Add("Select Department");
 
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            for (int i = 0; i < Ds.Tables[0].Rows.Count; i++)
             {
-                department.Items.Add(ds.Tables[0].Rows[i][0].ToString());
-                department2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                department.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
+                department2.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
             }
         }
 
         void fillgrid()
         {
             getcon();
-            da = new SqlDataAdapter("select * from students", con);
-            ds = new DataSet();
-            da.Fill(ds);
-            GridView1.DataSource = ds;
+            Da = new SqlDataAdapter("select * from students", Con);
+            Ds = new DataSet();
+            Da.Fill(Ds);
+            GridView1.DataSource = Ds;
             GridView1.DataBind();
-            con.Close();
+            Con.Close();
         }
 
         protected void btnAddStudent_Click(object sender, EventArgs e)
@@ -73,15 +80,31 @@ namespace EduErp.pages.admin
             string Department = department.SelectedValue;
             string Year = ddYear.SelectedValue;
 
-            getcon();
+           getcon();
 
-            string query = "INSERT INTO users (email, password_hash, role, is_active) " +
-               "VALUES ('" + Email + "', '" + (FirstName + Year) + "', 'student', 1)";
+            string userQuery = "INSERT INTO users (email, password_hash, role, is_active) " +
+                               "OUTPUT INSERTED.id " +
+                               "VALUES ('" + Email + "', '" + (FirstName + Year) + "', 'student', 1)";
 
+            Cmd = new SqlCommand(userQuery, Con);
+            int newUserId = (int)Cmd.ExecuteScalar();
 
-            cmd = new SqlCommand(query, con);
+            string studentQuery = "INSERT INTO students (user_id, student_id, roll_number, first_name, last_name, phone, department_id, year_level, status) " +
+                                  "VALUES (" + newUserId + ", 'STU" + newUserId.ToString("000") + "', '" + DateTime.Now.Year + "CS" + newUserId.ToString("000") + "', " +
+                                  "'" + FirstName + "', '" + LastName + "', '" + Phone + "', " + Department + ", '" + Year + "', 'Active')";
+            
+            Cmd = new SqlCommand(studentQuery, Con);
+            Cmd.ExecuteNonQuery();
 
-            cmd.ExecuteNonQuery();
+            Response.Write("<script>alert('Student added successfully!');</script>");
+
+            txtFirstName.Text = "";
+            txtLastName.Text = "";
+            txtEmail.Text = "";
+            txtPhone.Text = "";
+            ddYear.SelectedIndex = 0;
+
+            Con.Close();
 
         }
 

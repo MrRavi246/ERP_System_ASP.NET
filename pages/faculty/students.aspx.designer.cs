@@ -15,6 +15,24 @@ namespace EduErp.pages.faculty
     {
 
         /// <summary>
+        /// department2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList department2;
+
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
+
+        /// <summary>
         /// txtFirstName control.
         /// </summary>
         /// <remarks>
@@ -51,13 +69,13 @@ namespace EduErp.pages.faculty
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
-        /// ddDepartment control.
+        /// department control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddDepartment;
+        protected global::System.Web.UI.WebControls.DropDownList department;
 
         /// <summary>
         /// ddYear control.

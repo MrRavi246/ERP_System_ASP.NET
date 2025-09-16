@@ -61,7 +61,7 @@ namespace EduErp.pages.admin
         }
 
         void fillgrid()
-        {`
+        {
             getcon();
             Da = new SqlDataAdapter("select * from students", Con);
             Ds = new DataSet();

@@ -77,7 +77,7 @@ namespace EduErp.pages.admin
             string LastName = txtLastName.Text;
             string Email = txtEmail.Text;
             string Phone = txtPhone.Text;
-            string Department = department.SelectedValue;
+            int Department = department.SelectedIndex;
             string Year = ddYear.SelectedValue;
 
            getcon();
@@ -95,6 +95,8 @@ namespace EduErp.pages.admin
             
             Cmd = new SqlCommand(studentQuery, Con);
             Cmd.ExecuteNonQuery();
+
+            fillgrid();
 
             Response.Write("<script>alert('Student added successfully!');</script>");
 

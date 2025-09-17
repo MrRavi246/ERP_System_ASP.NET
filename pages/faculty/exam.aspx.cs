@@ -7,9 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace EduErp.pages.faculty
 {
-    public partial class exams1 : System.Web.UI.Page
+    public partial class exam : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCreateExam_Click(object sender, EventArgs e)
         {
 
         }

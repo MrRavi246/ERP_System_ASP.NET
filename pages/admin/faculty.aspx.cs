@@ -91,7 +91,7 @@ namespace EduErp.pages.admin
             {
                 string userQuery = "INSERT INTO users (email, password_hash, role, is_active) " +
                    "OUTPUT INSERTED.id " +
-                   "VALUES ('" + Email + "', '" + (faculty_fname.Text + faculty_experience.Text) + "', 'student', 1)";
+                   "VALUES ('" + faculty_email.Text + "', '" + (faculty_fname.Text + faculty_experience.Text) + "', 'student', 1)";
 
                 cmd = new SqlCommand(userQuery, con);
                 int newUserId = (int)cmd.ExecuteScalar();

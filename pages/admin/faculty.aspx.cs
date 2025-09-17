@@ -47,15 +47,16 @@ namespace EduErp.pages.admin
             department.Items.Add("Select Department");
             department2.Items.Add("Select Department");
 
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++) {
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
                 department.Items.Add(ds.Tables[0].Rows[i][0].ToString());
                 department2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
 
-        void filldesignation_catagory() 
-        { 
-            getcon() ;
+        void filldesignation_catagory()
+        {
+            getcon();
             da = new SqlDataAdapter("select name from designation", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -63,7 +64,7 @@ namespace EduErp.pages.admin
             designation.Items.Add("Select Designation");
             designation2.Items.Add("Select Designation");
 
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++) 
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 designation.Items.Add(ds.Tables[0].Rows[i][0].ToString());
                 designation2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
@@ -84,11 +85,21 @@ namespace EduErp.pages.admin
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            
+
             if (Button2.Text == "Add")
             {
+                string userQuery = "INSERT INTO users (email, password_hash, role, is_active) " +
+                   "OUTPUT INSERTED.id " +
+                   "VALUES ('" + Email + "', '" + (faculty_fname.Text + faculty_experience.Text) + "', 'student', 1)";
+
+                cmd = new SqlCommand(userQuery, con);
+                int newUserId = (int)cmd.ExecuteScalar();
+
+
                 getcon();
-                cmd = new SqlCommand("INSERT INTO faculty (first_name,last_name, Phone, department_id, Designation, qualification, experience_years, address) "
-                    + "Values('" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedValue + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
+                cmd = new SqlCommand("INSERT INTO faculty (user_id, employee_id, first_name,last_name, Phone, department_id, Designation, qualification, experience_years, address) "
+                    + "Values('" + newUserId + ", 'STU" + newUserId.ToString("000") + "','" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedIndex + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
                 cmd.ExecuteNonQuery();
             }
         }

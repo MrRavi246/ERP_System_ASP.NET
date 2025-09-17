@@ -129,39 +129,52 @@
                                             <div class="col-md-6 mb-3">
                                                 <label for="employeeId" class="form-label">
                                                     Employee ID</label>
-                                                <input type="text" class="form-control" id="employeeId" value="FAC001" readonly>
+                                                <%--<input type="text" class="form-control" id="employeeId" value="FAC001" readonly>--%>
+
+                                                <asp:TextBox ID="employeeId" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="joinDate" class="form-label">
                                                     Join Date</label>
-                                                <input type="date" class="form-control" id="joinDate" value="2018-09-01" readonly>
+                                                <%--<input type="date" class="form-control" id="joinDate" value="2018-09-01" readonly>--%>
+                                                <asp:TextBox ID="joinDate" runat="server" class="form-control" ReadOnly="true"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label for="qualification" class="form-label">
                                                 Qualification</label>
-                                            <input type="text" class="form-control" id="qualification" value="Ph.D. in Computer Science">
+                                            <%--<input type="text" class="form-control" id="qualification" value="Ph.D. in Computer Science">--%>
+
+                                            <asp:TextBox ID="qualification" runat="server" class="form-control"></asp:TextBox>
                                         </div>
                                         <div class="mb-3">
                                             <label for="specialization" class="form-label">
                                                 Specialization</label>
-                                            <input type="text" class="form-control" id="specialization" value="Artificial Intelligence, Machine Learning">
+                                            <%--<input type="text" class="form-control" id="specialization" value="Artificial Intelligence, Machine Learning">--%>
+
+                                            <asp:TextBox ID="specialization" runat="server" class="form-control"></asp:TextBox>
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label">
                                                 Address</label>
-                                            <textarea class="form-control" id="address" rows="3">789 Faculty Street, City, State 12345</textarea>
+                                            <%--<textarea class="form-control" id="address" rows="3">789 Faculty Street, City, State 12345</textarea>--%>
+
+                                            <asp:TextBox ID="address" class="form-control" Rows="3" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="officeHours" class="form-label">
                                                     Office Hours</label>
-                                                <input type="text" class="form-control" id="officeHours" value="Mon-Fri 10:00 AM - 2:00 PM">
+                                                <%--<input type="text" class="form-control" id="officeHours" value="Mon-Fri 10:00 AM - 2:00 PM">--%>
+
+                                                <asp:TextBox ID="officehours" class="form-control" runat="server"></asp:TextBox>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="officeLocation" class="form-label">
                                                     Office Location</label>
-                                                <input type="text" class="form-control" id="officeLocation" value="Room 205, CS Building">
+                                                <%--<input type="text" class="form-control" id="officeLocation" value="Room 205, CS Building">--%>
+
+                                                <asp:TextBox ID="officeLocation" runat="server" class="form-control"></asp:TextBox>
                                             </div>
                                         </div>
                                         <hr class="my-4">

@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/App_Data/EduErp.mdf
+/App_Data/EduErp_log.ldf

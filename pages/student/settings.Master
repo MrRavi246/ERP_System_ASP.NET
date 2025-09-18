@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-      <title>College ERP System - Student Settings</title>
+    <title>College ERP System - Student Settings</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -12,259 +12,260 @@
     <form id="form1" runat="server">
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="../../assets/css/common.css" rel="stylesheet">
-
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                <link href="../../assets/css/common.css" rel="stylesheet">
             </asp:ContentPlaceHolder>
 
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-                    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 px-0">
-                <div class="sidebar bg-white border-end p-3">
-                    <div class="text-center mb-4">
-                        <h4 class="text-primary fw-bold">College ERP</h4>
-                        <p class="text-muted small">Student Portal</p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Sidebar -->
+                        <div class="col-md-3 col-lg-2 px-0">
+                            <div class="sidebar bg-white border-end p-3">
+                                <div class="text-center mb-4">
+                                    <h4 class="text-primary fw-bold">College ERP</h4>
+                                    <p class="text-muted small">Student Portal</p>
+                                </div>
+                                <nav class="nav flex-column">
+                                    <a class="nav-link text-dark" href="dashboard.aspx">
+                                        <i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard
+                                    </a>
+                                    <a class="nav-link text-dark" href="courses.aspx">
+                                        <i class="fas fa-book me-2 text-primary"></i>My Courses
+                                    </a>
+                                    <a class="nav-link text-dark" href="attendance.aspx">
+                                        <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance
+                                    </a>
+                                    <a class="nav-link text-dark" href="timetable.aspx">
+                                        <i class="fas fa-calendar me-2 text-primary"></i>Timetable
+                                    </a>
+                                    <a class="nav-link text-dark" href="exams.aspx">
+                                        <i class="fas fa-clipboard-list me-2 text-primary"></i>Exams
+                                    </a>
+                                    <a class="nav-link text-dark" href="fees.aspx">
+                                        <i class="fas fa-money-bill me-2 text-primary"></i>Fees
+                                    </a>
+                                    <a class="nav-link text-dark" href="notices.aspx">
+                                        <i class="fas fa-bullhorn me-2 text-primary"></i>Notices
+                                    </a>
+                                    <a class="nav-link text-dark" href="profile.aspx">
+                                        <i class="fas fa-user me-2 text-primary"></i>Profile
+                                    </a>
+                                    <a class="nav-link active" href="settings.aspx">
+                                        <i class="fas fa-cog me-2 text-primary"></i>Settings
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="col-md-9 col-lg-10">
+                            <!-- Header -->
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2"><i class="fas fa-cog me-2 text-primary"></i>Account Settings</h1>
+                                <div class="btn-toolbar mb-2 mb-md-0">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            <i class="fas fa-user me-1"></i>Student
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
+                                            <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settings Content -->
+                            <div class="row">
+                                <!-- Profile Settings -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0"><i class="fas fa-user me-2 text-primary"></i>Profile Settings</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="displayName" class="form-label">Display Name</label>
+                                                    <input type="text" class="form-control" id="displayName" value="John Doe">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email Address</label>
+                                                    <input type="email" class="form-control" id="email" value="john.doe@student.college.edu" readonly>
+                                                    <small class="text-muted">Contact admin to change email</small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="phone" class="form-label">Phone Number</label>
+                                                    <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="emergencyContact" class="form-label">Emergency Contact</label>
+                                                    <input type="tel" class="form-control" id="emergencyContact" value="+1 (555) 987-6543">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Security Settings -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0"><i class="fas fa-shield-alt me-2 text-primary"></i>Security</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" id="currentPassword">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')">
+                                                            <i class="fas fa-eye" id="toggleCurrentPassword"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="newPassword" class="form-label">New Password</label>
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" id="newPassword">
+                                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')">
+                                                            <i class="fas fa-eye" id="toggleNewPassword"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                                    <input type="password" class="form-control" id="confirmPassword">
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" id="loginNotifications" checked>
+                                                    <label class="form-check-label" for="loginNotifications">
+                                                        Email me when someone logs into my account
+                                                    </label>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Notification Settings -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0"><i class="fas fa-bell me-2 text-primary"></i>Notification Preferences</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <h6>Email Notifications</h6>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="emailGrades" checked>
+                                                        <label class="form-check-label" for="emailGrades">
+                                                            New grades posted
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="emailAssignments" checked>
+                                                        <label class="form-check-label" for="emailAssignments">
+                                                            Assignment deadlines
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="emailExams" checked>
+                                                        <label class="form-check-label" for="emailExams">
+                                                            Exam schedules
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="emailNotices">
+                                                        <label class="form-check-label" for="emailNotices">
+                                                            General notices
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <h6>SMS Notifications</h6>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="smsUrgent" checked>
+                                                        <label class="form-check-label" for="smsUrgent">
+                                                            Urgent announcements only
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="smsExams">
+                                                        <label class="form-check-label" for="smsExams">
+                                                            Exam reminders
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Privacy Settings -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="mb-0"><i class="fas fa-eye-slash me-2 text-primary"></i>Privacy Settings</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="profileVisibility" class="form-label">Profile Visibility</label>
+                                                    <select class="form-select" id="profileVisibility">
+                                                        <option selected>Students & Faculty</option>
+                                                        <option>Faculty Only</option>
+                                                        <option>Private</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" id="showContactInfo" checked>
+                                                    <label class="form-check-label" for="showContactInfo">
+                                                        Allow classmates to see my contact information
+                                                    </label>
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" id="showGrades">
+                                                    <label class="form-check-label" for="showGrades">
+                                                        Show my grades on class rankings (anonymous)
+                                                    </label>
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" id="allowDataAnalytics" checked>
+                                                    <label class="form-check-label" for="allowDataAnalytics">
+                                                        Allow anonymous data collection for improving services
+                                                    </label>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Save Privacy Settings</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <nav class="nav flex-column">
-                        <a class="nav-link text-dark" href="dashboard.aspx">
-                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Dashboard
-                        </a>
-                        <a class="nav-link text-dark" href="courses.aspx">
-                            <i class="fas fa-book me-2 text-primary"></i> My Courses
-                        </a>
-                        <a class="nav-link text-dark" href="attendance.aspx">
-                            <i class="fas fa-calendar-check me-2 text-primary"></i> Attendance
-                        </a>
-                        <a class="nav-link text-dark" href="timetable.aspx">
-                            <i class="fas fa-calendar me-2 text-primary"></i> Timetable
-                        </a>
-                        <a class="nav-link text-dark" href="exams.aspx">
-                            <i class="fas fa-clipboard-list me-2 text-primary"></i> Exams
-                        </a>
-                        <a class="nav-link text-dark" href="fees.aspx">
-                            <i class="fas fa-money-bill me-2 text-primary"></i> Fees
-                        </a>
-                        <a class="nav-link text-dark" href="notices.aspx">
-                            <i class="fas fa-bullhorn me-2 text-primary"></i> Notices
-                        </a>
-                        <a class="nav-link text-dark" href="profile.aspx">
-                            <i class="fas fa-user me-2 text-primary"></i> Profile
-                        </a>
-                        <a class="nav-link active" href="settings.aspx">
-                            <i class="fas fa-cog me-2 text-primary"></i> Settings
-                        </a>
-                    </nav>
                 </div>
-            </div>
-            
-            <!-- Main Content -->
-            <div class="col-md-9 col-lg-10">
-                <!-- Header -->
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><i class="fas fa-cog me-2 text-primary"></i>Account Settings</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user me-1"></i>Student
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
-                                <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Settings Content -->
-                <div class="row">
-                    <!-- Profile Settings -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0"><i class="fas fa-user me-2 text-primary"></i>Profile Settings</h5>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="displayName" class="form-label">Display Name</label>
-                                        <input type="text" class="form-control" id="displayName" value="John Doe">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" value="john.doe@student.college.edu" readonly>
-                                        <small class="text-muted">Contact admin to change email</small>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="emergencyContact" class="form-label">Emergency Contact</label>
-                                        <input type="tel" class="form-control" id="emergencyContact" value="+1 (555) 987-6543">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Security Settings -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0"><i class="fas fa-shield-alt me-2 text-primary"></i>Security</h5>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="currentPassword" class="form-label">Current Password</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="currentPassword">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')">
-                                                <i class="fas fa-eye" id="toggleCurrentPassword"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="newPassword" class="form-label">New Password</label>
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="newPassword">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')">
-                                                <i class="fas fa-eye" id="toggleNewPassword"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                                        <input type="password" class="form-control" id="confirmPassword">
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="loginNotifications" checked>
-                                        <label class="form-check-label" for="loginNotifications">
-                                            Email me when someone logs into my account
-                                        </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Change Password</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Notification Settings -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0"><i class="fas fa-bell me-2 text-primary"></i>Notification Preferences</h5>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <h6>Email Notifications</h6>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="emailGrades" checked>
-                                            <label class="form-check-label" for="emailGrades">
-                                                New grades posted
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="emailAssignments" checked>
-                                            <label class="form-check-label" for="emailAssignments">
-                                                Assignment deadlines
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="emailExams" checked>
-                                            <label class="form-check-label" for="emailExams">
-                                                Exam schedules
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="emailNotices">
-                                            <label class="form-check-label" for="emailNotices">
-                                                General notices
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <h6>SMS Notifications</h6>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="smsUrgent" checked>
-                                            <label class="form-check-label" for="smsUrgent">
-                                                Urgent announcements only
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="smsExams">
-                                            <label class="form-check-label" for="smsExams">
-                                                Exam reminders
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Save Preferences</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Privacy Settings -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0"><i class="fas fa-eye-slash me-2 text-primary"></i>Privacy Settings</h5>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="profileVisibility" class="form-label">Profile Visibility</label>
-                                        <select class="form-select" id="profileVisibility">
-                                            <option selected>Students & Faculty</option>
-                                            <option>Faculty Only</option>
-                                            <option>Private</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="showContactInfo" checked>
-                                        <label class="form-check-label" for="showContactInfo">
-                                            Allow classmates to see my contact information
-                                        </label>
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="showGrades">
-                                        <label class="form-check-label" for="showGrades">
-                                            Show my grades on class rankings (anonymous)
-                                        </label>
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="allowDataAnalytics" checked>
-                                        <label class="form-check-label" for="allowDataAnalytics">
-                                            Allow anonymous data collection for improving services
-                                        </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Save Privacy Settings</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
             </asp:ContentPlaceHolder>
 
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/js/common.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="../../assets/js/common.js"></script>
 
             </asp:ContentPlaceHolder>
         </div>

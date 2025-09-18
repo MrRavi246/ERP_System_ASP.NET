@@ -79,8 +79,9 @@ namespace EduErp.pages.admin
             string Phone = txtPhone.Text;
             int Department = department.SelectedIndex;
             string Year = ddYear.SelectedValue;
+            string address = txtAddress.Text;
 
-           getcon();
+            getcon();
 
             string userQuery = "INSERT INTO users (email, password_hash, role, is_active) " +
                                "OUTPUT INSERTED.id " +
@@ -89,9 +90,9 @@ namespace EduErp.pages.admin
             Cmd = new SqlCommand(userQuery, Con);
             int newUserId = (int)Cmd.ExecuteScalar();
 
-            string studentQuery = "INSERT INTO students (user_id, student_id, roll_number, first_name, last_name, phone, department_id, year_level, status) " +
+            string studentQuery = "INSERT INTO students (user_id, student_id, roll_number, first_name, last_name, phone,address, department_id, year_level, status) " +
                                   "VALUES (" + newUserId + ", 'STU" + newUserId.ToString("000") + "', '" + DateTime.Now.Year + "CS" + newUserId.ToString("000") + "', " +
-                                  "'" + FirstName + "', '" + LastName + "', '" + Phone + "', " + Department + ", '" + Year + "', 'Active')";
+                                  "'" + FirstName + "', '" + LastName + "', '" + Phone + "','"+address+"', " + Department + ", '" + Year + "', 'Active')";
             
             Cmd = new SqlCommand(studentQuery, Con);
             Cmd.ExecuteNonQuery();

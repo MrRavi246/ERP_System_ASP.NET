@@ -21,11 +21,9 @@ namespace EduErp.pages.faculty
         protected void Page_Load(object sender, EventArgs e)
         {
             getcon();
-            if (!IsPostBack)
-            {
-                filldepartment();
-                filldesignation();
-            }
+            filldepartment();
+            filldesignation();
+
         }
         void getcon()
         {

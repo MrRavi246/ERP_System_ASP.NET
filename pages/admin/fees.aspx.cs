@@ -56,10 +56,12 @@ namespace EduErp.pages.admin
             da.Fill(ds);
 
             list_department.Items.Add("Select Department");
+            list_department_2.Items.Add("Select Department");
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 list_department.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                list_department_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
 
@@ -71,11 +73,16 @@ namespace EduErp.pages.admin
             da.Fill(ds);
 
             list_fee_type.Items.Add("Select Fee Type");
+            list_fee_type_2.Items.Add("Select Fee Type");
 
-            for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 list_fee_type.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                list_fee_type_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
+
+
+
     }
 }

@@ -268,62 +268,69 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="addFeeForm" class="mobile-form">
+                         
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">
                                         Student Roll No</label>
-                                    <input type="text" class="form-control" id="studentRollNo" required>
+                                    <%--<input type="text" class="form-control" id="studentRollNo" required>--%>
+                                    <asp:TextBox ID="std_rollno" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">
                                         Student Name</label>
-                                    <input type="text" class="form-control" id="studentName" required>
+                                    <%--<input type="text" class="form-control" id="studentName" required>--%>
+                                    <asp:TextBox ID="std_name" class="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">
                                         Fee Type</label>
-                                    <select class="form-select" id="feeType" required>
+                                    <%--<select class="form-select" id="feeType" required>
                                         <option value="">Select Fee Type</option>
                                         <option value="Tuition Fee">Tuition Fee</option>
                                         <option value="Hostel Fee">Hostel Fee</option>
                                         <option value="Library Fee">Library Fee</option>
                                         <option value="Examination Fee">Examination Fee</option>
                                         <option value="Transport Fee">Transport Fee</option>
-                                    </select>
+                                    </select>--%>
+                                    <asp:DropDownList ID="list_fee_type_2" class="form-select" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">
                                         Department</label>
-                                    <select class="form-select" id="feeDepartment" required>
+                                    <%--<select class="form-select" id="feeDepartment" required>
                                         <option value="">Select Department</option>
                                         <option value="Computer Science">Computer Science</option>
                                         <option value="Electrical">Electrical</option>
                                         <option value="Mechanical">Mechanical</option>
                                         <option value="Civil">Civil</option>
-                                    </select>
+                                    </select>--%>
+                                    <asp:DropDownList ID="list_department_2" class="form-select" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">
                                         Amount (₹)</label>
-                                    <input type="number" class="form-control" id="feeAmount" min="0" step="1" required>
+                                    <%--<input type="number" class="form-control" id="feeAmount" min="0" step="1" required>--%>
+                                    <asp:TextBox ID="fee_amount" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">
+                                    <label class="form-label">  
                                         Due Date</label>
-                                    <input type="date" class="form-control" id="dueDate" required>
+                                    <%--<input type="date" class="form-control" id="dueDate" required>--%>
+
+                                    <asp:TextBox ID="fee_Duedata" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">
                                     Description</label>
-                                <textarea class="form-control" id="feeDescription" rows="3" placeholder="Additional details about the fee"></textarea>
+                                <%--<textarea class="form-control" id="feeDescription" rows="3" placeholder="Additional details about the fee"></textarea>--%>
+                                <asp:TextBox ID="fee_descripition" class="form-control" runat="server" Rows="3"></asp:TextBox>
                             </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

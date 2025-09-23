@@ -133,7 +133,7 @@
                                                 <option value="Quiz">Quiz</option>
                                                 <option value="Assignment">Assignment</option>
                                             </select>--%>
-                                            <asp:DropDownList ID="txt_ExamType"  class="form-select" runat="server"></asp:DropDownList>
+                                            <asp:DropDownList ID="txt_ExamType" class="form-select" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-label">
@@ -227,72 +227,77 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="addExamForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Exam Name</label>
-                                    <input type="text" class="form-control" id="examName" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Exam Type</label>
-                                   <%-- <select class="form-select" id="examType" required>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Exam Name</label>
+                                <%--<input type="text" class="form-control" id="examName" required>--%>
+                                <asp:TextBox ID="exam_name" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Exam Type</label>
+                                <%-- <select class="form-select" id="examType" required>
                                         <option value="">Select Type</option>
                                         <option value="Midterm">Midterm</option>
                                         <option value="Final">Final</option>
                                         <option value="Quiz">Quiz</option>
                                         <option value="Assignment">Assignment</option>
                                     </select>--%>
-                                     <asp:DropDownList ID="txt_ExamType_2"  class="form-select" runat="server"></asp:DropDownList>
-                                </div>
+                                <asp:DropDownList ID="txt_ExamType_2" class="form-select" runat="server"></asp:DropDownList>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Subject</label>
-                                    <input type="text" class="form-control" id="examSubject" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Department</label>
-                                    <%--<select class="form-select" id="examDepartment" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Subject</label>
+                                <%--<input type="text" class="form-control" id="examSubject" required>--%>
+                                <asp:TextBox ID="subject" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Department</label>
+                                <%--<select class="form-select" id="examDepartment" required>
                                         <option value="">Select Department</option>
                                         <option value="Computer Science">Computer Science</option>
                                         <option value="Electrical">Electrical</option>
                                         <option value="Mechanical">Mechanical</option>
                                         <option value="Civil">Civil</option>
                                     </select>--%>
-                                     <asp:DropDownList ID="txt_department_2"  class="form-select" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="txt_department_2" class="form-select" runat="server"></asp:DropDownList>
 
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Total Marks</label>
-                                    <input type="number" class="form-control" id="totalMarks" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Exam Date</label>
-                                    <input type="date" class="form-control" id="examDate" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    Description</label>
-                                <textarea class="form-control" id="examDescription" rows="3"></textarea>
+                                    Total Marks</label>
+                                <%--<input type="number" class="form-control" id="totalMarks" required>--%>
+                                <asp:TextBox ID="totalmarks" TextMode="Number" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                        </form>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Exam Date</label>
+                                <%--<input type="date" class="form-control" id="examDate" required>--%>
+                                <asp:TextBox ID="exam_date" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Description</label>
+                            <%--<textarea class="form-control" id="examDescription" rows="3"></textarea>--%>
+                            <asp:TextBox ID="txt_description" runat="server" TextMode="MultiLine" CssClass="form-control" Rows="3"></asp:TextBox>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancel
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="addExam()">
+                        <%--<button type="button" class="btn btn-primary" onclick="addExam()">
                             Add Exam
-                        </button>
+                        </button>--%>
+
+                        <asp:Button ID="add_exam" runat="server" class="btn btn-primary" Text="Add Exam" />
                     </div>
                 </div>
             </div>
@@ -308,82 +313,89 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="addResultForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Student Roll No</label>
-                                    <input type="text" class="form-control" id="studentRollNo" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Student Name</label>
-                                    <input type="text" class="form-control" id="studentName" required>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Student Roll No</label>
+                                <%--<input type="text" class="form-control" id="studentRollNo" required>--%>
+                                <asp:TextBox ID="std_rollno" TextMode="Number" class="form-control" runat="server"></asp:TextBox>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Exam</label>
-                                    <select class="form-select" id="resultExam" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Student Name</label>
+                                <%--<input type="text" class="form-control" id="studentName" required>--%>
+                                <asp:TextBox ID="std_name" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Exam</label>
+                                <%--<select class="form-select" id="resultExam" required>
                                         <option value="">Select Exam</option>
                                         <option value="Midterm Exam">Midterm Exam</option>
                                         <option value="Final Exam">Final Exam</option>
                                         <option value="Quiz 1">Quiz 1</option>
                                         <option value="Assignment 1">Assignment 1</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Subject</label>
-                                    <input type="text" class="form-control" id="resultSubject" required>
-                                </div>
+                                    </select>--%>
+                                <asp:DropDownList ID="txt_exam_type_3" class="form-select" runat="server"></asp:DropDownList>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Marks Obtained</label>
-                                    <input type="number" class="form-control" id="marksObtained" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Total Marks</label>
-                                    <input type="number" class="form-control" id="totalMarksResult" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Grade</label>
-                                    <select class="form-select" id="resultGrade" required>
-                                        <option value="">Select Grade</option>
-                                        <option value="A">A (90-100)</option>
-                                        <option value="B">B (80-89)</option>
-                                        <option value="C">C (70-79)</option>
-                                        <option value="D">D (60-69)</option>
-                                        <option value="F">F (Below 60)</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Result Date</label>
-                                    <input type="date" class="form-control" id="resultDate" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    Remarks</label>
-                                <textarea class="form-control" id="resultRemarks" rows="2"></textarea>
+                                    Subject</label>
+                                <%--<input type="text" class="form-control" id="resultSubject" required>--%>
+                                <asp:TextBox ID="txt_subject" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                        </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Marks Obtained</label>
+                                <%--<input type="number" class="form-control" id="marksObtained" required>--%>
+                                <asp:TextBox ID="txt_marks" TextMode="Number" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Total Marks</label>
+                                <%--<input type="number" class="form-control" id="totalMarksResult" required>--%>
+                                <asp:TextBox ID="txt_totalmarks" TextMode="Number" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Grade</label>
+                                <select class="form-select" id="resultGrade" required>
+                                    <option value="">Select Grade</option>
+                                    <option value="A">A (90-100)</option>
+                                    <option value="B">B (80-89)</option>
+                                    <option value="C">C (70-79)</option>
+                                    <option value="D">D (60-69)</option>
+                                    <option value="F">F (Below 60)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Result Date</label>
+                                <%--<input type="date" class="form-control" id="resultDate" required>--%>
+                                <asp:TextBox ID="txt_date" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Remarks</label>
+                            <%--<textarea class="form-control" id="resultRemarks" rows="2"></textarea>--%>
+                            <asp:TextBox ID="txt_remarks" runat="server" TextMode="MultiLine" CssClass="form-control" Rows="2"></asp:TextBox>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancel
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="addResult()">
+                        <%--<button type="button" class="btn btn-primary" onclick="addResult()">
                             Add Result
-                        </button>
+                        </button>--%>
+                        <asp:Button ID="add_result" runat="server" class="btn btn-primary" Text="Add Result" />
                     </div>
                 </div>
             </div>

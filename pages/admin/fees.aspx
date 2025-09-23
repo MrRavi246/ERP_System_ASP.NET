@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
 
-    <form runat="server">
+    <form id="form1" runat="server">
         <!-- Mobile Navigation Toggle -->
         <button class="mobile-nav-toggle d-md-none" type="button">
             <i class="fas fa-bars"></i>
@@ -42,10 +42,10 @@
                             </p>
                         </div>
                         <div class="d-flex flex-column flex-sm-row gap-2">
-                            <button class="btn btn-primary btn-mobile" data-bs-toggle="modal" data-bs-target="#addFeeModal">
+                            <button type="button" class="btn btn-primary btn-mobile" data-bs-toggle="modal" data-bs-target="#addFeeModal">
                                 <i class="fas fa-plus me-1"></i>Add Fee Record
                             </button>
-                            <button class="btn btn-success btn-mobile" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                            <button type="button" class="btn btn-success btn-mobile" data-bs-toggle="modal" data-bs-target="#paymentModal">
                                 <i class="fas fa-credit-card me-1"></i>Make Payment
                             </button>
                             <button class="btn btn-outline-secondary btn-mobile">
@@ -140,7 +140,7 @@
                                         <div class="col-lg-3 col-md-6 mb-3">
                                             <label class="form-label">
                                                 Department</label>
-                                           <%-- <select class="form-select" id="departmentFilter">
+                                            <%-- <select class="form-select" id="departmentFilter">
                                                 <option value="">All Departments</option>
                                                 <option value="Computer Science">Computer Science</option>
                                                 <option value="Electrical">Electrical</option>
@@ -268,26 +268,26 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                         
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Student Roll No</label>
-                                    <%--<input type="text" class="form-control" id="studentRollNo" required>--%>
-                                    <asp:TextBox ID="std_rollno" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Student Name</label>
-                                    <%--<input type="text" class="form-control" id="studentName" required>--%>
-                                    <asp:TextBox ID="std_name" class="form-control" runat="server"></asp:TextBox>
-                                </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Student Roll No</label>
+                                <%--<input type="text" class="form-control" id="studentRollNo" required>--%>
+                                <asp:TextBox ID="std_rollno" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Fee Type</label>
-                                    <%--<select class="form-select" id="feeType" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Student Name</label>
+                                <%--<input type="text" class="form-control" id="studentName" required>--%>
+                                <asp:TextBox ID="std_name" class="form-control" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Fee Type</label>
+                                <%--<select class="form-select" id="feeType" required>
                                         <option value="">Select Fee Type</option>
                                         <option value="Tuition Fee">Tuition Fee</option>
                                         <option value="Hostel Fee">Hostel Fee</option>
@@ -295,42 +295,42 @@
                                         <option value="Examination Fee">Examination Fee</option>
                                         <option value="Transport Fee">Transport Fee</option>
                                     </select>--%>
-                                    <asp:DropDownList ID="list_fee_type_2" class="form-select" runat="server"></asp:DropDownList>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Department</label>
-                                    <%--<select class="form-select" id="feeDepartment" required>
+                                <asp:DropDownList ID="list_fee_type_2" class="form-select" runat="server"></asp:DropDownList>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Department</label>
+                                <%--<select class="form-select" id="feeDepartment" required>
                                         <option value="">Select Department</option>
                                         <option value="Computer Science">Computer Science</option>
                                         <option value="Electrical">Electrical</option>
                                         <option value="Mechanical">Mechanical</option>
                                         <option value="Civil">Civil</option>
                                     </select>--%>
-                                    <asp:DropDownList ID="list_department_2" class="form-select" runat="server"></asp:DropDownList>
-                                </div>
+                                <asp:DropDownList ID="list_department_2" class="form-select" runat="server"></asp:DropDownList>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Amount (₹)</label>
-                                    <%--<input type="number" class="form-control" id="feeAmount" min="0" step="1" required>--%>
-                                    <asp:TextBox ID="fee_amount" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">  
-                                        Due Date</label>
-                                    <%--<input type="date" class="form-control" id="dueDate" required>--%>
-
-                                    <asp:TextBox ID="fee_Duedata" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="mb-3">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    Description</label>
-                                <%--<textarea class="form-control" id="feeDescription" rows="3" placeholder="Additional details about the fee"></textarea>--%>
-                                <asp:TextBox ID="fee_descripition" class="form-control" runat="server" Rows="3"></asp:TextBox>
+                                    Amount (₹)</label>
+                                <%--<input type="number" class="form-control" id="feeAmount" min="0" step="1" required>--%>
+                                <asp:TextBox ID="fee_amount" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Due Date</label>
+                                <%--<input type="date" class="form-control" id="dueDate" required>--%>
+
+                                <asp:TextBox ID="fee_Duedata" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Description</label>
+                            <%--<textarea class="form-control" id="feeDescription" rows="3" placeholder="Additional details about the fee"></textarea>--%>
+                            <asp:TextBox ID="fee_descripition" class="form-control" runat="server" Rows="3"></asp:TextBox>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -354,46 +354,46 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Student Roll No</label>
-                                    <%--<input type="text" class="form-control" id="paymentRollNo" readonly>--%>
-                                    <asp:TextBox ID="std_rollno_paymethod" TextMode="Number" class="form-control" runat="server"></asp:TextBox>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Student Name</label>
-                                    <%--<input type="text" class="form-control" id="paymentStudentName" readonly>--%>
-                                    <asp:TextBox ID="std_name_paymethod" class="form-control" runat="server"></asp:TextBox>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Student Roll No</label>
+                                <%--<input type="text" class="form-control" id="paymentRollNo" readonly>--%>
+                                <asp:TextBox ID="std_rollno_paymethod" TextMode="Number" class="form-control" runat="server"></asp:TextBox>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Fee Record</label>
-                                    <%--<select class="form-select" id="paymentFeeRecord" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Student Name</label>
+                                <%--<input type="text" class="form-control" id="paymentStudentName" readonly>--%>
+                                <asp:TextBox ID="std_name_paymethod" class="form-control" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Fee Record</label>
+                                <%--<select class="form-select" id="paymentFeeRecord" required>
                                         <option value="">Select Fee Record</option>
                                         <option value="Tuition Fee - ₹25,000">Tuition Fee - ₹25,000</option>
                                         <option value="Hostel Fee - ₹15,000">Hostel Fee - ₹15,000</option>
                                         <option value="Library Fee - ₹5,000">Library Fee - ₹5,000</option>
                                     </select>--%>
 
-                                    <asp:DropDownList ID="list_fee_record" class="form-select" runat="server"></asp:DropDownList>
-    
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Payment Amount (₹)</label>
-                                    <%--<input type="number" class="form-control" id="paymentAmount" min="0" step="1" required>--%>
-                                    <asp:TextBox ID="payment_amount" TextMode="Number"  class="form-control" min="0" runat="server"></asp:TextBox>
-                                </div>
+                                <asp:DropDownList ID="list_fee_record" class="form-select" runat="server"></asp:DropDownList>
+
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Payment Method</label>
-                                    <%--<select class="form-select" id="paymentMethod" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Payment Amount (₹)</label>
+                                <%--<input type="number" class="form-control" id="paymentAmount" min="0" step="1" required>--%>
+                                <asp:TextBox ID="payment_amount" TextMode="Number" class="form-control" min="0" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Payment Method</label>
+                                <%--<select class="form-select" id="paymentMethod" required>
                                         <option value="">Select Method</option>
                                         <option value="Online Banking">Online Banking</option>
                                         <option value="Credit Card">Credit Card</option>
@@ -403,29 +403,29 @@
                                         <option value="Cheque">Cheque</option>
                                         <option value="Demand Draft">Demand Draft</option>
                                     </select>--%>
-                                    <asp:DropDownList ID="list_fee_type_3" class="form-select" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="list_fee_type_3" class="form-select" runat="server"></asp:DropDownList>
 
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">
-                                        Payment Date</label>
-                                    <%--<input type="date" class="form-control" id="paymentDate" required>--%>
-                                    <asp:TextBox ID="payment_date" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
-                                </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    Transaction ID</label>
-                                <%--<input type="text" class="form-control" id="transactionId" placeholder="Enter transaction reference (optional)">--%>
+                                    Payment Date</label>
+                                <%--<input type="date" class="form-control" id="paymentDate" required>--%>
+                                <asp:TextBox ID="payment_date" TextMode="Date" class="form-control" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Transaction ID</label>
+                            <%--<input type="text" class="form-control" id="transactionId" placeholder="Enter transaction reference (optional)">--%>
 
-                                <asp:TextBox ID="transaction_id" class="form-control" runat="server"></asp:TextBox>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">
-                                    Remarks</label>
-                                <%--<textarea class="form-control" id="paymentRemarks" rows="2" placeholder="Any additional notes"></textarea>--%>
-                                <asp:TextBox ID="payment_remarks" class="form-control" runat="server" Rows="2"></asp:TextBox>
-                            </div>
+                            <asp:TextBox ID="transaction_id" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Remarks</label>
+                            <%--<textarea class="form-control" id="paymentRemarks" rows="2" placeholder="Any additional notes"></textarea>--%>
+                            <asp:TextBox ID="payment_remarks" class="form-control" runat="server" Rows="2"></asp:TextBox>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -434,12 +434,25 @@
                         <%--<button type="button" class="btn btn-success" onclick="makePayment()">
                             Process Payment
                         </button>--%>
-                        <asp:Button ID="btn_payment" class="btn btn-success"  Text="Process Payment" runat="server" />
+                        <asp:Button ID="btn_payment" class="btn btn-success" Text="Process Payment" runat="server" />
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </asp:Content>
+
+
+<asp:Content ID="Content3" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="../../assets/css/common.css" rel="stylesheet">
+    </head>
+</asp:Content>
+
 
 

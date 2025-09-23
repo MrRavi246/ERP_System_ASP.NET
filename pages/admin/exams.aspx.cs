@@ -53,11 +53,13 @@ namespace EduErp.pages.admin
 
             txt_ExamType.Items.Add("Select Exam Type");
             txt_ExamType_2.Items.Add("Select Exam Type");
+            txt_exam_type_3.Items.Add("Select Exam Type");
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 txt_ExamType.Items.Add(ds.Tables[0].Rows[i][0].ToString());
                 txt_ExamType_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                txt_exam_type_3.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
         void filldepartment()

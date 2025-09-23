@@ -105,84 +105,21 @@ namespace EduErp.pages.admin
         protected global::System.Web.UI.WebControls.TextBox fee_descripition;
 
         /// <summary>
-        /// std_rollno_paymethod control.
+        /// btnAddFee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox std_rollno_paymethod;
+        protected global::System.Web.UI.WebControls.Button btnAddFee;
 
         /// <summary>
-        /// std_name_paymethod control.
+        /// GridViewFees control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox std_name_paymethod;
-
-        /// <summary>
-        /// list_fee_record control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList list_fee_record;
-
-        /// <summary>
-        /// payment_amount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox payment_amount;
-
-        /// <summary>
-        /// list_fee_type_3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList list_fee_type_3;
-
-        /// <summary>
-        /// payment_date control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox payment_date;
-
-        /// <summary>
-        /// transaction_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox transaction_id;
-
-        /// <summary>
-        /// payment_remarks control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox payment_remarks;
-
-        /// <summary>
-        /// btn_payment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_payment;
+        protected global::System.Web.UI.WebControls.GridView GridViewFees;
     }
 }

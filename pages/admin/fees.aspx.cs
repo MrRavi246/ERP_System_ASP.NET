@@ -71,7 +71,19 @@ namespace EduErp.pages.admin
             }
         }
 
-        void fill_fee_type()
+        void fill_list_fee_type_3()
+        {
+            getcon();
+            da = new SqlDataAdapter("select payment_method from fee_payments", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            list_fee_type_3.Items.Add("Select Fee Method");
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                list_fee_type_3.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+            }
+        }
+            void fill_fee_type()
         {
             da = new SqlDataAdapter("select name from fee_types", con);
             ds = new DataSet();
@@ -82,11 +94,13 @@ namespace EduErp.pages.admin
 
             list_fee_type.Items.Add("Select Fee Type");
             list_fee_type_2.Items.Add("Select Fee Type");
+            list_fee_record.Items.Add("Select Fee Type");
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 list_fee_type.Items.Add(ds.Tables[0].Rows[i][0].ToString());
                 list_fee_type_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                list_fee_record.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
 

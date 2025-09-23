@@ -99,7 +99,7 @@ namespace EduErp.pages.admin
 
                 getcon();
                 cmd = new SqlCommand("INSERT INTO faculty (user_id, employee_id, first_name,last_name, Phone, department_id, Designation, qualification, experience_years, address) "
-                    + "Values('" + newUserId + ", 'STU" + newUserId.ToString("000") + "','" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedIndex + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
+                    + "Values('" + newUserId + "', 'FAC" + newUserId.ToString("000") + "','" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedIndex + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
                 cmd.ExecuteNonQuery();
             }
         }

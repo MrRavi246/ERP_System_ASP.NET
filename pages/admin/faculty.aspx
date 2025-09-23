@@ -71,7 +71,7 @@
                                         <asp:DropDownList ID="department2" runat="server" AutoPostBack="false" CssClass="form-select">
                                         </asp:DropDownList>
                                     </div>
-                                    <div class="col-md-3">                                        
+                                    <div class="col-md-3">
                                         <asp:DropDownList ID="designation2" runat="server" CssClass="form-select" AutoPostBack="false">
                                         </asp:DropDownList>
 
@@ -199,85 +199,70 @@
                                     </table>
                                 </div>
 
-                                <!-- Pagination -->
-                                <nav class="mt-4">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a> </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a> </li>
-                                        <li class="page-item"><a class="auto-style1" href="#">2</a> </li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a> </li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a> </li>
-                                    </ul>
-                                </nav>
 
-
-                                <div class="card shadow-sm mb-4" style="left: 1px; top: 5px">
+                                <div class="card shadow-sm">
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="auto-style2">
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+                                            <asp:GridView ID="GridView1" DataKeyNames="id" runat="server" AutoGenerateColumns="False" class="auto-style2">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="first_name" HeaderStyle-CssClass="table-light">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label1" Text='<%# Eval("first_name") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Last_name">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label2" Text='<%# Eval("last_name") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Phone">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label3" Text='<%# Eval("phone") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="address">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label4" Text='<%# Eval("address") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Designation">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label5" Text='<%# Eval("designation") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Qualification ">
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label7" Text='<%# Eval("qualification") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="salary">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label6" Text='<%# Eval("salary") %>' runat="server"></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Delete">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("id") %>'>Delete</asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Edite">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("id") %>'>Edite</asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
                                         </div>
                                     </div>
                                 </div>
-                                <asp:GridView ID="GridView1" DataKeyNames="id" runat="server" AutoGenerateColumns="False">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="first_name">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label1" Text='<%# Eval("first_name") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Last_name">
-
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label2" Text='<%# Eval("last_name") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Phone">
-
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label3" Text='<%# Eval("phone") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="address">
-
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label4" Text='<%# Eval("address") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Designation">
-
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label5" Text='<%# Eval("designation") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Qualification ">
-                                            <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                                            </EditItemTemplate>
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label7" Text='<%# Eval("qualification") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="salary">
-
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label6" Text='<%# Eval("salary") %>' runat="server"></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Delete">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("id") %>'>Delete</asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Edite">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("id") %>'>Edite</asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
                             </div>
                         </div>
                     </div>

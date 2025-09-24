@@ -322,7 +322,7 @@
                                 <label class="form-label">
                                     Student Roll No</label>
                                 <%--<input type="text" class="form-control" id="studentRollNo" required>--%>
-                                <asp:TextBox ID="std_rollno" class="form-control" TextMode="Number" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="std_rollno" class="form-control" runat="server"></asp:TextBox>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
@@ -425,7 +425,7 @@
                                         <option value="Library Fee - ₹5,000">Library Fee - ₹5,000</option>
                                     </select>--%>
 
-                                    <asp:DropDownList ID="list_fee_record" class="form-select" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="list_fee_record" class="form-select"  runat="server"></asp:DropDownList>
     
                                 </div>
                                 <div class="col-md-6 mb-3">

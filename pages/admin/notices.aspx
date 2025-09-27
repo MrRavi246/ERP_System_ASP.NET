@@ -123,38 +123,47 @@
                                         <div class="col-md-3">
                                             <label class="form-label">
                                                 Priority</label>
-                                            <select class="form-select" id="priorityFilter">
+                                            <%--<select class="form-select" id="priorityFilter">
                                                 <option value="">All Priorities</option>
                                                 <option value="High">High</option>
                                                 <option value="Medium">Medium</option>
                                                 <option value="Low">Low</option>
-                                            </select>
+                                            </select>--%>
+                                            <asp:DropDownList ID="notice_priority_2" class="form-select" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-label">
                                                 Category</label>
-                                            <select class="form-select" id="categoryFilter">
+                                            <%--<select class="form-select" id="categoryFilter">
                                                 <option value="">All Categories</option>
                                                 <option value="Academic">Academic</option>
                                                 <option value="Administrative">Administrative</option>
                                                 <option value="Event">Event</option>
                                                 <option value="Emergency">Emergency</option>
-                                            </select>
+                                            </select>--%>
+                                            <asp:DropDownList ID="notice_category_2" class="form-select" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-label">
                                                 Status</label>
-                                            <select class="form-select" id="statusFilter">
+                                            <%--<select class="form-select" id="statusFilter">
                                                 <option value="">All Status</option>
                                                 <option value="Active">Active</option>
                                                 <option value="Inactive">Inactive</option>
                                                 <option value="Expired">Expired</option>
-                                            </select>
+                                            </select>--%>
+                                            <asp:DropDownList ID="notice_status" class="form-select" runat="server">
+                                                <asp:ListItem Value="All_Status" Text="All Status"></asp:ListItem>
+                                                <asp:ListItem Value="Active" Text="Active"></asp:ListItem>
+                                                <asp:ListItem Value="Inactive" Text="Inactive"></asp:ListItem>
+                                                <asp:ListItem Value="Expired" Text="Expired"></asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-label">
                                                 Search</label>
-                                            <input type="text" class="form-control" id="searchInput" placeholder="Search notices...">
+                                            <%--<input type="text" class="form-control" id="searchInput" placeholder="Search notices...">--%>
+                                            <asp:TextBox ID="notice_search" class="form-control" TextMode="Search"  runat="server" placeholder="Search notices"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>

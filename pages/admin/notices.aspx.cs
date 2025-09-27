@@ -38,10 +38,12 @@ namespace EduErp.pages.admin
             da.Fill(ds);
 
             notice_priority.Items.Add("Select Priority");
+            notice_priority_2.Items.Add("Select Priority");
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++) 
             {
                 notice_priority.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                notice_priority_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
 
@@ -53,11 +55,15 @@ namespace EduErp.pages.admin
             da.Fill(ds);
 
             notice_category.Items.Add("Selete Category");
+            notice_category_2.Items.Add("Selete Category");
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++) 
             {
                 notice_category.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                notice_category_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
         }
+
+        
     }
 }

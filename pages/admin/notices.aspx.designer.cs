@@ -15,6 +15,42 @@ namespace EduErp.pages.admin
     {
 
         /// <summary>
+        /// notice_priority_2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList notice_priority_2;
+
+        /// <summary>
+        /// notice_category_2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList notice_category_2;
+
+        /// <summary>
+        /// notice_status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList notice_status;
+
+        /// <summary>
+        /// notice_search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox notice_search;
+
+        /// <summary>
         /// motice_title control.
         /// </summary>
         /// <remarks>

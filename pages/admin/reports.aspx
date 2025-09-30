@@ -108,13 +108,14 @@
                                         <div class="col-md-3">
                                             <label class="form-label">
                                                 Department</label>
-                                            <select class="form-select" id="departmentFilter">
+                                           <%-- <select class="form-select" id="departmentFilter">
                                                 <option value="">All Departments</option>
                                                 <option value="Computer Science">Computer Science</option>
                                                 <option value="Electrical">Electrical</option>
                                                 <option value="Mechanical">Mechanical</option>
                                                 <option value="Civil">Civil</option>
-                                            </select>
+                                            </select>--%>
+                                            <asp:DropDownList ID="reports_department" class="form-select" runat="server"></asp:DropDownList>
                                         </div>
                                         <div class="col-md-3">
                                             <label class="form-label">

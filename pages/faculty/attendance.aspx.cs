@@ -78,7 +78,6 @@ namespace EduErp.pages.faculty
                     late = count;
             }
 
-
             presentCount.Text = present.ToString();
             absentCount.Text = absent.ToString();
             lateCount.Text = late.ToString();

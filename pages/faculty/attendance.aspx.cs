@@ -22,6 +22,7 @@ namespace EduErp.pages.faculty
             fill_department();
             getcon();
             fill_student_attendance_grid();
+            fill_presentCount();
         }
         void getcon()
         {
@@ -53,6 +54,34 @@ namespace EduErp.pages.faculty
             student_attendance.DataSource= ds;
             student_attendance.DataBind();
 
+        }
+
+        void fill_presentCount()
+        {
+            getcon();
+            da = new SqlDataAdapter("SELECT status, COUNT(*) AS total_count FROM attendance WHERE status IN ('Present', 'Absent', 'Late') GROUP BY status", con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            int present = 0, absent = 0, late = 0;
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                string status = row["status"].ToString();
+                int count = Convert.ToInt32(row["total_count"]);
+
+                if (status == "Present")
+                    present = count;
+                else if (status == "Absent")
+                    absent = count;
+                else if (status == "Late")
+                    late = count;
+            }
+
+
+            presentCount.Text = present.ToString();
+            absentCount.Text = absent.ToString();
+            lateCount.Text = late.ToString();
         }
     }
 }

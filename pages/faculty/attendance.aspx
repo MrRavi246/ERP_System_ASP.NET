@@ -127,7 +127,8 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="text-center">
-                                        <h4 class="text-success" id="presentCount">0</h4>
+                                        <%--<h4 class="text-success" id="presentCount">0</h4>--%>
+                                        <asp:Label ID="presentCount" class="text-success" runat="server" Text="0"></asp:Label>
                                         <p class="text-muted">
                                             Present
                                         </p>
@@ -135,7 +136,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
-                                        <h4 class="text-danger" id="absentCount">0</h4>
+                                        <%--<h4 class="text-danger" id="absentCount">0</h4>--%>
+                                        <asp:Label ID="absentCount" class="text-success" runat="server" Text="0"></asp:Label>
+
                                         <p class="text-muted">
                                             Absent
                                         </p>
@@ -143,7 +146,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="text-center">
-                                        <h4 class="text-warning" id="lateCount">0</h4>
+                                        <%--<h4 class="text-warning" id="lateCount">0</h4>--%>
+                                        <asp:Label ID="lateCount" class="text-success" runat="server" Text="0"></asp:Label>
                                         <p class="text-muted">
                                             Late
                                         </p>

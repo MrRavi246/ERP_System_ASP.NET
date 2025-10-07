@@ -5,15 +5,29 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 
 namespace EduErp
 {
     public partial class index : System.Web.UI.Page
     {
+        string conString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        SqlConnection con;
+        SqlDataAdapter da;
+        DataSet ds;
+        SqlCommand cmd;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        void getcon()
+        {
+            con = new SqlConnection(conString);
+            con.Open();
         }
 
         protected void BtnSubmit_click(object sender, EventArgs e)
@@ -21,22 +35,71 @@ namespace EduErp
             string email = txtemail.Text;
             string password = txtpass.Text;
 
-            if (email == "admin@college.edu" && password == "password")
+            // Basic validation
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                Response.Redirect("./pages/admin/dashboard.aspx");
+                Response.Write("<script>alert('Please enter both email and password!');</script>");
+                return;
             }
-            else if (email == "faculty@college.edu" && password == "password")
-            {                
-                Response.Redirect("./pages/faculty/dashboard.aspx");
-            }
-            else if (email == "student@college.edu" && password == "password")
+
+            getcon();
+
+            // Check if user exists and is active
+            string query = "SELECT id, role, password_hash FROM users WHERE email = '" + email + "' AND is_active = 1";
+            cmd = new SqlCommand(query, con);
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
             {
-                Response.Redirect("./pages/student/dashboard.aspx");
+                string dbPassword = ds.Tables[0].Rows[0]["password_hash"].ToString();
+                string userRole = ds.Tables[0].Rows[0]["role"].ToString();
+                int userId = Convert.ToInt32(ds.Tables[0].Rows[0]["id"]);
+
+                // Simple password check (you can enhance this with proper hashing)
+                if (password == dbPassword || dbPassword.Contains(password))
+                {
+                    // Update last login time
+                    string updateQuery = "UPDATE users SET last_login = GETDATE() WHERE id = " + userId;
+                    cmd = new SqlCommand(updateQuery, con);
+                    cmd.ExecuteNonQuery();
+
+                    // Store user info in session
+                    Session["UserId"] = userId;
+                    Session["UserEmail"] = email;
+                    Session["UserRole"] = userRole;
+
+                    Response.Write("<script>alert('Login successful! Welcome " + userRole + "!');</script>");
+
+                    // Redirect based on role
+                    if (userRole == "admin")
+                    {
+                        Response.Redirect("pages/admin/dashboard.aspx");
+                    }
+                    else if (userRole == "faculty")
+                    {
+                        Response.Redirect("pages/faculty/dashboard.aspx");
+                    }
+                    else if (userRole == "student")
+                    {
+                        Response.Redirect("pages/student/dashboard.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Write("<script>alert('Invalid password!');</script>");
+                }
             }
             else
             {
-                Response.Write("<script>alert('Enter Valid Credentials');</script>");
+                Response.Write("<script>alert('User not found or account is inactive!');</script>");
             }
+
+            con.Close();
+
+            // Clear password field for security
+            txtpass.Text = "";
         }
     }
 }

@@ -77,7 +77,7 @@
                                             Total Students
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            2,847
+                                            <%= TotalStudents %>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -96,7 +96,7 @@
                                             Total Faculty
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            156
+                                            <%= TotalFaculty %>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -115,7 +115,7 @@
                                             Total Courses
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            89
+                                            <%= TotalCourses %>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -134,7 +134,7 @@
                                             Total Revenue
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            $1.2M
+                                            <%= TotalRevenue %>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -183,42 +183,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="list-group list-group-flush">
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                New student registration: John Doe
-                                            </div>
-                                            <small class="text-muted">2 minutes ago</small>
-                                        </div>
-                                        <span class="badge bg-success rounded-pill">New</span>
-                                    </div>
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Faculty meeting scheduled for tomorrow
-                                            </div>
-                                            <small class="text-muted">1 hour ago</small>
-                                        </div>
-                                        <span class="badge bg-info rounded-pill">New</span>
-                                    </div>
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Course "Advanced Mathematics" updated
-                                            </div>
-                                            <small class="text-muted">3 hours ago</small>
-                                        </div>
-                                        <span class="badge bg-warning rounded-pill">New</span>
-                                    </div>
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Monthly report generated
-                                            </div>
-                                            <small class="text-muted">1 day ago</small>
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">New</span>
-                                    </div>
+                                    <%= RecentStudents %>
                                 </div>
                             </div>
                         </div>
@@ -230,42 +195,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="list-group list-group-flush">
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Faculty Meeting
-                                            </div>
-                                            <small class="text-muted">Tomorrow, 10:00 AM</small>
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">Event</span>
-                                    </div>
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Student Orientation
-                                            </div>
-                                            <small class="text-muted">Next Week</small>
-                                        </div>
-                                        <span class="badge bg-success rounded-pill">Event</span>
-                                    </div>
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Exam Period
-                                            </div>
-                                            <small class="text-muted">2 weeks</small>
-                                        </div>
-                                        <span class="badge bg-warning rounded-pill">Event</span>
-                                    </div>
-                                    <div class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">
-                                                Annual Conference
-                                            </div>
-                                            <small class="text-muted">1 month</small>
-                                        </div>
-                                        <span class="badge bg-info rounded-pill">Event</span>
-                                    </div>
+                                    <%= RecentNotices %>
                                 </div>
                             </div>
                         </div>

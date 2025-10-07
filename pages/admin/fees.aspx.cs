@@ -323,7 +323,8 @@ namespace EduErp.pages.admin
             da.Fill(RecentPayments);
         }
 
-        protected void GetStudentData_Click(object sender, EventArgs e)
+        //protected void GetStudentData_Click(object sender, EventArgs e)
+        protected void makePayment(object sender, EventArgs e)
         {
             string rollNo = std_rollno.Text.Trim();
             

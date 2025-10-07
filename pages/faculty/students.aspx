@@ -84,11 +84,11 @@
                         </div>
 
                         <!-- Students Table -->
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+                        <asp:GridView class="table table-hover" ID="GridView1" runat="server" AutoGenerateColumns="False">
                             <Columns>
                                 <asp:TemplateField HeaderText="student_id">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("student_id") %>'></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" class="table-light" Text='<%# Eval("student_id") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 

@@ -41,7 +41,7 @@
                             </p>
                         </div>
                         <nav class="nav flex-column">
-                            <a class="nav-link text-dark" href="dashboard.aspx"><i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard </a><a class="nav-link text-dark" href="courses.aspx"><i class="fas fa-book me-2 text-primary"></i>My Courses </a><a class="nav-link active" href="attendance.aspx"><i class="fas fa-calendar-check me-2 text-primary"></i>Attendance </a><a class="nav-link text-dark" href="timetable.aspx"><i class="fas fa-clock me-2 text-primary"></i>My Timetable </a><a class="nav-link text-dark" href="exams.aspx"><i class="fas fa-file-alt me-2 text-primary"></i>Exams </a><a class="nav-link text-dark" href="students.aspx"><i class="fas fa-users me-2 text-primary"></i>My Students </a><a class="nav-link text-dark" href="notices.aspx"><i class="fas fa-bullhorn me-2 text-primary"></i>Notices </a><a class="nav-link text-dark" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile </a>
+                            <a class="nav-link text-dark" href="dashboard.aspx"><i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard </a><a class="nav-link text-dark" href="courses.aspx"><i class="fas fa-book me-2 text-primary"></i>My Courses </a><a class="nav-link text-dark" href="attendance.aspx"><i class="fas fa-calendar-check me-2 text-primary"></i>Attendance </a><a class="nav-link text-dark" href="timetable.aspx"><i class="fas fa-clock me-2 text-primary"></i>My Timetable </a><a class="nav-link text-dark" href="exam.aspx"><i class="fas fa-file-alt me-2 text-primary"></i>Exams </a><a class="nav-link active" href="students.aspx"><i class="fas fa-calendar-check me-2 text-primary"></i>My Students </a><a class="nav-link text-dark" href="notices.aspx"><i class="fas fa-bullhorn me-2 text-primary"></i>Notices </a><a class="nav-link text-dark" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile </a>
                         </nav>
                     </div>
                 </div>
@@ -59,11 +59,11 @@
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Search students...">
+                                        <%--<input type="text" class="form-control" placeholder="Search students...">--%>
+                                        <asp:TextBox ID="txtSearch" runat="server" class="form-control" placeholder="Search students..."></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
                                         <asp:DropDownList ID="department2" runat="server" class="form-select" AutoPostBack="false"></asp:DropDownList>
-
                                     </div>
                                     <div class="col-md-3">
                                         <select class="form-select">

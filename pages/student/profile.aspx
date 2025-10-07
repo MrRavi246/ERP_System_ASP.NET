@@ -84,7 +84,8 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label for="email" class="form-label">
                                                     Email Address</label>
-                                                    <input type="email" class="form-control" id="email" value="student@college.edu" required>
+                                                    <%--<input type="email" class="form-control" id="email" value="student@college.edu" required>--%>
+                                                    <asp:TextBox  class="form-control" ID="email" runat="server"></asp:TextBox>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="phone" class="form-label">

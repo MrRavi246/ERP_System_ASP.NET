@@ -83,18 +83,54 @@ namespace EduErp.pages.admin
 
             getcon();
 
-            string userQuery = "INSERT INTO users (email, password_hash, role, is_active) " +
-                               "OUTPUT INSERTED.id " +
-                               "VALUES ('" + Email + "', '" + (FirstName + Year) + "', 'student', 1)";
+            // First, check if email already exists
+            string checkEmailQuery = "SELECT COUNT(*) FROM users WHERE email = '" + Email + "'";
+            Cmd = new SqlCommand(checkEmailQuery, Con);
+            int emailExists = (int)Cmd.ExecuteScalar();
+
+            if (emailExists > 0)
+            {
+                Response.Write("<script>alert('Email already exists! Please use a different email.');</script>");
+                Con.Close();
+                return;
+            }
+
+            // Get the next available user ID to avoid conflicts
+            string getMaxIdQuery = "SELECT ISNULL(MAX(id), 0) + 1 FROM users";
+            Cmd = new SqlCommand(getMaxIdQuery, Con);
+            int nextUserId = (int)Cmd.ExecuteScalar();
+
+            // Insert user with explicit ID to avoid identity conflicts
+            string userQuery = "SET IDENTITY_INSERT users ON; " +
+                               "INSERT INTO users (id, email, password_hash, role, is_active) " +
+                               "VALUES (" + nextUserId + ", '" + Email + "', '" + (FirstName + Year) + "', 'student', 1); " +
+                               "SET IDENTITY_INSERT users OFF;";
 
             Cmd = new SqlCommand(userQuery, Con);
-            int newUserId = (int)Cmd.ExecuteScalar();
+            Cmd.ExecuteNonQuery();
 
-            string studentQuery = "INSERT INTO students (user_id, student_id, roll_number, first_name, last_name, phone,address, department_id, year_level, status) " +
-                                  "VALUES (" + newUserId + ", 'STU" + newUserId.ToString("000") + "', '" + DateTime.Now.Year + "CS" + newUserId.ToString("000") + "', " +
-                                  "'" + FirstName + "', '" + LastName + "', '" + Phone + "','"+address+"', " + Department + ", '" + Year + "', 'Active')";
+            // Get the next available student ID
+            string getMaxStudentIdQuery = "SELECT ISNULL(MAX(id), 0) + 1 FROM students";
+            Cmd = new SqlCommand(getMaxStudentIdQuery, Con);
+            int nextStudentId = (int)Cmd.ExecuteScalar();
+
+            // Insert student with explicit ID to avoid conflicts
+            string studentQuery = "SET IDENTITY_INSERT students ON; " +
+                                  "INSERT INTO students (id, user_id, student_id, roll_number, first_name, last_name, phone, address, department_id, year_level, status) " +
+                                  "VALUES (" + nextStudentId + ", " + nextUserId + ", 'STU" + nextUserId.ToString("000") + "', '" + DateTime.Now.Year + "CS" + nextUserId.ToString("000") + "', " +
+                                  "'" + FirstName + "', '" + LastName + "', '" + Phone + "', '" + address + "', " + Department + ", '" + Year + "', 'Active'); " +
+                                  "SET IDENTITY_INSERT students OFF;";
             
             Cmd = new SqlCommand(studentQuery, Con);
+            Cmd.ExecuteNonQuery();
+
+            // Update identity seeds to continue from the new values
+            string resetUserSeed = "DBCC CHECKIDENT ('users', RESEED, " + nextUserId + ")";
+            Cmd = new SqlCommand(resetUserSeed, Con);
+            Cmd.ExecuteNonQuery();
+
+            string resetStudentSeed = "DBCC CHECKIDENT ('students', RESEED, " + nextStudentId + ")";
+            Cmd = new SqlCommand(resetStudentSeed, Con);
             Cmd.ExecuteNonQuery();
 
             fillgrid();

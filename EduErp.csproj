@@ -90,7 +90,7 @@
     <Content Include="pages\faculty\attendance.aspx" />
     <Content Include="pages\faculty\courses.aspx" />
     <Content Include="pages\faculty\dashboard.aspx" />
-    <Content Include="pages\faculty\exam.aspx" />
+    <Content Include="pages\faculty\exams.aspx" />
     <Content Include="pages\faculty\notices.aspx" />
     <Content Include="pages\faculty\profile.aspx" />
     <Content Include="pages\faculty\settings.aspx" />
@@ -341,12 +341,12 @@
     <Compile Include="pages\faculty\dashboard.Master.designer.cs">
       <DependentUpon>dashboard.Master</DependentUpon>
     </Compile>
-    <Compile Include="pages\faculty\exam.aspx.cs">
-      <DependentUpon>exam.aspx</DependentUpon>
+    <Compile Include="pages\faculty\exams.aspx.cs">
+      <DependentUpon>exams.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\faculty\exam.aspx.designer.cs">
-      <DependentUpon>exam.aspx</DependentUpon>
+    <Compile Include="pages\faculty\exams.aspx.designer.cs">
+      <DependentUpon>exams.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\faculty\exams.Master.cs">
       <DependentUpon>exams.Master</DependentUpon>

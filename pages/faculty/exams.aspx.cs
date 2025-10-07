@@ -72,7 +72,7 @@ namespace EduErp.pages.faculty
         {
             int course_id = Convert.ToInt32(course_exam.SelectedValue);
             int course_type = Convert.ToInt32(exam_type.SelectedValue);
-            string exam_date = exam_date.;
+            //string exam_date = exam_date.;
 
         }
     }

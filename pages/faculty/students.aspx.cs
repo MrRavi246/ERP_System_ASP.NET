@@ -41,17 +41,24 @@ namespace EduErp.pages.faculty
         void Filldepartment_catagory()
         {
             getcon();
-            Da = new SqlDataAdapter("select name from departments", con);
+            Da = new SqlDataAdapter("select id,name from departments", con);
             Ds = new DataSet();
             Da.Fill(Ds);
+
+            
 
             department.Items.Add("Select Department");
             department2.Items.Add("Select Department");
 
             for (int i = 0; i < Ds.Tables[0].Rows.Count; i++)
             {
-                department.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
-                department2.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
+                string Name = Ds.Tables[0].Rows[i]["name"].ToString();
+                string deptId = Ds.Tables[0].Rows[i]["id"].ToString();
+
+                //department.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
+                //department2.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
+
+                department.Items.Add(new ListItem(Name, deptId));
             }
         }
         void Fillgrid()
@@ -70,7 +77,8 @@ namespace EduErp.pages.faculty
             string LastName = txtLastName.Text;
             string Email = txtEmail.Text;
             string Phone = txtPhone.Text;
-            string Department = department.SelectedValue;
+            //string Department = department.SelectedValue;
+            int Department = Convert.ToInt32(department.SelectedValue); ;
             int Year = ddYear.SelectedIndex;
 
             getcon();

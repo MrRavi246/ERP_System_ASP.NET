@@ -59,6 +59,7 @@ namespace EduErp.pages.faculty
                 //department2.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
 
                 department.Items.Add(new ListItem(Name, deptId));
+                department2.Items.Add(new ListItem(Name, deptId));
             }
         }
         void Fillgrid()
@@ -110,7 +111,9 @@ namespace EduErp.pages.faculty
             Cmd = new SqlCommand(studentQuery, con);
             Cmd.ExecuteNonQuery();
 
+            Fillgrid();
             Response.Write("<script>alert('Student added successfully!');</script>");
+
 
             txtFirstName.Text = "";
             txtLastName.Text = "";

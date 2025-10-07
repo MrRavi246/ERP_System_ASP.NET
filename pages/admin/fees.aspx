@@ -61,7 +61,7 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h4 class="mb-0" id="totalFees">₹2,45,000</h4>
+                                            <h4 class="mb-0" id="totalFees"><%= TotalFees %></h4>
                                             <p class="mb-0">
                                                 Total Fees
                                             </p>
@@ -76,7 +76,7 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h4 class="mb-0" id="paidAmount">₹1,85,000</h4>
+                                            <h4 class="mb-0" id="paidAmount"><%= PaidAmount %></h4>
                                             <p class="mb-0">
                                                 Paid Amount
                                             </p>
@@ -91,7 +91,7 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h4 class="mb-0" id="pendingAmount">₹60,000</h4>
+                                            <h4 class="mb-0" id="pendingAmount"><%= PendingAmount %></h4>
                                             <p class="mb-0">
                                                 Pending Amount
                                             </p>
@@ -106,7 +106,7 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h4 class="mb-0" id="paymentRate">75.5%</h4>
+                                            <h4 class="mb-0" id="paymentRate"><%= PaymentRate %></h4>
                                             <p class="mb-0">
                                                 Payment Rate
                                             </p>
@@ -220,7 +220,59 @@
                     <div class="section-spacing">
                         <h5 class="mb-3">Recent Payments</h5>
                         <div class="row" id="recentPayments">
-                            <!-- Recent payment cards will be populated here -->
+                            <%
+                                if (RecentPayments != null && RecentPayments.Tables[0].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i < RecentPayments.Tables[0].Rows.Count; i++)
+                                    {
+                                        var row = RecentPayments.Tables[0].Rows[i];
+                                        string studentName = row["student_name"].ToString();
+                                        string rollNumber = row["roll_number"].ToString();
+                                        string feeType = row["fee_type"].ToString();
+                                        string amountPaid = row["amount_paid"].ToString();
+                                        string amountDue = row["amount_due"].ToString();
+                                        string paymentDate = Convert.ToDateTime(row["payment_date"]).ToString("MMMM dd, yyyy");
+                            %>
+                            <div class="col-lg-4 col-md-6 mb-3">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h6 class="card-title mb-0 fw-bold"><%= studentName %></h6>
+                                            <span class="badge bg-success">Paid</span>
+                                        </div>
+                                        <p class="text-muted mb-2"><%= feeType != "" ? feeType : "Tuition Fee" %></p>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="text-success fw-bold">₹<%= Convert.ToDecimal(amountPaid).ToString("N0") %></span>
+                                            <span class="text-primary">₹<%= Convert.ToDecimal(amountDue).ToString("N0") %></span>
+                                        </div>
+                                        <div class="d-flex justify-content-between text-muted small">
+                                            <span>Paid</span>
+                                            <span>Total</span>
+                                        </div>
+                                        <hr class="my-2">
+                                        <div class="d-flex justify-content-between text-muted small">
+                                            <span>Roll No: <%= rollNumber %></span>
+                                            <span>Date: <%= paymentDate %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
+                                    }
+                                }
+                                else
+                                {
+                            %>
+                            <div class="col-12">
+                                <div class="text-center py-4">
+                                    <i class="fas fa-credit-card fa-3x text-muted mb-3"></i>
+                                    <h5 class="text-muted">No Recent Payments</h5>
+                                    <p class="text-muted">Recent payment transactions will appear here</p>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
 

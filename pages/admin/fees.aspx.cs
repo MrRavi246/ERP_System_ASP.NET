@@ -17,6 +17,12 @@ namespace EduErp.pages.admin
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        protected string TotalFees { get; set; }
+        protected string PaidAmount { get; set; }
+        protected string PendingAmount { get; set; }
+        protected string PaymentRate { get; set; }
+        protected DataSet RecentPayments { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -26,6 +32,8 @@ namespace EduErp.pages.admin
                 fill_fee_type();
                 fillFeeGrid();
                 fill_list_fee_type_3();
+                LoadFeeStats();
+                LoadRecentPayments();
                 con.Close();
             }
         }
@@ -105,6 +113,58 @@ namespace EduErp.pages.admin
             }
         }
 
+        protected void GetStudentData_Click(object sender, EventArgs e)
+        {
+            string rollNo = std_rollno.Text.Trim();
+            
+            if (string.IsNullOrEmpty(rollNo))
+            {
+                Response.Write("<script>alert('Please enter roll number first!');</script>");
+                return;
+            }
+
+            getcon();
+
+            // Get student details with department name
+            string getStudentQuery = @"SELECT s.id, s.first_name + ' ' + s.last_name as full_name, 
+                                            s.year_level, d.name as department_name, s.phone, s.address
+                                     FROM students s 
+                                     INNER JOIN departments d ON s.department_id = d.id 
+                                     WHERE s.roll_number = '" + rollNo + "'";
+            
+            cmd = new SqlCommand(getStudentQuery, con);
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                var row = ds.Tables[0].Rows[0];
+                std_name.Text = row["full_name"].ToString();
+                
+                // Set department dropdown
+                string deptName = row["department_name"].ToString();
+                for (int i = 0; i < list_department_2.Items.Count; i++)
+                {
+                    if (list_department_2.Items[i].Text == deptName)
+                    {
+                        list_department_2.SelectedIndex = i;
+                        break;
+                    }
+                }
+                
+                Response.Write("<script>alert('Student found: " + row["full_name"].ToString() + " from " + deptName + "');</script>");
+            }
+            else
+            {
+                std_name.Text = "";
+                list_department_2.SelectedIndex = 0;
+                Response.Write("<script>alert('No student found with roll number: " + rollNo + "');</script>");
+            }
+
+            con.Close();
+        }
+
         protected void btnAddFee_Click(object sender, EventArgs e)
         {
             string rollNo = std_rollno.Text;
@@ -133,8 +193,10 @@ namespace EduErp.pages.admin
 
                 Response.Write("<script>alert('Fee record added successfully!');</script>");
 
-                // Refresh the grid
+                // Refresh the grid and stats
                 fillFeeGrid();
+                LoadFeeStats();
+                LoadRecentPayments();
 
             }
 
@@ -188,6 +250,129 @@ namespace EduErp.pages.admin
                 default:
                     return "bg-secondary";
             }
+        }
+
+        void LoadFeeStats()
+        {
+            GetTotalFees();
+            GetPaidAmount();
+            GetPendingAmount();
+            GetPaymentRate();
+        }
+
+        void GetTotalFees()
+        {
+            string query = "SELECT ISNULL(SUM(amount_due), 0) FROM student_fees";
+            cmd = new SqlCommand(query, con);
+            object result = cmd.ExecuteScalar();
+            decimal total = Convert.ToDecimal(result);
+            TotalFees = "₹" + total.ToString("N0");
+        }
+
+        void GetPaidAmount()
+        {
+            string query = "SELECT ISNULL(SUM(amount_paid), 0) FROM student_fees";
+            cmd = new SqlCommand(query, con);
+            object result = cmd.ExecuteScalar();
+            decimal paid = Convert.ToDecimal(result);
+            PaidAmount = "₹" + paid.ToString("N0");
+        }
+
+        void GetPendingAmount()
+        {
+            string query = "SELECT ISNULL(SUM(amount_due - amount_paid), 0) FROM student_fees WHERE payment_status != 'Paid'";
+            cmd = new SqlCommand(query, con);
+            object result = cmd.ExecuteScalar();
+            decimal pending = Convert.ToDecimal(result);
+            PendingAmount = "₹" + pending.ToString("N0");
+        }
+
+        void GetPaymentRate()
+        {
+            string totalQuery = "SELECT ISNULL(SUM(amount_due), 1) FROM student_fees";
+            cmd = new SqlCommand(totalQuery, con);
+            decimal total = Convert.ToDecimal(cmd.ExecuteScalar());
+
+            string paidQuery = "SELECT ISNULL(SUM(amount_paid), 0) FROM student_fees";
+            cmd = new SqlCommand(paidQuery, con);
+            decimal paid = Convert.ToDecimal(cmd.ExecuteScalar());
+
+            decimal rate = (paid / total) * 100;
+            PaymentRate = rate.ToString("F1") + "%";
+        }
+
+        void LoadRecentPayments()
+        {
+            string query = @"SELECT TOP 3 
+                                s.roll_number,
+                                s.first_name + ' ' + s.last_name as student_name,
+                                ft.name as fee_type,
+                                sf.amount_paid,
+                                sf.amount_due,
+                                sf.payment_date,
+                                sf.payment_status
+                            FROM student_fees sf 
+                            INNER JOIN students s ON sf.student_id = s.id 
+                            LEFT JOIN fee_structures fs ON sf.fee_structure_id = fs.id
+                            LEFT JOIN fee_types ft ON fs.fee_type_id = ft.id
+                            WHERE sf.payment_status = 'Paid' AND sf.payment_date IS NOT NULL
+                            ORDER BY sf.payment_date DESC";
+            
+            da = new SqlDataAdapter(query, con);
+            RecentPayments = new DataSet();
+            da.Fill(RecentPayments);
+        }
+
+        protected void GetStudentData_Click(object sender, EventArgs e)
+        {
+            string rollNo = std_rollno.Text.Trim();
+            
+            if (string.IsNullOrEmpty(rollNo))
+            {
+                Response.Write("<script>alert('Please enter roll number first!');</script>");
+                return;
+            }
+
+            getcon();
+
+            // Get student details with department name
+            string getStudentQuery = @"SELECT s.id, s.first_name + ' ' + s.last_name as full_name, 
+                                            s.year_level, d.name as department_name, s.phone, s.address
+                                     FROM students s 
+                                     INNER JOIN departments d ON s.department_id = d.id 
+                                     WHERE s.roll_number = '" + rollNo + "'";
+            
+            cmd = new SqlCommand(getStudentQuery, con);
+            da = new SqlDataAdapter(cmd);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                var row = ds.Tables[0].Rows[0];
+                std_name.Text = row["full_name"].ToString();
+                
+                // Set department dropdown
+                string deptName = row["department_name"].ToString();
+                for (int i = 0; i < list_department_2.Items.Count; i++)
+                {
+                    if (list_department_2.Items[i].Text == deptName)
+                    {
+                        list_department_2.SelectedIndex = i;
+                        break;
+                    }
+                }
+                
+                Response.Write("<script>alert('Student found: " + row["full_name"].ToString() + " from " + deptName + "');</script>");
+            }
+            else
+            {
+                std_name.Text = "";
+                list_department_2.SelectedIndex = 0;
+                Response.Write("<script>alert('No student found with roll number: " + rollNo + "');</script>");
+            }
+
+            con.Close();
         }
     }
 }

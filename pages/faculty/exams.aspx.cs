@@ -23,6 +23,7 @@ namespace EduErp.pages.faculty
             getcon();
             fill_course();
             fill_exam_type();
+            
         }
 
         void getcon()
@@ -75,5 +76,7 @@ namespace EduErp.pages.faculty
             //string exam_date = exam_date.;
 
         }
+
+        
     }
 }

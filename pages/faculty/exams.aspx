@@ -235,6 +235,8 @@
                         </div>
                     </div>
 
+                   
+
                     <!-- Ongoing Exams -->
                     <div class="tab-pane fade" id="ongoing" role="tabpanel">
                         <div class="alert alert-info" role="alert">
@@ -337,7 +339,7 @@
                             <div class="col-md-6">
                                 <label for="examCourse" class="form-label">
                                     Course</label>
-                         <%--       <select class="form-select" id="examCourse" required>
+                                <%--       <select class="form-select" id="examCourse" required>
                                     <option value="">Select Course</option>
                                     <option value="math">Advanced Mathematics</option>
                                     <option value="physics">Quantum Physics</option>

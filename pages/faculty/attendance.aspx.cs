@@ -47,13 +47,20 @@ namespace EduErp.pages.faculty
         void fill_student_attendance_grid()
         {
             getcon();
-            da = new SqlDataAdapter("select id , student_id , status,remarks from attendance", con);
+            string query = @"SELECT 
+                        a.id, 
+                        s.first_name + ' ' + s.last_name AS student_name, 
+                        a.status, 
+                        a.remarks 
+                     FROM attendance AS a INNER JOIN Students AS s ON a.student_id = s.id";
+
+            //da = new SqlDataAdapter("select id , student_id , status,remarks from attendance", con);
+            da = new SqlDataAdapter(query, con);
             ds = new DataSet();
             da.Fill(ds);
 
             student_attendance.DataSource= ds;
             student_attendance.DataBind();
-
         }
 
         void fill_presentCount()

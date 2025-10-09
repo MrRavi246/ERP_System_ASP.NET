@@ -373,14 +373,15 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
                                     Student Roll No</label>
-                                <%--<input type="text" class="form-control" id="studentRollNo" required>--%>
-                                <asp:TextBox ID="std_rollno" class="form-control" runat="server"></asp:TextBox>
+                                <div class="input-group">
+                                    <asp:TextBox ID="std_rollno" class="form-control" runat="server" placeholder="Enter roll number" onchange="clearStudentFields()"></asp:TextBox>
+                                    <asp:Button ID="btnGetStudent" runat="server" Text="Get Student" CssClass="btn btn-outline-primary" OnClick="GetStudentData_Click" UseSubmitBehavior="false" />
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
                                     Student Name</label>
-                                <%--<input type="text" class="form-control" id="studentName" required>--%>
-                                <asp:TextBox ID="std_name" class="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="std_name" class="form-control" runat="server" ReadOnly="true" placeholder="Auto-filled after getting student data"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
@@ -436,7 +437,7 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancel
                         </button>
-                        <asp:Button ID="btnAddFee" runat="server" Text="Add Fee Record" CssClass="btn btn-primary" OnClick="btnAddFee_Click" UseSubmitBehavior="false" />
+                        <asp:Button ID="btnAddFee" runat="server" Text="Add Fee Record" CssClass="btn btn-primary" OnClick="btnAddFee_Click" UseSubmitBehavior="false" OnClientClick="return validateBeforeSubmit();" />
                     </div>
                 </div>
             </div>
@@ -549,6 +550,28 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link href="../../assets/css/common.css" rel="stylesheet">
+        
+        <script>
+            function clearStudentFields() {
+                // Clear student name and department when roll number changes
+                document.getElementById('<%= std_name.ClientID %>').value = '';
+                var deptDropdown = document.getElementById('<%= list_department_2.ClientID %>');
+                if (deptDropdown) {
+                    deptDropdown.selectedIndex = 0;
+                }
+            }
+            
+            function validateBeforeSubmit() {
+                var rollNo = document.getElementById('<%= std_rollno.ClientID %>').value.trim();
+                var studentName = document.getElementById('<%= std_name.ClientID %>').value.trim();
+                
+                if (rollNo && !studentName) {
+                    alert('Please click "Get Student" button first to fetch student details!');
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
 </asp:Content>
 

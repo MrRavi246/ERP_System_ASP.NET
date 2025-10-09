@@ -23,6 +23,7 @@ namespace EduErp.pages.faculty
             getcon();
             fill_course();
             fill_exam_type();
+            
         }
 
         void getcon()
@@ -34,7 +35,7 @@ namespace EduErp.pages.faculty
         void fill_course()
         {
             getcon();
-            da = new SqlDataAdapter("select course_name from courses", con);
+            da = new SqlDataAdapter("select id,course_name from courses", con);
             ds = new DataSet();
             da.Fill(ds);
 
@@ -42,14 +43,18 @@ namespace EduErp.pages.faculty
 
             for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                course_exam.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                string Name = ds.Tables[0].Rows[i]["course_name"].ToString();
+                string courseId = ds.Tables[0].Rows[i]["id"].ToString();
+                //course_exam.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+
+                course_exam.Items.Add(new ListItem(Name, courseId));
             }
         }
 
         void fill_exam_type()
         {
             getcon();
-            da = new SqlDataAdapter("select name from exam_types", con);
+            da = new SqlDataAdapter("select id,name from exam_types", con);
             ds = new DataSet();
             da.Fill(ds);
 
@@ -57,12 +62,21 @@ namespace EduErp.pages.faculty
 
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                exam_type.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                string Name = ds.Tables[0].Rows[i]["name"].ToString();
+                string examTypeId = ds.Tables[0].Rows[i]["id"].ToString();
+                //exam_type.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+
+                exam_type.Items.Add(new ListItem(Name, examTypeId));
             }
         }
         protected void btnCreateExam_Click(object sender, EventArgs e)
         {
+            int course_id = Convert.ToInt32(course_exam.SelectedValue);
+            int course_type = Convert.ToInt32(exam_type.SelectedValue);
+            //string exam_date = exam_date.;
 
         }
+
+        
     }
 }

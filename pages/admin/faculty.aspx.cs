@@ -101,6 +101,8 @@ namespace EduErp.pages.admin
                 cmd = new SqlCommand("INSERT INTO faculty (user_id, employee_id, first_name,last_name, Phone, department_id, Designation, qualification, experience_years, address) "
                     + "Values('" + newUserId + "', 'FAC" + newUserId.ToString("000") + "','" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedIndex + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
                 cmd.ExecuteNonQuery();
+
+                fillgrid();
             }
         }
 
@@ -108,8 +110,17 @@ namespace EduErp.pages.admin
         {
             if (e.CommandName == "cmd_delete")
             {
-                int Id = Convert.ToInt32(e.CommandArgument);
-                ViewState["Id"] = Id;
+                int id = Convert.ToInt32(e.CommandArgument);
+                using (SqlConnection con = new SqlConnection(s))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM faculty WHERE id = @id", con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                fillgrid();
             }
         }
 

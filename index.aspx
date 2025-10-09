@@ -80,12 +80,13 @@
             </div>
         </div>
 
-        <script>
-            // Password toggle functionality
-            document.getElementById('togglePassword').addEventListener('click', function () {
-                const passwordField = document.getElementById('<%= txtpass.ClientID %>');
+    </body>
+    <script>
+        // Password toggle functionality
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('<%= txtpass.ClientID %>');
                 const toggleIcon = this.querySelector('i');
-                
+
                 if (passwordField.type === 'password') {
                     passwordField.type = 'text';
                     toggleIcon.classList.remove('fa-eye');
@@ -96,7 +97,7 @@
                     toggleIcon.classList.add('fa-eye');
                 }
             });
-        </script>
+    </script>
 </asp:Content>
 
 

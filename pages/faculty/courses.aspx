@@ -75,7 +75,7 @@
                                             Total Courses
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            5
+                                            <asp:Label ID="total_course" runat="server" Text="0"></asp:Label>
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -94,7 +94,7 @@
                                             Total Students
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            285
+                                            <asp:Label ID="totale_student" runat="server" Text="0"></asp:Label>
                                         </div>
                                     </div>
                                     <div class="col-auto">

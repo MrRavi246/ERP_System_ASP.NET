@@ -167,10 +167,36 @@ namespace EduErp.pages.admin
 
         protected void btnAddFee_Click(object sender, EventArgs e)
         {
-            string rollNo = std_rollno.Text;
-            string name = std_name.Text;
+            string rollNo = std_rollno.Text.Trim();
+            string name = std_name.Text.Trim();
             int feeTypeId = list_fee_type_2.SelectedIndex;
             int deptId = list_department_2.SelectedIndex;
+            
+            // Validation
+            if (string.IsNullOrEmpty(rollNo))
+            {
+                Response.Write("<script>alert('Please enter roll number!');</script>");
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(name))
+            {
+                Response.Write("<script>alert('Student name not found. Please click Get Student Data first!');</script>");
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(fee_amount.Text))
+            {
+                Response.Write("<script>alert('Please enter fee amount!');</script>");
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(fee_Duedata.Text))
+            {
+                Response.Write("<script>alert('Please select due date!');</script>");
+                return;
+            }
+
             int amount = int.Parse(fee_amount.Text);
             DateTime dueDate = DateTime.Parse(fee_Duedata.Text);
             string desc = fee_descripition.Text;
@@ -336,7 +362,6 @@ namespace EduErp.pages.admin
 
             getcon();
 
-            // Get student details with department name
             string getStudentQuery = @"SELECT s.id, s.first_name + ' ' + s.last_name as full_name, 
                                             s.year_level, d.name as department_name, s.phone, s.address
                                      FROM students s 
@@ -353,7 +378,7 @@ namespace EduErp.pages.admin
                 var row = ds.Tables[0].Rows[0];
                 std_name.Text = row["full_name"].ToString();
                 
-                // Set department dropdown
+
                 string deptName = row["department_name"].ToString();
                 for (int i = 0; i < list_department_2.Items.Count; i++)
                 {

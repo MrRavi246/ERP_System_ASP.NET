@@ -20,6 +20,11 @@ namespace EduErp.pages.faculty
         SqlCommand cmd;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserId"] == null)
+            {
+                Response.Redirect("~/index.aspx");
+            }
+
             getcon();
             filldepartment();
             filldesignation();

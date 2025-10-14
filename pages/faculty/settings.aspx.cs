@@ -11,6 +11,10 @@ namespace EduErp.pages.faculty
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserId"] == null)
+            {
+                Response.Redirect("~/index.aspx");
+            }
 
         }
     }

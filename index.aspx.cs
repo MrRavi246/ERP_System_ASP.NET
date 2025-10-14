@@ -21,7 +21,24 @@ namespace EduErp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Check if the user is ALREADY logged in.
+            if (Session["UserId"] != null)
+            {
+                // If they are, redirect them to their respective dashboard.
+                string userRole = Session["UserRole"].ToString();
+                if (userRole == "admin")
+                {
+                    Response.Redirect("~/pages/admin/dashboard.aspx");
+                }
+                else if (userRole == "faculty")
+                {
+                    Response.Redirect("~/pages/faculty/dashboard.aspx");
+                }
+                else if (userRole == "student")
+                {
+                    Response.Redirect("~/pages/student/dashboard.aspx");
+                }
+            }
         }
 
         void getcon()

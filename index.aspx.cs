@@ -35,7 +35,6 @@ namespace EduErp
             string email = txtemail.Text;
             string password = txtpass.Text;
 
-            // Basic validation
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 Response.Write("<script>alert('Please enter both email and password!');</script>");
@@ -44,7 +43,6 @@ namespace EduErp
 
             getcon();
 
-            // Check if user exists and is active
             string query = "SELECT id, role, password_hash FROM users WHERE email = '" + email + "' AND is_active = 1";
             cmd = new SqlCommand(query, con);
             da = new SqlDataAdapter(cmd);
@@ -57,22 +55,18 @@ namespace EduErp
                 string userRole = ds.Tables[0].Rows[0]["role"].ToString();
                 int userId = Convert.ToInt32(ds.Tables[0].Rows[0]["id"]);
 
-                // Simple password check (you can enhance this with proper hashing)
                 if (password == dbPassword || dbPassword.Contains(password))
                 {
-                    // Update last login time
                     string updateQuery = "UPDATE users SET last_login = GETDATE() WHERE id = " + userId;
                     cmd = new SqlCommand(updateQuery, con);
                     cmd.ExecuteNonQuery();
 
-                    // Store user info in session
                     Session["UserId"] = userId;
                     Session["UserEmail"] = email;
                     Session["UserRole"] = userRole;
 
                     Response.Write("<script>alert('Login successful! Welcome " + userRole + "!');</script>");
 
-                    // Redirect based on role
                     if (userRole == "admin")
                     {
                         Response.Redirect("pages/admin/dashboard.aspx");
@@ -98,7 +92,6 @@ namespace EduErp
 
             con.Close();
 
-            // Clear password field for security
             txtpass.Text = "";
         }
     }

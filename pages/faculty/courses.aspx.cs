@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CrystalDecisions.Shared;
+using System.IO;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace EduErp.pages.faculty
 {
@@ -17,6 +20,10 @@ namespace EduErp.pages.faculty
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string Crypath = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserId"] == null)
@@ -51,6 +58,25 @@ namespace EduErp.pages.faculty
             ds = new DataSet();
             da.Fill(ds);
             totale_student.Text = ds.Tables[0].Rows[0][0].ToString();
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from courses", con);
+            ds = new DataSet();
+            da.Fill(ds);
+
+
+            string path = Server.MapPath("~/pages/faculty/course_CrystalReport1.rpt");
+
+            cr.Load(path);
+
+            cr.SetDataSource(ds.Tables[0]);
+            cr.Refresh();
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "User_Report");
+
+
         }
     }
 }

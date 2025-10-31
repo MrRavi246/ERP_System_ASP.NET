@@ -331,7 +331,7 @@
                                     <label for="noticeExpiry" class="form-label">
                                         Expiry Date (Optional)</label>
                                     <%--<input type="date" class="form-control" id="noticeExpiry">--%>
-                                    <asp:TextBox ID="expiry_date"  TextMode="Date" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="expiry_date"  class="form-control" TextMode="Date" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </form>

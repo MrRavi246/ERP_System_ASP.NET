@@ -64,6 +64,9 @@ namespace EduErp.pages.faculty
 
         void add_notice()
         {
+            getcon();
+            cmd = new SqlCommand("insert into notices (notice_title,priority,notice_content,target_audience,posted_on) values", con);
+
 
         }
     }

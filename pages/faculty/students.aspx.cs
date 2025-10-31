@@ -127,8 +127,6 @@ namespace EduErp.pages.faculty
             ddYear.SelectedIndex = 0;
 
             con.Close();
-
-
         }
     }
 }

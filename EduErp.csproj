@@ -390,6 +390,12 @@
     <Compile Include="pages\faculty\notices.Master.designer.cs">
       <DependentUpon>notices.Master</DependentUpon>
     </Compile>
+    <Compile Include="pages\faculty\notice_rpt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>notice_rpt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\faculty\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -661,6 +667,10 @@
     <EmbeddedResource Include="pages\faculty\examdata.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>examdata.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\faculty\notice_rpt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>notice_rpt.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

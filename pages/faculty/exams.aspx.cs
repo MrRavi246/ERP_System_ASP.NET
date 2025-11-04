@@ -95,12 +95,13 @@ namespace EduErp.pages.faculty
         //    string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/data.xml";
         //    ds.WriteXmlSchema(xml);
 
-        //    string path = Server.MapPath("G:/Collage/Sem-V/ERP_System_ASPNET/pages/facultyexamdata.rpt");
-        //    cr.Load(Crypath);
+        //    path = Server.MapPath("examdata.rpt");
+        //    cr.Load(path);
         //    cr.SetDataSource(ds);
         //    cr.Database.Tables[0].SetDataSource(ds);
         //    cr.Refresh();
         //    CrystalReportViewer1.ReportSource = cr;
+        //    cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "examdata");
         //}
 
         protected void crsytl_Click(object sender, EventArgs e)
@@ -112,13 +113,7 @@ namespace EduErp.pages.faculty
             string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/data.xml";
             ds.WriteXmlSchema(xml);
 
-            //path = Server.MapPath("G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/examdata.rpt");
             path = Server.MapPath("examdata.rpt");
-            //cr.Load(Crypath);
-            //cr.SetDataSource(ds.Tables[0]);
-            //cr.Refresh();
-            //CrystalReportViewer1.ReportSource = cr;
-
             cr.Load(path);
             cr.SetDataSource(ds);
             cr.Database.Tables[0].SetDataSource(ds);

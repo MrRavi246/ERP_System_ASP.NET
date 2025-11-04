@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using CrystalDecisions.Web;
 
 namespace EduErp.pages.faculty
 {
@@ -17,6 +20,9 @@ namespace EduErp.pages.faculty
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string path = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserId"] == null)
@@ -68,6 +74,24 @@ namespace EduErp.pages.faculty
             cmd = new SqlCommand("insert into notices (notice_title,priority,notice_content,target_audience,posted_on) values", con);
 
 
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from notices", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/notices.xml";
+            ds.WriteXmlSchema(xml);
+
+            path = Server.MapPath("notice_rpt.rpt");
+            cr.Load(path);
+            cr.SetDataSource(ds);
+            cr.Database.Tables[0].SetDataSource(ds);
+            cr.Refresh();
+            CrystalReportViewer1.ReportSource = cr;
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "Notices");
         }
     }
 }

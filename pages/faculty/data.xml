@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:int" minOccurs="0" />
+              <xs:element name="course_id" type="xs:int" minOccurs="0" />
+              <xs:element name="exam_type_id" type="xs:int" minOccurs="0" />
+              <xs:element name="exam_name" type="xs:string" minOccurs="0" />
+              <xs:element name="exam_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="start_time" type="xs:duration" minOccurs="0" />
+              <xs:element name="end_time" type="xs:duration" minOccurs="0" />
+              <xs:element name="total_marks" type="xs:int" minOccurs="0" />
+              <xs:element name="passing_marks" type="xs:int" minOccurs="0" />
+              <xs:element name="room_number" type="xs:string" minOccurs="0" />
+              <xs:element name="academic_year" type="xs:string" minOccurs="0" />
+              <xs:element name="semester" type="xs:string" minOccurs="0" />
+              <xs:element name="instructions" type="xs:string" minOccurs="0" />
+              <xs:element name="created_by" type="xs:int" minOccurs="0" />
+              <xs:element name="created_at" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

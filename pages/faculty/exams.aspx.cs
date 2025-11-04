@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace EduErp.pages.faculty
 {
@@ -17,6 +19,8 @@ namespace EduErp.pages.faculty
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string path = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -82,6 +86,45 @@ namespace EduErp.pages.faculty
 
         }
 
-        
+        //protected void LinkButton1_Click(object sender, EventArgs e)
+        //{
+        //    getcon();
+        //    da = new SqlDataAdapter("select * from exams", con);
+        //    ds = new DataSet();
+        //    da.Fill(ds);
+        //    string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/data.xml";
+        //    ds.WriteXmlSchema(xml);
+
+        //    string path = Server.MapPath("G:/Collage/Sem-V/ERP_System_ASPNET/pages/facultyexamdata.rpt");
+        //    cr.Load(Crypath);
+        //    cr.SetDataSource(ds);
+        //    cr.Database.Tables[0].SetDataSource(ds);
+        //    cr.Refresh();
+        //    CrystalReportViewer1.ReportSource = cr;
+        //}
+
+        protected void crsytl_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from exams", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/data.xml";
+            ds.WriteXmlSchema(xml);
+
+            //path = Server.MapPath("G:/Collage/Sem-V/ERP_System_ASPNET/pages/faculty/examdata.rpt");
+            path = Server.MapPath("examdata.rpt");
+            //cr.Load(Crypath);
+            //cr.SetDataSource(ds.Tables[0]);
+            //cr.Refresh();
+            //CrystalReportViewer1.ReportSource = cr;
+
+            cr.Load(path);
+            cr.SetDataSource(ds);
+            cr.Database.Tables[0].SetDataSource(ds);
+            cr.Refresh();
+            CrystalReportViewer1.ReportSource = cr;
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "examdata");
+        }
     }
 }

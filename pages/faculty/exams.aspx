@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/pages/faculty/exams.Master" AutoEventWireup="true" CodeBehind="exams.aspx.cs" Inherits="EduErp.pages.faculty.exam" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -44,14 +46,16 @@
                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createExamModal">
                                 <i class="fas fa-plus me-1"></i>Create Exam
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                <i class="fas fa-download me-1"></i>Export
-                            </button>
+                            <%--<button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download me-1"></i>Export
+                                </button>--%>
+                            <%--<asp:LinkButton ID="LinkButton1" class="btn btn-sm btn-outline-secondary" runat="server" OnClick="LinkButton1_Click"><i class="fas fa-download me-1"></i>Export</asp:LinkButton>--%>
+                            <asp:Button ID="crsytl" runat="server" class="btn btn-sm btn-outline-secondary" Text="Export" OnClick="crsytl_Click" />
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                         </div>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user me-1"></i>Faculty
-                            </button>
+                                <i class="fas fa-user me-1"></i>Faculty</button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
                                 <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
@@ -235,7 +239,7 @@
                         </div>
                     </div>
 
-                   
+
 
                     <!-- Ongoing Exams -->
                     <div class="tab-pane fade" id="ongoing" role="tabpanel">
@@ -321,99 +325,100 @@
         </div>
     </div>
 
+    <%-----------------------------------------------%>
+
+    <div class="modal fade" id="createExamModal" tabindex="-1" aria-labelledby="createExamModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createExamModalLabel">Create New Exam</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="examCourse" class="form-label">
+                                Course</label>
+                            <%--       <select class="form-select" id="examCourse" required>
+                            <option value="">Select Course</option>
+                            <option value="math">Advanced Mathematics</option>
+                            <option value="physics">Quantum Physics</option>
+                            <option value="cs">Data Structures</option>
+                            <option value="ml">Machine Learning</option>
+                            <option value="db">Database Systems</option>
+                        </select>--%>
+                            <asp:DropDownList ID="course_exam" class="form-select" runat="server"></asp:DropDownList>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="examType" class="form-label">
+                                Exam Type</label>
+                            <%--<select class="form-select" id="examType" required>
+                            <option value="">Select Type</option>
+                            <option value="midterm">Midterm</option>
+                            <option value="final">Final</option>
+                            <option value="quiz">Quiz</option>
+                            <option value="assignment">Assignment</option>
+                        </select>--%>
+
+                            <asp:DropDownList ID="exam_type" class="form-select" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="examDate" class="form-label">
+                                Exam Date</label>
+                            <%--<input type="date" class="form-control" id="examDate" required>--%>
+                            <asp:TextBox ID="exam_date" class="form-control" runat="server" TextMode="Date"></asp:TextBox>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="examTime" class="form-label">
+                                Exam Time</label>
+                            <%--<input type="time" class="form-control" id="examTime" required>--%>
+                            <asp:TextBox ID="exam_time" class="form-control" runat="server" TextMode="Time"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="examDuration" class="form-label">
+                                Duration (hours)</label>
+                            <%--<input type="number" class="form-control" id="examDuration" min="1" max="5" required>--%>
+                            <asp:TextBox ID="exam_duration" class="form-control" runat="server" TextMode="Number" MaxLength="5"></asp:TextBox>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="examRoom" class="form-label">
+                                Room</label>
+                            <%--<input type="text" class="form-control" id="examRoom" placeholder="e.g., Hall A-101" required>--%>
+                            <asp:TextBox ID="exam_room" class="form-control" runat="server" MaxLength="20" Placeholder="e.g., Hall A-101"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="examInstructions" class="form-label">
+                            Instructions</label>
+                        <%--<textarea class="form-control" id="examInstructions" rows="3" placeholder="Enter exam instructions..."></textarea>--%>
+                        <asp:TextBox ID="exam_instructions" class="form-control" runat="server" TextMode="MultiLine" Rows="3" Placeholder="Enter exam instructions..."></asp:TextBox>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <%--<button type="button" class="btn btn-primary">
+                    Create Exam
+                </button>--%>
+                    <asp:Button ID="create_exam" CssClass="btn btn-primary" runat="server" Text="Create Exam" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/common.js"></script>
+
 </asp:Content>
 
 
 <asp:Content ID="Content4" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">
-    <form runat="server">
-        <div class="modal fade" id="createExamModal" tabindex="-1" aria-labelledby="createExamModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createExamModalLabel">Create New Exam</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="examCourse" class="form-label">
-                                    Course</label>
-                                <%--       <select class="form-select" id="examCourse" required>
-                                    <option value="">Select Course</option>
-                                    <option value="math">Advanced Mathematics</option>
-                                    <option value="physics">Quantum Physics</option>
-                                    <option value="cs">Data Structures</option>
-                                    <option value="ml">Machine Learning</option>
-                                    <option value="db">Database Systems</option>
-                                </select>--%>
-                                <asp:DropDownList ID="course_exam" class="form-select" runat="server"></asp:DropDownList>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="examType" class="form-label">
-                                    Exam Type</label>
-                                <%--<select class="form-select" id="examType" required>
-                                    <option value="">Select Type</option>
-                                    <option value="midterm">Midterm</option>
-                                    <option value="final">Final</option>
-                                    <option value="quiz">Quiz</option>
-                                    <option value="assignment">Assignment</option>
-                                </select>--%>
-
-                                <asp:DropDownList ID="exam_type" class="form-select" runat="server"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="examDate" class="form-label">
-                                    Exam Date</label>
-                                <%--<input type="date" class="form-control" id="examDate" required>--%>
-                                <asp:TextBox ID="exam_date" class="form-control" runat="server" TextMode="Date"></asp:TextBox>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="examTime" class="form-label">
-                                    Exam Time</label>
-                                <%--<input type="time" class="form-control" id="examTime" required>--%>
-                                <asp:TextBox ID="exam_time" class="form-control" runat="server" TextMode="Time"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="examDuration" class="form-label">
-                                    Duration (hours)</label>
-                                <%--<input type="number" class="form-control" id="examDuration" min="1" max="5" required>--%>
-                                <asp:TextBox ID="exam_duration" class="form-control" runat="server" TextMode="Number" MaxLength="5"></asp:TextBox>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="examRoom" class="form-label">
-                                    Room</label>
-                                <%--<input type="text" class="form-control" id="examRoom" placeholder="e.g., Hall A-101" required>--%>
-                                <asp:TextBox ID="exam_room" class="form-control" runat="server" MaxLength="20" Placeholder="e.g., Hall A-101"></asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="examInstructions" class="form-label">
-                                Instructions</label>
-                            <%--<textarea class="form-control" id="examInstructions" rows="3" placeholder="Enter exam instructions..."></textarea>--%>
-                            <asp:TextBox ID="exam_instructions" class="form-control" runat="server" TextMode="MultiLine" Rows="3" Placeholder="Enter exam instructions..."></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <%--<button type="button" class="btn btn-primary">
-                            Create Exam
-                        </button>--%>
-                        <asp:Button ID="create_exam" CssClass="btn btn-primary" runat="server" Text="Create Exam" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../../assets/js/common.js"></script>
-    </form>
 </asp:Content>
 
 

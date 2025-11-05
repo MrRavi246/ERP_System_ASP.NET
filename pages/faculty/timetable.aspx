@@ -1,4 +1,347 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/pages/faculty/timetable.Master" AutoEventWireup="true" CodeBehind="timetable.aspx.cs" Inherits="EduErp.pages.faculty.timetable1" %>
+
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
+<asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
+    <form runat="server">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Mobile Navigation Toggle -->
+                <button class="mobile-nav-toggle d-md-none" type="button">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Sidebar Overlay -->
+                <div class="sidebar-overlay">
+                </div>
+                <!-- Sidebar -->
+                <div class="col-md-3 col-lg-2 px-0">
+                    <div class="sidebar bg-white border-end p-3">
+                        <div class="text-center mb-4">
+                            <h4 class="text-primary fw-bold">College ERP</h4>
+                            <p class="text-muted small">
+                                Faculty Dashboard
+                            </p>
+                        </div>
+                        <nav class="nav flex-column">
+                            <a class="nav-link text-dark" href="dashboard.aspx"><i class="fas fa-tachometer-alt me-2 text-primary"></i>Dashboard </a><a class="nav-link text-dark" href="courses.aspx"><i class="fas fa-book me-2 text-primary"></i>My Courses </a><a class="nav-link text-dark" href="attendance.aspx"><i class="fas fa-calendar-check me-2 text-primary"></i>Attendance </a><a class="nav-link active" href="timetable.aspx"><i class="fas fa-clock me-2 text-primary"></i>My Timetable </a><a class="nav-link text-dark" href="exams.aspx"><i class="fas fa-file-alt me-2 text-primary"></i>Exams </a><a class="nav-link text-dark" href="students.aspx"><i class="fas fa-users me-2 text-primary"></i>My Students </a><a class="nav-link text-dark" href="notices.aspx"><i class="fas fa-bullhorn me-2 text-primary"></i>Notices </a><a class="nav-link text-dark" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Edit Profile </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-md-9 col-lg-10 main-content">
+                    <!-- Top Navigation -->
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <div>
+                            <h1 class="h2">My Timetable</h1>
+                            <p class="text-muted">
+                                View your weekly teaching schedule
+                            </p>
+                        </div>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <%--<button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download me-1"></i>Export
+                                </button>--%>
+                                <asp:Button ID="Button1" runat="server" Text="Export"  class="btn btn-sm btn-outline-secondary" OnClick="Button1_Click"/>
+
+                                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
+                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-print me-1"></i>Print</button>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user me-1"></i>Faculty
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="settings.aspx"><i class="fas fa-cog me-2 text-primary"></i>Settings</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="../../index.aspx"><i class="fas fa-sign-out-alt me-2 text-primary"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">18</h5>
+                                    <p class="card-text text-muted">
+                                        Weekly Hours
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">5</h5>
+                                    <p class="card-text text-muted">
+                                        Courses
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">285</h5>
+                                    <p class="card-text text-muted">
+                                        Total Students
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Next Class</h5>
+                                    <p class="card-text text-muted">
+                                        2:00 PM Today
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timetable -->
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0"><i class="fas fa-calendar-week me-2 text-primary"></i>Weekly Schedule </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="time-header" style="width: 12%;">Time</th>
+                                            <th class="day-header">Monday</th>
+                                            <th class="day-header">Tuesday</th>
+                                            <th class="day-header">Wednesday</th>
+                                            <th class="day-header">Thursday</th>
+                                            <th class="day-header">Friday</th>
+                                            <th class="day-header">Saturday</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="time-header">9:00 - 10:00</td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block ml" onclick="showClassDetails('ML', '9:00 - 11:00', 'Room 301')">
+                                                    <strong>Machine Learning</strong><br>
+                                                    <small>CS-501 | Room 301</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block ml" onclick="showClassDetails('ML', '9:00 - 11:00', 'Room 301')">
+                                                    <strong>Machine Learning</strong><br>
+                                                    <small>CS-501 | Room 301</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-header">10:00 - 11:00</td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block math" onclick="showClassDetails('Advanced Math', '10:00 - 11:00', 'Room 201')">
+                                                    <strong>Advanced Math</strong><br>
+                                                    <small>MATH-301 | Room 201</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block ml" onclick="showClassDetails('ML', '9:00 - 11:00', 'Room 301')">
+                                                    <strong>Machine Learning</strong><br>
+                                                    <small>CS-501 | Room 301</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block math" onclick="showClassDetails('Advanced Math', '10:00 - 11:00', 'Room 201')">
+                                                    <strong>Advanced Math</strong><br>
+                                                    <small>MATH-301 | Room 201</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block ml" onclick="showClassDetails('ML', '9:00 - 11:00', 'Room 301')">
+                                                    <strong>Machine Learning</strong><br>
+                                                    <small>CS-501 | Room 301</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block math" onclick="showClassDetails('Advanced Math', '10:00 - 11:00', 'Room 201')">
+                                                    <strong>Advanced Math</strong><br>
+                                                    <small>MATH-301 | Room 201</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-header">11:00 - 12:00</td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block cs" onclick="showClassDetails('Data Structures', '11:00 - 12:00', 'Lab 101')">
+                                                    <strong>Data Structures</strong><br>
+                                                    <small>CS-201 | Lab 101</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block cs" onclick="showClassDetails('Data Structures', '11:00 - 12:00', 'Lab 101')">
+                                                    <strong>Data Structures</strong><br>
+                                                    <small>CS-201 | Lab 101</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block cs" onclick="showClassDetails('Data Structures', '11:00 - 12:00', 'Lab 101')">
+                                                    <strong>Data Structures</strong><br>
+                                                    <small>CS-201 | Lab 101</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-header">12:00 - 1:00</td>
+                                            <td class="timetable-cell bg-light text-center"><small class="text-muted">LUNCH BREAK</small> </td>
+                                            <td class="timetable-cell bg-light text-center"><small class="text-muted">LUNCH BREAK</small> </td>
+                                            <td class="timetable-cell bg-light text-center"><small class="text-muted">LUNCH BREAK</small> </td>
+                                            <td class="timetable-cell bg-light text-center"><small class="text-muted">LUNCH BREAK</small> </td>
+                                            <td class="timetable-cell bg-light text-center"><small class="text-muted">LUNCH BREAK</small> </td>
+                                            <td class="timetable-cell bg-light text-center"><small class="text-muted">LUNCH BREAK</small> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-header">2:00 - 3:00</td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block physics" onclick="showClassDetails('Quantum Physics', '2:00 - 4:00', 'Room 401')">
+                                                    <strong>Quantum Physics</strong><br>
+                                                    <small>PHYS-401 | Room 401</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block physics" onclick="showClassDetails('Quantum Physics', '2:00 - 4:00', 'Room 401')">
+                                                    <strong>Quantum Physics</strong><br>
+                                                    <small>PHYS-401 | Room 401</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-header">3:00 - 4:00</td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block db" onclick="showClassDetails('Database Systems', '3:00 - 4:00', 'Lab 201')">
+                                                    <strong>Database Systems</strong><br>
+                                                    <small>CS-301 | Lab 201</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block physics" onclick="showClassDetails('Quantum Physics', '2:00 - 4:00', 'Room 401')">
+                                                    <strong>Quantum Physics</strong><br>
+                                                    <small>PHYS-401 | Room 401</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block db" onclick="showClassDetails('Database Systems', '3:00 - 4:00', 'Lab 201')">
+                                                    <strong>Database Systems</strong><br>
+                                                    <small>CS-301 | Lab 201</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block physics" onclick="showClassDetails('Quantum Physics', '2:00 - 4:00', 'Room 401')">
+                                                    <strong>Quantum Physics</strong><br>
+                                                    <small>PHYS-401 | Room 401</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell">
+                                                <div class="class-block db" onclick="showClassDetails('Database Systems', '3:00 - 4:00', 'Lab 201')">
+                                                    <strong>Database Systems</strong><br>
+                                                    <small>CS-301 | Lab 201</small>
+                                                </div>
+                                            </td>
+                                            <td class="timetable-cell"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-header">4:00 - 5:00</td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                            <td class="timetable-cell"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Classes -->
+                    <div class="row mt-4">
+                        <div class="col-lg-6">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-clock me-2 text-primary"></i>Upcoming Classes Today </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group list-group-flush">
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="my-0">Quantum Physics</h6>
+                                                <small class="text-muted">PHYS-401 | Room 401</small>
+                                            </div>
+                                            <span class="badge bg-primary">2:00 PM</span>
+                                        </div>
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="my-0">Database Systems</h6>
+                                                <small class="text-muted">CS-301 | Lab 201</small>
+                                            </div>
+                                            <span class="badge bg-success">3:00 PM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-exclamation-triangle me-2 text-primary"></i>Reminders </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group list-group-flush">
+                                        <div class="list-group-item">
+                                            <h6 class="my-0">Prepare ML Assignment</h6>
+                                            <small class="text-muted">Due: Tomorrow</small>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <h6 class="my-0">Faculty Meeting</h6>
+                                            <small class="text-muted">Tomorrow 4:00 PM</small>
+                                        </div>
+                                        <div class="list-group-item">
+                                            <h6 class="my-0">Submit Grades</h6>
+                                            <small class="text-muted">Due: End of week</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</asp:Content>
+
 

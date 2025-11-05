@@ -351,6 +351,12 @@
     <Compile Include="pages\faculty\dashboard.Master.designer.cs">
       <DependentUpon>dashboard.Master</DependentUpon>
     </Compile>
+    <Compile Include="pages\faculty\dashboardReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dashboardReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\faculty\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -451,6 +457,12 @@
     </Compile>
     <Compile Include="pages\faculty\timetable.Master.designer.cs">
       <DependentUpon>timetable.Master</DependentUpon>
+    </Compile>
+    <Compile Include="pages\faculty\timeTableReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>timeTableReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="pages\student\attendance.aspx.cs">
       <DependentUpon>attendance.aspx</DependentUpon>
@@ -664,6 +676,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>course_CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\faculty\dashboardReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>dashboardReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\faculty\examdata.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>examdata.cs</LastGenOutput>
@@ -671,6 +687,10 @@
     <EmbeddedResource Include="pages\faculty\notice_rpt.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>notice_rpt.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\faculty\timeTableReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>timeTableReport.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

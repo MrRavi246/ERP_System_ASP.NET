@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using CrystalDecisions.Web;
 
 namespace EduErp.pages.admin
 {
@@ -17,6 +20,10 @@ namespace EduErp.pages.admin
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string path = "";
+
 
         protected string TotalStudents { get; set; }
         protected string TotalFaculty { get; set; }
@@ -143,6 +150,25 @@ namespace EduErp.pages.admin
                 return (int)timeDiff.TotalHours + " hours ago";
             else
                 return (int)timeDiff.TotalDays + " days ago";
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from users", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/admin/AdminDashboardData.xml";
+            ds.WriteXmlSchema(xml);
+
+
+            path = Server.MapPath("AdminDashboardData.rpt");
+            cr.Load(path);
+            cr.SetDataSource(ds);
+            cr.Database.Tables[0].SetDataSource(ds);
+            cr.Refresh();
+            CrystalReportViewer1.ReportSource = cr;
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "Dashboard_Data");
         }
     }
 }

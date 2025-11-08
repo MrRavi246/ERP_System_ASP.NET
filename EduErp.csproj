@@ -121,6 +121,30 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\admin\AdminDashboardData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminDashboardData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\admin\AdminFeeData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminFeeData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\admin\AdminNoticeData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminNoticeData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="pages\admin\AdminReportData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminReportData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="pages\admin\attendance.aspx.cs">
       <DependentUpon>attendance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -672,6 +696,22 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="pages\admin\AdminDashboardData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AdminDashboardData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\admin\AdminFeeData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AdminFeeData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\admin\AdminNoticeData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AdminNoticeData.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\admin\AdminReportData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AdminReportData.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\faculty\course_CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>course_CrystalReport1.cs</LastGenOutput>

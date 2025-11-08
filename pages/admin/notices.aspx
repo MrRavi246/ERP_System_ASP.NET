@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/pages/admin/notices.Master" AutoEventWireup="true" CodeBehind="notices.aspx.cs" Inherits="EduErp.pages.admin.notices1" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -44,9 +46,12 @@
                             <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#addNoticeModal">
                                 <i class="fas fa-plus me-1"></i>Add Notice
                             </button>
-                            <button class="btn btn-outline-secondary">
+                            <%--<button class="btn btn-outline-secondary">
                                 <i class="fas fa-download me-1"></i>Export
-                            </button>
+                            </button>--%>
+
+                            <asp:Button ID="Button1" runat="server" Text="Export" class="btn btn-outline-secondary" OnClick="Button1_Click"/>
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                         </div>
                     </div>
 

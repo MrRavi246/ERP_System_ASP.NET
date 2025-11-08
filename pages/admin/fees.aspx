@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/pages/admin/fees.Master" AutoEventWireup="true" CodeBehind="fees.aspx.cs" Inherits="EduErp.pages.admin.fees1" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -48,9 +50,12 @@
                             <button type="button" class="btn btn-success btn-mobile" data-bs-toggle="modal" data-bs-target="#paymentModal">
                                 <i class="fas fa-credit-card me-1"></i>Make Payment
                             </button>
-                            <button class="btn btn-outline-secondary btn-mobile">
+                            <%--<button class="btn btn-outline-secondary btn-mobile">
                                 <i class="fas fa-download me-1"></i>Export
-                            </button>
+                            </button>--%>
+
+                            <asp:Button ID="Button1" runat="server" Text="Export" class="btn btn-outline-secondary btn-mobile" OnClick="Button1_Click"/>
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />                            
                         </div>
                     </div>
 

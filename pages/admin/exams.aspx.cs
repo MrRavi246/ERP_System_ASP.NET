@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace EduErp.pages.admin
 {
@@ -17,6 +18,9 @@ namespace EduErp.pages.admin
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string path = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             getcon();
@@ -77,6 +81,16 @@ namespace EduErp.pages.admin
                 txt_department.Items.Add(ds.Tables[0].Rows[i][0].ToString());
                 txt_department_2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
             }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from exams", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/admin/AdminExamData.xml";
+            ds.WriteXmlSchema(xml);
         }
     }
 }

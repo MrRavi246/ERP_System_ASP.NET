@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/pages/admin/reports.Master" AutoEventWireup="true" CodeBehind="reports.aspx.cs" Inherits="EduErp.pages.admin.reports1" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -44,12 +46,13 @@
                             <button class="btn btn-primary me-2" onclick="generateReport()">
                                 <i class="fas fa-file-alt me-1"></i>Generate Report
                             </button>
-                            <button class="btn btn-success me-2" onclick="exportData()">
+                            <%--<button class="btn btn-success me-2" onclick="exportData()">
                                 <i class="fas fa-download me-1"></i>Export Data
-                            </button>
+                            </button>--%>
+                            <asp:Button ID="Button1" class="btn btn-success me-2" runat="server" Text="Export Data" OnClick="Button1_Click" />
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                             <button class="btn btn-outline-secondary" onclick="printReport()">
-                                <i class="fas fa-print me-1"></i>Print
-                            </button>
+                                <i class="fas fa-print me-1"></i>Print</button>
                         </div>
                     </div>
 
@@ -62,7 +65,7 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="reportType" id="attendanceReport" value="attendance" checked>
+                                                <input class="form-check-input" type="radio" name="reportType" id="attendanceReport" value="attendance" >
                                                 <label class="form-check-label" for="attendanceReport">
                                                     <i class="fas fa-calendar-check me-2 text-primary"></i>Attendance Report
                                                 </label>
@@ -78,7 +81,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="reportType" id="resultsReport" value="results">
+                                                <input class="form-check-input" type="radio" name="reportType" id="resultsReport" value="results" checked>
                                                 <label class="form-check-label" for="resultsReport">
                                                     <i class="fas fa-chart-line me-2 text-primary"></i>Results Report
                                                 </label>

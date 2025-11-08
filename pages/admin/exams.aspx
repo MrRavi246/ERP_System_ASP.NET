@@ -1,10 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/pages/admin/exams.Master" AutoEventWireup="true" CodeBehind="exams.aspx.cs" Inherits="EduErp.pages.admin.exams1" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
-    <form runat="server">
+    <%--<form runat="server">--%>
         <div class="container-fluid">
             <div class="row">
                 <!-- Mobile Navigation Toggle -->
@@ -47,9 +49,10 @@
                             <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#addResultModal">
                                 <i class="fas fa-plus me-1"></i>Add Result
                             </button>
-                            <button class="btn btn-outline-secondary">
+                            <%--<button class="btn btn-outline-secondary">
                                 <i class="fas fa-download me-1"></i>Export
-                            </button>
+                            </button>--%>
+                            <asp:Button ID="Button1" runat="server" Text="Export" class="btn btn-outline-secondary"/>
                         </div>
                     </div>
 
@@ -400,8 +403,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    <%--</form>--%>
 </asp:Content>
-
-
-

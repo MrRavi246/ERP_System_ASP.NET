@@ -21,6 +21,56 @@ namespace EduErp.pages.admin
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton add_schedule;
+    protected global::System.Web.UI.WebControls.Button add_schedule;
+
+        /// <summary>
+        /// timetableBody control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl timetableBody;
+
+    /// <summary>
+    /// pageMessage control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.Literal pageMessage;
+
+        /// <summary>
+        /// scheduleCourse control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList scheduleCourse;
+
+        /// <summary>
+        /// scheduleDay control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList scheduleDay;
+
+        /// <summary>
+        /// startTime control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox startTime;
+
+        /// <summary>
+        /// endTime control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox endTime;
+
+        /// <summary>
+        /// scheduleInstructor control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList scheduleInstructor;
+
+        /// <summary>
+        /// scheduleRoom control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox scheduleRoom;
+
+        /// <summary>
+        /// scheduleType control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList scheduleType;
+
+        /// <summary>
+        /// scheduleFrequency control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList scheduleFrequency;
     }
 }

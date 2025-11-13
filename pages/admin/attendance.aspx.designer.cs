@@ -22,5 +22,30 @@ namespace EduErp.pages.admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList course_attendance;
+        
+    /// <summary>
+    /// class_date control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.TextBox class_date;
+
+    /// <summary>
+    /// period_select control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.DropDownList period_select;
+
+    /// <summary>
+    /// btnLoadStudents control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.Button btnLoadStudents;
+
+    /// <summary>
+    /// studentAttendanceGrid control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.GridView studentAttendanceGrid;
+
+    /// <summary>
+    /// btnSaveAttendance control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.Button btnSaveAttendance;
     }
 }

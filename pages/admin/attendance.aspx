@@ -53,26 +53,16 @@
                                     <asp:DropDownList ID="course_attendance"  class="form-select" runat="server"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">
-                                        Select Date</label>
-                                    <input type="date" class="form-control" value="2024-01-15">
+                                    <label class="form-label">Select Date</label>
+                                    <asp:TextBox ID="class_date" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">
-                                        Class Period</label>
-                                    <select class="form-select">
-                                        <option>Period 1 (9:00-10:00)</option>
-                                        <option>Period 2 (10:00-11:00)</option>
-                                        <option>Period 3 (11:00-12:00)</option>
-                                        <option>Period 4 (12:00-1:00)</option>
-                                    </select>
+                                    <label class="form-label">Class Period</label>
+                                    <asp:DropDownList ID="period_select" runat="server" CssClass="form-select"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">
-                                        &nbsp;</label>
-                                    <button class="btn btn-outline-primary w-100">
-                                        <i class="fas fa-search me-2"></i>Load Students
-                                    </button>
+                                    <label class="form-label">&nbsp;</label>
+                                    <asp:Button ID="btnLoadStudents" runat="server" CssClass="btn btn-outline-primary w-100" Text="Load Students" OnClick="btnLoadStudents_Click" />
                                 </div>
                             </div>
                         </div>
@@ -85,77 +75,32 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Roll No</th>
-                                            <th>Student Name</th>
-                                            <th>Status</th>
-                                            <th class="text-center">Present</th>
-                                            <th class="text-center">Absent</th>
-                                            <th class="text-center">Late</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2021CS001</td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="Student">
-                                                    <span>John Doe</span>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-success">Present</span></td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_001" value="present" checked class="form-check-input">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_001" value="absent" class="form-check-input">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_001" value="late" class="form-check-input">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021CS002</td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="Student">
-                                                    <span>Jane Smith</span>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-danger">Absent</span></td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_002" value="present" class="form-check-input">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_002" value="absent" checked class="form-check-input">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_002" value="late" class="form-check-input">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021CS003</td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="Student">
-                                                    <span>Mike Johnson</span>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-warning">Late</span></td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_003" value="present" class="form-check-input">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_003" value="absent" class="form-check-input">
-                                            </td>
-                                            <td class="text-center">
-                                                <input type="radio" name="attendance_003" value="late" checked class="form-check-input">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <asp:GridView ID="studentAttendanceGrid" runat="server" CssClass="table table-hover" AutoGenerateColumns="false" DataKeyNames="student_id">
+                                    <Columns>
+                                        <asp:BoundField DataField="roll_no" HeaderText="Roll No" />
+                                        <asp:BoundField DataField="student_name" HeaderText="Student Name" />
+                                        <asp:TemplateField HeaderText="Status">
+                                            <ItemTemplate>
+                                                <span class="badge <%= ((string)Eval("current_status") == "Present") ? "bg-success" : (((string)Eval("current_status") == "Absent") ? "bg-danger" : (((string)Eval("current_status") == "Late") ? "bg-warning" : "bg-secondary")) %>" id="status_<%# Eval("student_id") %>"><%# Eval("current_status") %></span>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Present" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <input type="radio" name='<%# "att_" + Eval("student_id") %>' value="Present" class="form-check-input" <%# Eval("current_status").ToString() == "Present" ? "checked='checked'" : "" %> />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Absent" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <input type="radio" name='<%# "att_" + Eval("student_id") %>' value="Absent" class="form-check-input" <%# Eval("current_status").ToString() == "Absent" ? "checked='checked'" : "" %> />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Late" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <input type="radio" name='<%# "att_" + Eval("student_id") %>' value="Late" class="form-check-input" <%# Eval("current_status").ToString() == "Late" ? "checked='checked'" : "" %> />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
                             </div>
 
                             <!-- Attendance Summary -->
@@ -202,9 +147,7 @@
                                 </div>
                             </div>
                             <div class="text-end mt-4">
-                                <button class="btn btn-success">
-                                    <i class="fas fa-save me-2"></i>Save Attendance
-                                </button>
+                                <asp:Button ID="btnSaveAttendance" runat="server" CssClass="btn btn-success" Text="Save Attendance" OnClick="btnSaveAttendance_Click" />
                             </div>
                         </div>
                     </div>

@@ -2,24 +2,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .auto-style1 {
-            position: relative;
-            display: block;
-            font-size: var(--bs-pagination-font-size);
-            color: var(--bs-pagination-color);
-            text-decoration: none;
-            transition: none;
-            left: -1px;
-            top: 2px;
-            background-color: var(--bs-pagination-bg);
-        }
-
-        .auto-style2 {
-            margin-right: 0px;
-        }
-    </style>
-</asp:Content>
+    </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
     <form id="form1" runat="server">
@@ -89,114 +72,6 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Faculty ID</th>
-                                                <th>Name</th>
-                                                <th>Department</th>
-                                                <th>Designation</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>F001</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="Faculty">
-                                                        <div>
-                                                            <div class="fw-bold">
-                                                                Dr. Sarah Wilson
-                                                            </div>
-                                                            <small class="text-muted">Ph.D Computer Science</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Computer Science</td>
-                                                <td><span class="badge bg-primary">Professor</span></td>
-                                                <td>sarah.wilson@college.edu</td>
-                                                <td><span class="badge bg-success">Active</span></td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-primary" title="View">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-warning" title="Edit">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-danger" title="Delete">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>F002</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="Faculty">
-                                                        <div>
-                                                            <div class="fw-bold">
-                                                                Prof. Michael Brown
-                                                            </div>
-                                                            <small class="text-muted">M.Sc Mathematics</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Mathematics</td>
-                                                <td><span class="badge bg-info">Associate Professor</span></td>
-                                                <td>michael.brown@college.edu</td>
-                                                <td><span class="badge bg-success">Active</span></td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-primary" title="View">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-warning" title="Edit">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-danger" title="Delete">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>F003</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="Faculty">
-                                                        <div>
-                                                            <div class="fw-bold">
-                                                                Dr. Emily Davis
-                                                            </div>
-                                                            <small class="text-muted">Ph.D Physics</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>Physics</td>
-                                                <td><span class="badge bg-warning">Assistant Professor</span></td>
-                                                <td>emily.davis@college.edu</td>
-                                                <td><span class="badge bg-warning">On Leave</span></td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-primary" title="View">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-warning" title="Edit">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-danger" title="Delete">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
 
 
@@ -331,6 +206,21 @@
                                 <label class="form-label">
                                     Address</label>
                                 <asp:TextBox ID="faculty_address" runat="server" TextMode="MultiLine" Rows="3" class="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Hire Date</label>
+                                <asp:TextBox ID="hire_date" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Salary</label>
+                                <asp:TextBox ID="salary" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label">Profile Image (URL or path)</label>
+                                <asp:TextBox ID="profile_image" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <asp:CheckBox ID="is_active" runat="server" Checked="True" /> <label class="ms-2">Active</label>
                             </div>
                         </div>
 

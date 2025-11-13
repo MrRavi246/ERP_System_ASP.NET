@@ -57,7 +57,7 @@ namespace EduErp.pages.admin
         void filldesignation_catagory()
         {
             getcon();
-            da = new SqlDataAdapter("select name from designation", con);
+            da = new SqlDataAdapter("SELECT DISTINCT designation FROM faculty WHERE designation IS NOT NULL", con);
             ds = new DataSet();
             da.Fill(ds);
 
@@ -91,15 +91,25 @@ namespace EduErp.pages.admin
             {
                 string userQuery = "INSERT INTO users (email, password_hash, role, is_active) " +
                    "OUTPUT INSERTED.id " +
-                   "VALUES ('" + faculty_email.Text + "', '" + (faculty_fname.Text + faculty_experience.Text) + "', 'student', 1)";
+                   "VALUES ('" + faculty_email.Text + "', '" + (faculty_fname.Text + faculty_experience.Text) + "', 'faculty', 1)";
 
                 cmd = new SqlCommand(userQuery, con);
                 int newUserId = (int)cmd.ExecuteScalar();
 
 
                 getcon();
-                cmd = new SqlCommand("INSERT INTO faculty (user_id, employee_id, first_name,last_name, Phone, department_id, Designation, qualification, experience_years, address) "
-                    + "Values('" + newUserId + "', 'FAC" + newUserId.ToString("000") + "','" + faculty_fname.Text + "','" + faculty_lname.Text + "','" + faculty_phone.Text + "','" + department.SelectedIndex + "','" + designation.SelectedValue + "','" + Qualification.Text + "','" + faculty_experience.Text + "','" + faculty_address.Text + "')", con);
+
+                string hireDateValue = string.IsNullOrWhiteSpace(hire_date.Text) ? "NULL" : "'" + hire_date.Text + "'";
+                string salaryValue = salary.Text;
+                string profileImageValue = string.IsNullOrWhiteSpace(profile_image.Text) ? "NULL" : "'" + profile_image.Text.Replace("'", "''") + "'";
+                string isActiveValue = is_active.Checked ? "1" : "0";
+
+
+                string insertFaculty = "INSERT INTO faculty (user_id, employee_id, first_name, last_name, phone, department_id, designation, qualification, experience_years, address, hire_date, salary, profile_image, is_active) VALUES ("
+                    + "'" + newUserId + "', 'FAC" + newUserId.ToString("000") + "', '" + faculty_fname.Text.Replace("'", "''") + "', '" + faculty_lname.Text.Replace("'", "''") + "', '" + faculty_phone.Text.Replace("'", "''") + "', '" + department.SelectedIndex + "', '" + designation.SelectedValue.Replace("'", "''") + "', '" + Qualification.Text.Replace("'", "''") + "', '" + faculty_experience.Text + "', '" + faculty_address.Text.Replace("'", "''") + "', "
+                    + hireDateValue + ", " + salaryValue + ", " + profileImageValue + ", " + isActiveValue + ")";
+
+                cmd = new SqlCommand(insertFaculty, con);
                 cmd.ExecuteNonQuery();
 
                 fillgrid();
@@ -125,4 +135,4 @@ namespace EduErp.pages.admin
         }
 
     }
-}
+}   

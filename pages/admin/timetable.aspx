@@ -41,8 +41,11 @@
                                 View and manage class schedules
                             </p>
                         </div>
+                            <div>
+                                <asp:Literal ID="pageMessage" runat="server"></asp:Literal>
+                            </div>
                         <div class="btn-toolbar mb-2 mb-md-0">
-                            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#addScheduleModal">
+                            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#addScheduleModal">
                                 <i class="fas fa-plus me-2 text-primary"></i>Add Schedule
                             </button>
                             <button class="btn btn-outline-secondary" onclick="printTimetable()">
@@ -116,9 +119,9 @@
                                             <th class="timetable-header">Saturday</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="timetableBody">
-                                        <!-- Timetable rows will be populated by JavaScript -->
-                                    </tbody>
+                                            <tbody id="timetableBody" runat="server" ClientIDMode="Static">
+                                                <!-- Timetable rows will be populated on server side -->
+                                            </tbody>
                                 </table>
                             </div>
                         </div>
@@ -177,97 +180,83 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal">
                         </button>
                     </div>
-                    <div class="modal-body">
+                        <div class="modal-body">
+                        <div id="scheduleForm">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="scheduleCourse" class="form-label">
                                     Course *</label>
-                                <select class="form-select" id="scheduleCourse" required>
-                                    <option value="">Select Course</option>
-                                    <option value="CS101">CS101 - Introduction to Computer Science</option>
-                                    <option value="CS201">CS201 - Data Structures and Algorithms</option>
-                                    <option value="EN101">EN101 - Engineering Mechanics</option>
-                                    <option value="BU201">BU201 - Business Management</option>
-                                    <option value="AR101">AR101 - Introduction to Fine Arts</option>
-                                </select>
+                                <asp:DropDownList ID="scheduleCourse" runat="server" CssClass="form-select" ClientIDMode="Static"></asp:DropDownList>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="scheduleDay" class="form-label">
                                     Day *</label>
-                                <select class="form-select" id="scheduleDay" required>
-                                    <option value="">Select Day</option>
-                                    <option value="Monday">Monday</option>
-                                    <option value="Tuesday">Tuesday</option>
-                                    <option value="Wednesday">Wednesday</option>
-                                    <option value="Thursday">Thursday</option>
-                                    <option value="Friday">Friday</option>
-                                    <option value="Saturday">Saturday</option>
-                                </select>
+                                <asp:DropDownList ID="scheduleDay" runat="server" CssClass="form-select" ClientIDMode="Static">
+                                    <asp:ListItem Value="">Select Day</asp:ListItem>
+                                    <asp:ListItem Value="Monday">Monday</asp:ListItem>
+                                    <asp:ListItem Value="Tuesday">Tuesday</asp:ListItem>
+                                    <asp:ListItem Value="Wednesday">Wednesday</asp:ListItem>
+                                    <asp:ListItem Value="Thursday">Thursday</asp:ListItem>
+                                    <asp:ListItem Value="Friday">Friday</asp:ListItem>
+                                    <asp:ListItem Value="Saturday">Saturday</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="startTime" class="form-label">
                                     Start Time *</label>
-                                <input type="time" class="form-control" id="startTime" required>
+                                <asp:TextBox ID="startTime" runat="server" CssClass="form-control" TextMode="Time" ClientIDMode="Static"></asp:TextBox>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="endTime" class="form-label">
                                     End Time *</label>
-                                <input type="time" class="form-control" id="endTime" required>
+                                <asp:TextBox ID="endTime" runat="server" CssClass="form-control" TextMode="Time" ClientIDMode="Static"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="scheduleInstructor" class="form-label">
                                     Instructor</label>
-                                <select class="form-select" id="scheduleInstructor">
-                                    <option value="">Select Instructor</option>
-                                    <option value="Dr. Robert Wilson">Dr. Robert Wilson</option>
-                                    <option value="Prof. Sarah Johnson">Prof. Sarah Johnson</option>
-                                    <option value="Dr. Michael Brown">Dr. Michael Brown</option>
-                                    <option value="Prof. Emily Davis">Prof. Emily Davis</option>
-                                    <option value="Dr. James Miller">Dr. James Miller</option>
-                                </select>
+                                <asp:DropDownList ID="scheduleInstructor" runat="server" CssClass="form-select" ClientIDMode="Static"></asp:DropDownList>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="scheduleRoom" class="form-label">
                                     Room</label>
-                                <input type="text" class="form-control" id="scheduleRoom" placeholder="e.g., Room 101">
+                                <asp:TextBox ID="scheduleRoom" runat="server" CssClass="form-control" placeholder="e.g., Room 101" ClientIDMode="Static"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="scheduleType" class="form-label">
                                     Class Type</label>
-                                <select class="form-select" id="scheduleType">
-                                    <option value="Lecture">Lecture</option>
-                                    <option value="Lab">Lab</option>
-                                    <option value="Tutorial">Tutorial</option>
-                                    <option value="Seminar">Seminar</option>
-                                </select>
+                                <asp:DropDownList ID="scheduleType" runat="server" CssClass="form-select" ClientIDMode="Static">
+                                    <asp:ListItem Value="Lecture">Lecture</asp:ListItem>
+                                    <asp:ListItem Value="Lab">Lab</asp:ListItem>
+                                    <asp:ListItem Value="Tutorial">Tutorial</asp:ListItem>
+                                    <asp:ListItem Value="Seminar">Seminar</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="scheduleFrequency" class="form-label">
                                     Frequency</label>
-                                <select class="form-select" id="scheduleFrequency">
-                                    <option value="Weekly">Weekly</option>
-                                    <option value="Bi-weekly">Bi-weekly</option>
-                                    <option value="Monthly">Monthly</option>
-                                </select>
+                                <asp:DropDownList ID="scheduleFrequency" runat="server" CssClass="form-select" ClientIDMode="Static">
+                                    <asp:ListItem Value="Weekly">Weekly</asp:ListItem>
+                                    <asp:ListItem Value="Bi-weekly">Bi-weekly</asp:ListItem>
+                                    <asp:ListItem Value="Monthly">Monthly</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                        </div>
+                        <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancel
                         </button>
                         <%--<button type="button" class="btn btn-primary" onclick="addSchedule()">
                             <i class="fas fa-save me-2 text-primary"></i>Add Schedule
                         </button>--%>
-                        <asp:LinkButton ID="add_schedule" class="btn btn-primary" runat="server">
-                            <i class="fas fa-save me-2 text-primary"></i>Add Schedule
-                        </asp:LinkButton>
+                        <asp:Button ID="add_schedule" runat="server" CssClass="btn btn-primary" OnClick="add_schedule_Click" Text="Add Schedule" CausesValidation="false" />
                     </div>
                 </div>
             </div>

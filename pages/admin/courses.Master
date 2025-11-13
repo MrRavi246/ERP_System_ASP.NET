@@ -329,97 +329,8 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
-                    // Sample course data
-                    let courses = [
-                        {
-                            id: 1,
-                            courseId: "CS101",
-                            name: "Introduction to Computer Science",
-                            department: "Computer Science",
-                            credits: 3,
-                            instructor: "Dr. Robert Wilson",
-                            students: 45,
-                            status: "Active",
-                            description: "Fundamental concepts of computer science and programming"
-                        },
-                        {
-                            id: 2,
-                            courseId: "CS201",
-                            name: "Data Structures and Algorithms",
-                            department: "Computer Science",
-                            credits: 4,
-                            instructor: "Dr. Robert Wilson",
-                            students: 38,
-                            status: "Active",
-                            description: "Advanced data structures and algorithm analysis"
-                        },
-                        {
-                            id: 3,
-                            courseId: "EN101",
-                            name: "Engineering Mechanics",
-                            department: "Engineering",
-                            credits: 4,
-                            instructor: "Prof. Sarah Johnson",
-                            students: 52,
-                            status: "Active",
-                            description: "Basic principles of engineering mechanics"
-                        },
-                        {
-                            id: 4,
-                            courseId: "BU201",
-                            name: "Business Management",
-                            department: "Business",
-                            credits: 3,
-                            instructor: "Dr. Michael Brown",
-                            students: 41,
-                            status: "Active",
-                            description: "Principles of business management and leadership"
-                        },
-                        {
-                            id: 5,
-                            courseId: "AR101",
-                            name: "Introduction to Fine Arts",
-                            department: "Arts",
-                            credits: 3,
-                            instructor: "Prof. Emily Davis",
-                            students: 28,
-                            status: "Active",
-                            description: "Basic concepts and techniques in fine arts"
-                        },
-                        {
-                            id: 6,
-                            courseId: "SC101",
-                            name: "General Physics",
-                            department: "Science",
-                            credits: 4,
-                            instructor: "Dr. James Miller",
-                            students: 35,
-                            status: "Inactive",
-                            description: "Fundamental principles of physics"
-                        },
-                        {
-                            id: 7,
-                            courseId: "CS301",
-                            name: "Database Management Systems",
-                            department: "Computer Science",
-                            credits: 4,
-                            instructor: "Dr. Robert Wilson",
-                            students: 32,
-                            status: "Active",
-                            description: "Database design and management concepts"
-                        },
-                        {
-                            id: 8,
-                            courseId: "EN201",
-                            name: "Thermodynamics",
-                            department: "Engineering",
-                            credits: 4,
-                            instructor: "Prof. Sarah Johnson",
-                            students: 29,
-                            status: "Active",
-                            description: "Thermodynamic principles and applications"
-                        }
-                    ];
+                    // course data injected from server
+                    <%= CoursesJson %>
 
                     // Initialize page
                     function initializePage() {
@@ -432,7 +343,7 @@
                     // Update statistics
                     function updateStats() {
                         document.getElementById('totalCourses').textContent = courses.length;
-                        document.getElementById('activeCourses').textContent = courses.filter(c => c.status === 'Active').length;
+                        document.getElementById('activeCourses').textContent = courses.filter(c => c.status).length;
                         document.getElementById('totalCredits').textContent = courses.reduce((sum, c) => sum + c.credits, 0);
 
                         const departments = [...new Set(courses.map(c => c.department))];
@@ -451,7 +362,7 @@
                                  <h5 class="card-title mb-1">${course.name}</h5>
                                  <p class="text-muted mb-0">${course.courseId}</p>
                              </div>
-                             <span class="badge bg-${course.status === 'Active' ? 'success' : 'secondary'}">${course.status}</span>
+                            <span class="badge bg-${course.status ? 'success' : 'secondary'}">${course.status ? 'Active' : 'Inactive'}</span>
                          </div>
                          <div class="row text-center mb-3">
                              <div class="col-6">
@@ -505,7 +416,7 @@
                  <td>${course.credits}</td>
                  <td>${course.instructor}</td>
                  <td>${course.students}</td>
-                 <td><span class="badge bg-${course.status === 'Active' ? 'success' : 'secondary'}">${course.status}</span></td>
+                 <td><span class="badge bg-${course.status ? 'success' : 'secondary'}">${course.status ? 'Active' : 'Inactive'}</span></td>
                  <td>
                      <div class="btn-group btn-group-sm">
                          <button class="btn btn-outline-primary btn-sm" onclick="viewCourse(${course.id})">
@@ -545,9 +456,9 @@
                         const filteredCourses = courses.filter(course => {
                             const matchesSearch = course.name.toLowerCase().includes(searchTerm) ||
                                 course.courseId.toLowerCase().includes(searchTerm) ||
-                                course.instructor.toLowerCase().includes(searchTerm);
+                                (course.instructor || '').toLowerCase().includes(searchTerm);
                             const matchesDepartment = !departmentFilter || course.department === departmentFilter;
-                            const matchesStatus = !statusFilter || course.status === statusFilter;
+                            const matchesStatus = !statusFilter || (statusFilter === 'Active' ? course.status === true : course.status === false);
 
                             return matchesSearch && matchesDepartment && matchesStatus;
                         });
@@ -568,7 +479,7 @@
                                  <h5 class="card-title mb-1">${course.name}</h5>
                                  <p class="text-muted mb-0">${course.courseId}</p>
                              </div>
-                             <span class="badge bg-${course.status === 'Active' ? 'success' : 'secondary'}">${course.status}</span>
+                             <span class="badge bg-${course.status ? 'success' : 'secondary'}">${course.status ? 'Active' : 'Inactive'}</span>
                          </div>
                          <div class="row text-center mb-3">
                              <div class="col-6">

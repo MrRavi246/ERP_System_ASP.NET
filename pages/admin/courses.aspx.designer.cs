@@ -77,6 +77,7 @@ namespace EduErp.pages.admin
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList instructor_course;
 
+
         /// <summary>
         /// maxstudent_course control.
         /// </summary>
@@ -85,6 +86,26 @@ namespace EduErp.pages.admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox maxstudent_course;
+
+    /// <summary>
+    /// semester control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.DropDownList semester;
+
+    /// <summary>
+    /// course_description control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.TextBox course_description;
+
+    /// <summary>
+    /// courseStatus control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.DropDownList courseStatus;
+
+    /// <summary>
+    /// coursesGrid control.
+    /// </summary>
+    protected global::System.Web.UI.WebControls.GridView coursesGrid;
 
         /// <summary>
         /// Button1 control.

@@ -165,23 +165,22 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Course ID</th>
-                                            <th>Course Name</th>
-                                            <th>Department</th>
-                                            <th>Credits</th>
-                                            <th>Instructor</th>
-                                            <th>Students</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="courseTableBody">
-                                        <!-- Table rows will be populated by JavaScript -->
-                                    </tbody>
-                                </table>
+                                <asp:GridView ID="coursesGrid" runat="server" CssClass="table table-striped table-hover" AutoGenerateColumns="false">
+                                    <Columns>
+                                        <asp:BoundField DataField="id" HeaderText="ID" />
+                                        <asp:BoundField DataField="course_code" HeaderText="Course Code" />
+                                        <asp:BoundField DataField="course_name" HeaderText="Course Name" />
+                                        <asp:BoundField DataField="department_name" HeaderText="Department" />
+                                        <asp:BoundField DataField="credits" HeaderText="Credits" />
+                                        <asp:BoundField DataField="semester" HeaderText="Semester" />
+                                        <asp:BoundField DataField="year_level" HeaderText="Year" />
+                                        <asp:TemplateField HeaderText="Active">
+                                            <ItemTemplate>
+                                                <%# Convert.ToBoolean(Eval("is_active")) ? "<span class=\"badge bg-success\">Active</span>" : "<span class=\"badge bg-secondary\">Inactive</span>" %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
                             </div>
                         </div>
                     </div>
@@ -240,25 +239,24 @@
                             <div class="col-md-6 mb-3">
                                 <label for="semester" class="form-label">
                                     Semester</label>
-                                <select class="form-select" id="semester">
-                                    <option value="">Select Semester</option>
-                                    <option value="1">Semester 1</option>
-                                    <option value="2">Semester 2</option>
-                                    <option value="3">Semester 3</option>
-                                    <option value="4">Semester 4</option>
-                                    <option value="5">Semester 5</option>
-                                    <option value="6">Semester 6</option>
-                                    <option value="7">Semester 7</option>
-                                    <option value="8">Semester 8</option>
-                                </select>
+                                <asp:DropDownList ID="semester" runat="server" CssClass="form-select">
+                                    <asp:ListItem Value="">Select Semester</asp:ListItem>
+                                    <asp:ListItem Value="1">Semester 1</asp:ListItem>
+                                    <asp:ListItem Value="2">Semester 2</asp:ListItem>
+                                    <asp:ListItem Value="3">Semester 3</asp:ListItem>
+                                    <asp:ListItem Value="4">Semester 4</asp:ListItem>
+                                    <asp:ListItem Value="5">Semester 5</asp:ListItem>
+                                    <asp:ListItem Value="6">Semester 6</asp:ListItem>
+                                    <asp:ListItem Value="7">Semester 7</asp:ListItem>
+                                    <asp:ListItem Value="8">Semester 8</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="courseDescription" class="form-label">
                                 Course Description</label>
-                            <%--<textarea class="form-control" id="courseDescription" rows="3" placeholder="Enter course description..."></textarea>--%>
 
-                            <textarea id="course_description" class="form-control" cols="20" rows="3" placeholder="Enter course description..."></textarea>
+                            <asp:TextBox ID="course_description" runat="server" TextMode="MultiLine" CssClass="form-control" Rows="3" />
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -271,10 +269,10 @@
                             <div class="col-md-6 mb-3">
                                 <label for="courseStatus" class="form-label">
                                     Status</label>
-                                <select class="form-select" id="courseStatus">
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                </select>
+                                <asp:DropDownList ID="courseStatus" runat="server" CssClass="form-select">
+                                    <asp:ListItem Value="Active">Active</asp:ListItem>
+                                    <asp:ListItem Value="Inactive">Inactive</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
                         </div>
 
@@ -282,6 +280,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Cancel
+
                         </button>
                         <%--   <button type="button" class="btn btn-primary" onclick="addCourse()">
                             <i class="fas fa-save me-2"></i>Add Course

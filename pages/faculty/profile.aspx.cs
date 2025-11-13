@@ -52,7 +52,7 @@ namespace EduErp.pages.faculty
         void filldesignation()
         {
             getcon();
-            da = new SqlDataAdapter("select name from designation", con);
+            da = new SqlDataAdapter("SELECT DISTINCT designation FROM faculty WHERE designation IS NOT NULL", con);
             ds = new DataSet();
             da.Fill(ds);
             designation.Items.Add("Select Designation");

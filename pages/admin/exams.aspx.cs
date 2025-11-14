@@ -91,6 +91,9 @@ namespace EduErp.pages.admin
             da.Fill(ds);
             string xml = "G:/Collage/Sem-V/ERP_System_ASPNET/pages/admin/AdminExamData.xml";
             ds.WriteXmlSchema(xml);
+
+
         }
+    
     }
 }

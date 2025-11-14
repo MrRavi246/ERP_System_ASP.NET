@@ -6,7 +6,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
-    <%--<form runat="server">--%>
+    <form runat="server">
         <div class="container-fluid">
             <div class="row">
                 <!-- Mobile Navigation Toggle -->
@@ -52,7 +52,7 @@
                             <%--<button class="btn btn-outline-secondary">
                                 <i class="fas fa-download me-1"></i>Export
                             </button>--%>
-                            <asp:Button ID="Button1" runat="server" Text="Export" class="btn btn-outline-secondary"/>
+                            <asp:Button ID="Button1" runat="server" Text="Export" class="btn btn-outline-secondary" OnClick="Button1_Click1"/>
                         </div>
                     </div>
 
@@ -403,5 +403,5 @@
                 </div>
             </div>
         </div>
-    <%--</form>--%>
+    </form>
 </asp:Content>

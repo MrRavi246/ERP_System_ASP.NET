@@ -13,7 +13,7 @@ using CrystalDecisions.CrystalReports.Engine;
 
 namespace EduErp.pages.faculty
 {
-    public partial class courses1 : System.Web.UI.Page
+    public partial class courses1 : FacultyBasePage
     {
         string conString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         SqlConnection con;
@@ -26,11 +26,7 @@ namespace EduErp.pages.faculty
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
-
+            // Authentication handled by FacultyBasePage
             getcon();
             fill_total_course();
             fill_totale_student();
@@ -67,7 +63,6 @@ namespace EduErp.pages.faculty
             ds = new DataSet();
             da.Fill(ds);
 
-
             string path = Server.MapPath("~/pages/faculty/course_CrystalReport1.rpt");
 
             cr.Load(path);
@@ -75,8 +70,6 @@ namespace EduErp.pages.faculty
             cr.SetDataSource(ds.Tables[0]);
             cr.Refresh();
             cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "User_Report");
-
-
         }
     }
 }

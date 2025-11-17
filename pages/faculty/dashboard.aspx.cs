@@ -13,7 +13,7 @@ using CrystalDecisions.Web;
 
 namespace EduErp.pages.faculty
 {
-    public partial class dashboard1 : System.Web.UI.Page
+    public partial class dashboard1 : FacultyBasePage
     {
         string conString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         SqlConnection con;
@@ -25,11 +25,7 @@ namespace EduErp.pages.faculty
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
-
+            // FacultyBasePage handles authentication; page-specific logic can go here.
         }
 
         void getcon()

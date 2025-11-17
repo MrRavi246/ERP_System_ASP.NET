@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace EduErp.pages.student
 {
-    public partial class notices1 : System.Web.UI.Page
+    public partial class notices1 : StudentBasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Authentication centralized in StudentBasePage
         }
     }
 }

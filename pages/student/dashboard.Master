@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="dropdown">
                                     <button class="btn btn-outline-secondary dropdown-toggle btn-mobile" type="button" data-bs-toggle="dropdown">
-                                        <i class="fas fa-user me-1"></i>Student
+                                        <i class="fas fa-user me-1"></i><asp:Literal ID="litStudentName" runat="server">Student</asp:Literal>
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="profile.aspx"><i class="fas fa-user-cog me-2 text-primary"></i>Profile</a></li>
@@ -106,7 +106,7 @@
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     Current GPA
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">3.8</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Literal ID="litGPA" runat="server"></asp:Literal></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-star fa-2x text-gray-300"></i>
@@ -123,7 +123,7 @@
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Courses Enrolled
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">6</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Literal ID="litCourses" runat="server"></asp:Literal></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-book fa-2x text-gray-300"></i>
@@ -140,7 +140,7 @@
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                     Attendance %
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">95%</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Literal ID="litAttendance" runat="server"></asp:Literal></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
@@ -157,7 +157,7 @@
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Fees Due
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$2,500</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Literal ID="litFees" runat="server"></asp:Literal></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-credit-card fa-2x text-gray-300"></i>
@@ -210,36 +210,9 @@
                                         </h5>
                                     </div>
                                     <div class="card-body">
-                                        <div class="list-group list-group-flush">
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Assignment submitted: Mathematics</div>
-                                                    <small class="text-muted">1 hour ago</small>
-                                                </div>
-                                                <span class="badge bg-success rounded-pill">New</span>
+                                            <div class="list-group list-group-flush">
+                                                <asp:Literal ID="litRecentActivities" runat="server"></asp:Literal>
                                             </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Attendance marked for today</div>
-                                                    <small class="text-muted">2 hours ago</small>
-                                                </div>
-                                                <span class="badge bg-info rounded-pill">New</span>
-                                            </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Exam result published</div>
-                                                    <small class="text-muted">1 day ago</small>
-                                                </div>
-                                                <span class="badge bg-primary rounded-pill">New</span>
-                                            </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Library book due tomorrow</div>
-                                                    <small class="text-muted">2 days ago</small>
-                                                </div>
-                                                <span class="badge bg-warning rounded-pill">New</span>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,34 +225,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="list-group list-group-flush">
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Mathematics Exam</div>
-                                                    <small class="text-muted">Tomorrow, 2:00 PM</small>
-                                                </div>
-                                                <span class="badge bg-warning rounded-pill">Event</span>
-                                            </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Project Submission</div>
-                                                    <small class="text-muted">Next Week</small>
-                                                </div>
-                                                <span class="badge bg-primary rounded-pill">Event</span>
-                                            </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Semester Break</div>
-                                                    <small class="text-muted">2 weeks</small>
-                                                </div>
-                                                <span class="badge bg-success rounded-pill">Event</span>
-                                            </div>
-                                            <div class="list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Career Fair</div>
-                                                    <small class="text-muted">1 month</small>
-                                                </div>
-                                                <span class="badge bg-info rounded-pill">Event</span>
-                                            </div>
+                                            <asp:Literal ID="litUpcomingEvents" runat="server"></asp:Literal>
                                         </div>
                                     </div>
                                 </div>
@@ -293,6 +239,8 @@
 
 
         <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+            <asp:Literal ID="litPerfScript" runat="server" Visible="false"></asp:Literal>
+            <asp:Literal ID="litCourseScript" runat="server" Visible="false"></asp:Literal>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
@@ -300,13 +248,15 @@
                 function initializeCharts() {
                     // Performance Chart
                     const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+                    var perfLabels = (typeof perfLabels !== 'undefined') ? perfLabels : ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'];
+                    var perfData = (typeof perfData !== 'undefined') ? perfData : [3.2, 3.5, 3.7, 3.6];
                     new Chart(performanceCtx, {
                         type: 'line',
                         data: {
-                            labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6'],
+                            labels: perfLabels,
                             datasets: [{
                                 label: 'GPA',
-                                data: [3.2, 3.5, 3.7, 3.6, 3.8, 3.8],
+                                data: perfData,
                                 borderColor: 'rgb(75, 192, 192)',
                                 tension: 0.1
                             }]
@@ -319,19 +269,16 @@
 
                     // Course Chart
                     const courseCtx = document.getElementById('courseChart').getContext('2d');
+                    var courseLabels = (typeof courseLabels !== 'undefined') ? courseLabels : ['Mathematics', 'Physics', 'Computer Science'];
+                    var courseData = (typeof courseData !== 'undefined') ? courseData : [25, 20, 30];
+                    var colors = ['#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#7C4DFF','#FF9F40'];
                     new Chart(courseCtx, {
                         type: 'doughnut',
                         data: {
-                            labels: ['Mathematics', 'Physics', 'Computer Science', 'English', 'Chemistry'],
+                            labels: courseLabels,
                             datasets: [{
-                                data: [25, 20, 30, 15, 10],
-                                backgroundColor: [
-                                    '#FF6384',
-                                    '#36A2EB',
-                                    '#FFCE56',
-                                    '#4BC0C0',
-                                    '#9966FF'
-                                ]
+                                data: courseData,
+                                backgroundColor: colors.slice(0, courseData.length)
                             }]
                         },
                         options: {

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace EduErp.pages.faculty
 {
-    public partial class profile1 : System.Web.UI.Page
+    public partial class profile1 : FacultyBasePage
     {
         String s = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
@@ -20,15 +20,10 @@ namespace EduErp.pages.faculty
         SqlCommand cmd;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
-
+            // Authentication and role check handled by FacultyBasePage
             getcon();
             filldepartment();
             filldesignation();
-
         }
         void getcon()
         {

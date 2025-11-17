@@ -13,7 +13,7 @@ using CrystalDecisions.Web;
 
 namespace EduErp.pages.faculty
 {
-    public partial class timetable1 : System.Web.UI.Page
+    public partial class timetable1 : FacultyBasePage
     {
 
         string conString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -26,11 +26,7 @@ namespace EduErp.pages.faculty
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
-
+            // Authentication handled by FacultyBasePage
         }
 
         void getcon()

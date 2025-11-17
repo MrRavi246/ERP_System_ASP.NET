@@ -49,5 +49,50 @@ namespace EduErp.pages.student
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder3;
+
+        /// <summary>
+        /// litStudentName control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litStudentName;
+
+        /// <summary>
+        /// litGPA control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litGPA;
+
+        /// <summary>
+        /// litCourses control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litCourses;
+
+        /// <summary>
+        /// litAttendance control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litAttendance;
+
+        /// <summary>
+        /// litFees control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litFees;
+
+        /// <summary>
+        /// litRecentActivities control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litRecentActivities;
+
+        /// <summary>
+        /// litUpcomingEvents control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litUpcomingEvents;
+
+        /// <summary>
+        /// litPerfScript control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litPerfScript;
+
+        /// <summary>
+        /// litCourseScript control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litCourseScript;
     }
 }

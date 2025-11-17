@@ -15,7 +15,7 @@ using System.Configuration;
 namespace EduErp.pages.faculty
 {
 
-    public partial class students1 : System.Web.UI.Page
+    public partial class students1 : FacultyBasePage
     {
         string conString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         SqlConnection con;
@@ -24,11 +24,7 @@ namespace EduErp.pages.faculty
         SqlCommand Cmd;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
+            // Authentication handled by FacultyBasePage
 
             getcon();
             if (!IsPostBack)
@@ -50,8 +46,6 @@ namespace EduErp.pages.faculty
             Ds = new DataSet();
             Da.Fill(Ds);
 
-            
-
             department.Items.Add("Select Department");
             department2.Items.Add("Select Department");
 
@@ -59,9 +53,6 @@ namespace EduErp.pages.faculty
             {
                 string Name = Ds.Tables[0].Rows[i]["name"].ToString();
                 string deptId = Ds.Tables[0].Rows[i]["id"].ToString();
-
-                //department.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
-                //department2.Items.Add(Ds.Tables[0].Rows[i][0].ToString());
 
                 department.Items.Add(new ListItem(Name, deptId));
                 department2.Items.Add(new ListItem(Name, deptId));
@@ -83,7 +74,6 @@ namespace EduErp.pages.faculty
             string LastName = txtLastName.Text;
             string Email = txtEmail.Text;
             string Phone = txtPhone.Text;
-            //string Department = department.SelectedValue;
             int Department = Convert.ToInt32(department.SelectedValue); ;
             int Year = ddYear.SelectedIndex;
 
@@ -118,7 +108,6 @@ namespace EduErp.pages.faculty
 
             Fillgrid();
             Response.Write("<script>alert('Student added successfully!');</script>");
-
 
             txtFirstName.Text = "";
             txtLastName.Text = "";

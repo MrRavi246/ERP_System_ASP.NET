@@ -121,6 +121,12 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\student\StudentBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\faculty\FacultyBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="pages\admin\AdminDashboardData.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace EduErp.pages.student
 {
-    public partial class timetable : System.Web.UI.Page
+    public partial class timetable : StudentBasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Auth handled by StudentBasePage
         }
     }
 }

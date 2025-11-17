@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace EduErp.pages.student
 {
-    public partial class courses1 : System.Web.UI.Page
+    public partial class courses1 : StudentBasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // StudentBasePage handles authentication
         }
     }
 }

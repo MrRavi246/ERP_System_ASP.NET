@@ -7,15 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace EduErp.pages.faculty
 {
-    public partial class settings1 : System.Web.UI.Page
+    public partial class settings1 : FacultyBasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserId"] == null)
-            {
-                Response.Redirect("~/index.aspx");
-            }
-
+            // Auth handled by FacultyBasePage
         }
     }
 }

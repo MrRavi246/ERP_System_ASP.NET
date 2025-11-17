@@ -10,7 +10,7 @@
 </head>
 <body>
     <div>
-        <form runat="server">
+       
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 <head>
                     <meta charset="UTF-8">
@@ -741,8 +741,7 @@
                     }
                 </script>
                 <script src="../../assets/js/common.js"></script>
-            </asp:ContentPlaceHolder>
-        </form>
+            </asp:ContentPlaceHolder>        
     </div>
 </body>
 </html>
